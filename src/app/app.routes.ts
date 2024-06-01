@@ -5,6 +5,7 @@ import { LayoutComponent } from '../Components/layout/layout.component';
 import { HomeComponent } from '../Components/home/home.component';
 import { CoursesComponent } from '../Components/courses/courses.component';
 import { CourseDetailsComponent } from '../Components/course-details/course-details.component';
+import { PricingComponent } from '../Components/pricing/pricing.component';
 import { NotFoundComponent } from '../Components/not-found/not-found.component';
 
 export const routes: Routes = 
@@ -16,10 +17,14 @@ export const routes: Routes =
       path: '',
       component: LayoutComponent,
       children: [
+        
         { path: 'home', component: HomeComponent },
+       
         { path: 'courses', component: CoursesComponent },
         { path: 'courseDetails', component: CourseDetailsComponent },
       ]
     },
+    { path: 'pricing', component: PricingComponent },
+
     { path:"**",component:NotFoundComponent},
   ];
