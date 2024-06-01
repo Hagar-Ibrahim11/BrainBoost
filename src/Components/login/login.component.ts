@@ -1,20 +1,31 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  Validators,
+  ReactiveFormsModule
+} from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule,RouterLink ],
+  imports: [FormsModule,RouterLink, ReactiveFormsModule,CommonModule ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  loginForm=new FormGroup({
+    userName: new FormControl(null,Validators.required),
+    password: new FormControl(null,Validators.required)
+  })
   credentials = { userName: '', password: '' };
-  constructor(private router: Router, private authService: AuthService){}
+  constructor(private router: Router, private authService: AuthService){
+  }
   login(): void {
-    this.authService.login(this.credentials).subscribe(
+    this.authService.login({userName:this.loginForm.value['userName']!,password:this.loginForm.value['password']!}).subscribe(
       (response) => {
         this.authService.setToken(response.token);
         this.authService.decodeUserData();
