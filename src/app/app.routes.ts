@@ -6,7 +6,7 @@ import { HomeComponent } from '../Components/home/home.component';
 import { CoursesComponent } from '../Components/courses/courses.component';
 import { CourseDetailsComponent } from '../Components/course-details/course-details.component';
 import { NotFoundComponent } from '../Components/not-found/not-found.component';
-import { PricingComponent } from '../Components/pricing/pricing/pricing.component';
+import { PricingComponent } from '../Components/pricing/pricing.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
