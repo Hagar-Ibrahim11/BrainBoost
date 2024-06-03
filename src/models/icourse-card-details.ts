@@ -1,9 +1,9 @@
 import { ICourseCardTeacherData } from './icourse-card-teacher-data';
 
 export interface ICourseCardDetails {
-  name?: string;
-  photoUrl?: string;
-  price: number;
-  rate?: number;
-  teacher: ICourseCardTeacherData;
+  name: string | null;
+  photoUrl: string | null;
+  price: number | null;
+  rate: number | null;
+  teacher: ICourseCardTeacherData | null;
 }
