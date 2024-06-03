@@ -1,1 +1,45 @@
-<p>add-course works!</p>
+<!-- <p>add-course works!</p> -->
+<mat-stepper [linear]="true" #stepper>
+  <mat-step >
+    <form >
+      <ng-template matStepLabel>Job Requirment</ng-template>
+      <div>
+        <button
+          mat-button
+          matStepperNext
+          class="btn btn-secondary"
+        >
+          Next
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step  [optional]="false">
+    <form >
+      <ng-template matStepLabel>About You</ng-template>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button
+          mat-button
+          matStepperNext
+        >
+          Next
+        </button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step  [optional]="false">
+    <form >
+      <ng-template matStepLabel>Job Detail</ng-template>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button
+          mat-button
+          matStepperNext
+        >
+          Next
+        </button>
+      </div>
+    </form>
+  </mat-step>
+</mat-stepper>
