@@ -1,5 +1,5 @@
-import { IReviewSomeDetails } from "./ireview-some-details";
-import { WhatTToLearn } from "./what-tto-learn";
+import { IReviewSomeDetails } from './ireview-some-details';
+import { WhatTToLearn } from './what-tto-learn';
 
 export interface ICourseDetails {
   id: number;
@@ -10,6 +10,6 @@ export interface ICourseDetails {
   rate: number | null;
   fname: string | null;
   lname: string | null;
-  review:IReviewSomeDetails[];
+  review: IReviewSomeDetails[];
   whatToLearn: WhatTToLearn[] | null;
 }
