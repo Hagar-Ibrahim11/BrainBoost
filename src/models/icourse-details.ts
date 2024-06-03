@@ -1,2 +1,1 @@
-export interface ICourseDetails {
-}
+export interface ICourseDetails {}
