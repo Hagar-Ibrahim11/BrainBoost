@@ -66,122 +66,32 @@
        
        
             <div class="row">
-              <div class="col-lg-3 ">
+              <div class="col-lg-3" *ngFor="let Course of ListOfCourses">
                 <div class="card course-card rounded-4 shadow-lg " data-aos="flip-left" data-aos-duration="3000">
                   
-                    <img src="https://img.freepik.com/free-photo/html-css-collage-concept_23-2150061955.jpg?t=st=1717442132~exp=1717445732~hmac=c2951422c80a881bbcaf3cec6c74a148fb79c6c3946439d72b34a44ca8adffea&w=740" class="image-fluid mt-2 rounded-4" alt="Course 1" width="95%" height="95%">
+                    <img [src]="Course.photoUrl" class="image-fluid mt-2 rounded-4" alt="Course 1" width="95%" height="95%">
 
                   
             
 
                   <div class="card-body">
-                    <h5 class="card-title course-title">Front-end development for beginners</h5>
-                    <p class="card-text course-description">Front-end basics using HTML, CSS and JavaScript</p>
+                    <h5 class="card-title course-title">{{Course.name}}</h5>
+                    <p class="card-text course-description">{{Course.description}}</p>
                     <p class="card-text">
                         <i class="fa-solid fa-star me-2"></i> 
-                    <small class="text-muted">4.8 (4.8k reviews)</small></p>
+                    <small class="text-muted">{{Course.rate}} ({{Course.rate}}k reviews)</small></p>
                     
                     <p class="card-text course-duration">
                         <i class="fa-regular fa-clock me-2"></i>
-                        <small>Duration: 4 weeks</small> 
+                        <small>Duration: {{Course.duration}} weeks</small> 
                     
                     </p>
 
                     <a href="#" class="btn  enroll-button me-5">Details</a>
-                    <span class="badge  price-badge">$29.99</span>
+                    <span class="badge  price-badge">${{Course.price}}</span>
                   </div>
                 </div>
               </div>
-
-
-              <div class="col-lg-3">
-                <div class="card course-card rounded-4 shadow-lg" data-aos="flip-left" data-aos-duration="3000">
-                  
-                    <img src="https://img.freepik.com/free-photo/html-css-collage-concept_23-2150061955.jpg?t=st=1717442132~exp=1717445732~hmac=c2951422c80a881bbcaf3cec6c74a148fb79c6c3946439d72b34a44ca8adffea&w=740" class="image-fluid mt-2 rounded-4" alt="Course 1" width="95%" height="95%">
-
-                  
-            
-
-                  <div class="card-body">
-                    <h5 class="card-title course-title">Front-end development for beginners</h5>
-                    <p class="card-text course-description">Front-end basics using HTML, CSS and JavaScript</p>
-                    <p class="card-text">
-                        <i class="fa-solid fa-star me-2"></i> 
-                    <small class="text-muted">4.8 (4.8k reviews)</small></p>
-                    
-                    <p class="card-text course-duration">
-                        <i class="fa-regular fa-clock me-2"></i>
-                        <small>Duration: 4 weeks</small> 
-                    
-                    </p>
-
-                    <a href="#" class="btn  enroll-button me-5">Details</a>
-                    <span class="badge price-badge">$29.99</span>
-                  </div>
-                </div>
-              </div>
-
-
-              <div class="col-lg-3">
-                <div class="card course-card rounded-4 shadow-lg" data-aos="flip-left" data-aos-duration="3000">
-                  
-                    <img src="https://img.freepik.com/free-photo/html-css-collage-concept_23-2150061955.jpg?t=st=1717442132~exp=1717445732~hmac=c2951422c80a881bbcaf3cec6c74a148fb79c6c3946439d72b34a44ca8adffea&w=740" class="image-fluid mt-2 rounded-4" alt="Course 1" width="95%" height="95%">
-
-                  
-            
-
-                  <div class="card-body">
-                    <h5 class="card-title course-title">Front-end development for beginners</h5>
-                    <p class="card-text course-description">Front-end basics using HTML, CSS and JavaScript</p>
-                    <p class="card-text">
-                        <i class="fa-solid fa-star me-2"></i> 
-                    <small class="text-muted">4.8 (4.8k reviews)</small></p>
-                    
-                    <p class="card-text course-duration">
-                        <i class="fa-regular fa-clock me-2"></i>
-                        <small>Duration: 4 weeks</small> 
-                    
-                    </p>
-
-                    <a href="#" class="btn  enroll-button me-5">Details</a>
-                    <span class="badge  price-badge">$29.99</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-lg-3">
-                <div class="card course-card rounded-4 shadow-lg" data-aos="flip-left" data-aos-duration="3000">
-                  
-                    <img src="https://img.freepik.com/free-photo/html-css-collage-concept_23-2150061955.jpg?t=st=1717442132~exp=1717445732~hmac=c2951422c80a881bbcaf3cec6c74a148fb79c6c3946439d72b34a44ca8adffea&w=740" class="image-fluid mt-2 rounded-4" alt="Course 1" width="95%" height="95%">
-
-                  
-            
-
-                  <div class="card-body">
-                    <h5 class="card-title course-title">Front-end development for beginners</h5>
-                    <p class="card-text course-description">Front-end basics using HTML, CSS and JavaScript</p>
-                    <p class="card-text">
-                        <i class="fa-solid fa-star me-2"></i> 
-                    <small class="text-muted">4.8 (4.8k reviews)</small></p>
-                    
-                    <p class="card-text course-duration">
-                        <i class="fa-regular fa-clock me-2"></i>
-                        <small>Duration: 4 weeks</small> 
-                    
-                    </p>
-
-                    <a href="#" class="btn  enroll-button me-5">Details</a>
-                    <span class="badge  price-badge">$29.99</span>
-                  </div>
-                </div>
-              </div>
-            
-                
-
-
-
-
-
             </div>
           
        
