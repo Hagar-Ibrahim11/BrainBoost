@@ -6,4 +6,6 @@ export interface ICourseCardDetails {
   price: number | null;
   rate: number | null;
   teacher: ICourseCardTeacherData | null;
+  description: string | null;
+  duration: number | null;
 }

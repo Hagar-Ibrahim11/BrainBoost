@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CourseService } from '../../Services/course/course.service';
 import { CommonModule } from '@angular/common';
+import { ICourseCardDetails } from '../../models/icourse-card-details';
 
 
 
@@ -13,7 +14,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './courses.component.css'
 })
 export class CoursesComponent {
-  ListOfCourses:any=[{}]
+  ListOfCourses!:ICourseCardDetails[];
 constructor(private courseservice:CourseService)
 {}
 ngOnInit() {

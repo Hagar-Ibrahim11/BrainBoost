@@ -1,100 +1,147 @@
 <div class="">
-    <div class="row search-region">
-        <div class="row">
-            <div class="col-12 p-0 search-content mt-5">
-                <div class="row height d-flex justify-content-center align-items-center">
-                    <div class="col-md-8 search-elements" data-aos="zoom-in" data-aos-duration="3000">
-                        <div class="search rounded-3 shadow-lg">
-                            <input type="text" class="form-control" placeholder="Search on your favorite course">
-                            <button class="btn text-light rounded-3">Search</button>
-                        </div>
-                    </div>
-                </div>
+  <div class="row search-region">
+    <div class="row">
+      <div class="col-12 p-0 search-content mt-5">
+        <div
+          class="row height d-flex justify-content-center align-items-center"
+        >
+          <div
+            class="col-md-8 search-elements"
+            data-aos="zoom-in"
+            data-aos-duration="3000"
+          >
+            <div class="search rounded-3 shadow-lg">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search on your favorite course"
+              />
+              <button class="btn text-light rounded-3">Search</button>
             </div>
-    
-            <div class="container">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-2">
-                        <button href="#" class="btn btn-light w-100 filters" data-aos="zoom-in-up" data-aos-duration="3000">ALL</button>
-                    </div>
-                    <div class="col-md-2 higherzindex">
-                        <div class="dropdown w-100" data-aos="zoom-in-down" data-aos-duration="3000">
-                            <button class="btn dropdown-toggle w-100 filters" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Category
-                            </button>
-                            <ul class="dropdown-menu w-100">
-                                <li><a class="dropdown-item" href="#">Programming</a></li>
-                                <li><a class="dropdown-item" href="#">Ecommerce</a></li>
-                                <li><a class="dropdown-item" href="#">Front-end</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-2 higherzindex">
-                        <div class="dropdown w-100" data-aos="zoom-in-up" data-aos-duration="3000">
-                            <button class="btn dropdown-toggle w-100 filters" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Reviews
-                            </button>
-                            <ul class="dropdown-menu w-100">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-2  ">
-                        <div class="dropdown w-100" data-aos="zoom-in-down" data-aos-duration="3000">
-                            <button class="btn dropdown-toggle w-100 filters" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Hours
-                            </button>
-                            <ul class="dropdown-menu w-100">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-    </div>
-    
+      </div>
 
-    <div class="row m-0 d-flex mt-5 justify-content-center course-section">
-       
-       
-            <div class="row">
-              <div class="col-lg-3" *ngFor="let Course of ListOfCourses">
-                <div class="card course-card rounded-4 shadow-lg " data-aos="flip-left" data-aos-duration="3000">
-                  
-                    <img [src]="Course.photoUrl" class="image-fluid mt-2 rounded-4" alt="Course 1" width="95%" height="95%">
-
-                  
-            
-
-                  <div class="card-body">
-                    <h5 class="card-title course-title">{{Course.name}}</h5>
-                    <p class="card-text course-description">{{Course.description}}</p>
-                    <p class="card-text">
-                        <i class="fa-solid fa-star me-2"></i> 
-                    <small class="text-muted">{{Course.rate}} ({{Course.rate}}k reviews)</small></p>
-                    
-                    <p class="card-text course-duration">
-                        <i class="fa-regular fa-clock me-2"></i>
-                        <small>Duration: {{Course.duration}} weeks</small> 
-                    
-                    </p>
-
-                    <a href="#" class="btn  enroll-button me-5">Details</a>
-                    <span class="badge  price-badge">${{Course.price}}</span>
-                  </div>
-                </div>
-              </div>
+      <!-- <div class="container">
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-2">
+            <button
+              href="#"
+              class="btn btn-light w-100 filters"
+              data-aos="zoom-in-up"
+              data-aos-duration="3000"
+            >
+              ALL
+            </button>
+          </div>
+          <div class="col-md-2 higherzindex">
+            <div
+              class="dropdown w-100"
+              data-aos="zoom-in-down"
+              data-aos-duration="3000"
+            >
+              <button
+                class="btn dropdown-toggle w-100 filters"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Category
+              </button>
+              <ul class="dropdown-menu w-100">
+                <li><a class="dropdown-item" href="#">Programming</a></li>
+                <li><a class="dropdown-item" href="#">Ecommerce</a></li>
+                <li><a class="dropdown-item" href="#">Front-end</a></li>
+              </ul>
             </div>
-          
-       
-        
+          </div>
+          <div class="col-md-2 higherzindex">
+            <div
+              class="dropdown w-100"
+              data-aos="zoom-in-up"
+              data-aos-duration="3000"
+            >
+              <button
+                class="btn dropdown-toggle w-100 filters"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Reviews
+              </button>
+              <ul class="dropdown-menu w-100">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div
+              class="dropdown w-100"
+              data-aos="zoom-in-down"
+              data-aos-duration="3000"
+            >
+              <button
+                class="btn dropdown-toggle w-100 filters"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Hours
+              </button>
+              <ul class="dropdown-menu w-100">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div> -->
     </div>
+  </div>
+
+  <div class="row m-0 d-flex mt-5 justify-content-center course-section">
+    <div class="row">
+      <div class="col-lg-3" *ngFor="let Course of ListOfCourses">
+        <div
+          class="card course-card rounded-4 shadow-lg"
+          data-aos="flip-left"
+          data-aos-duration="3000"
+        >
+          <img
+            [src]="Course.photoUrl"
+            class="image-fluid mt-2 rounded-4"
+            alt="Course 1"
+            width="95%"
+            height="95%"
+          />
+
+          <div class="card-body">
+            <h5 class="card-title course-title">{{ Course.name }}</h5>
+            <p class="card-text course-description">{{ Course.description }}</p>
+            <p class="card-text">
+              <i class="fa-solid fa-star me-2"></i>
+              <small class="text-muted"
+                >{{ Course.rate }} ({{ Course.rate }}k reviews)</small
+              >
+            </p>
+
+            <p class="card-text course-duration">
+              <i class="fa-regular fa-clock me-2"></i>
+              <small>Duration: {{ Course.duration }} weeks</small>
+            </p>
+
+            <a href="#" class="btn enroll-button me-5">Details</a>
+            <span class="badge price-badge">${{ Course.price }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
