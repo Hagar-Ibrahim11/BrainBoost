@@ -5,6 +5,7 @@ import { environment } from '../../Enviroment/enviroment';
 import { Observable } from 'rxjs';
 import { ICourseCardDetails } from '../../models/icourse-card-details';
 import { ICourseFilteration } from '../../models/icourse-filteration';
+import { IQuiz } from '../../models/iquiz';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,7 @@ export class CourseService {
   getCourseDetails(id: number): Observable<ICourseDetails> {
     return this.http.get<ICourseDetails>(`${this.getByIdApiUrl}${id}`);
   }
+
   GetAllCoursesAsCards(): Observable<ICourseCardDetails[]> {
     return this.http.get<ICourseCardDetails[]>(
       `${environment.baseUrl}/api/Course/GetAllCoursesAsCards`
@@ -32,6 +34,12 @@ export class CourseService {
   GetSearchedCourses(searchString: string): Observable<ICourseCardDetails[]> {
     return this.http.get<ICourseCardDetails[]>(
       `${environment.baseUrl}/api/Course/GetSearchedCourses/${searchString}`
+    );
+  }
+  GetTakingQuiz(id:number):Observable<IQuiz>
+  {
+    return this.http.get<IQuiz>(
+      `${environment.baseUrl}/api/Course/GetCourseQuiz/${id}`
     );
   }
 }

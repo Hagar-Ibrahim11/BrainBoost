@@ -11,7 +11,7 @@
                     </div>
                 </div>
             </div>
-    
+
             <div class="container">
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-2">
@@ -60,31 +60,31 @@
             </div>
         </div>
     </div>
-    
+
 
     <div class="row m-0 d-flex mt-5 justify-content-center course-section">
-       
-       
+
+
             <div class="row">
               <div class="col-lg-3" *ngFor="let Course of ListOfCourses">
                 <div class="card course-card rounded-4 shadow-lg " data-aos="flip-left" data-aos-duration="3000">
-                  
+
                     <img [src]="Course.photoUrl" class="image-fluid mt-2 rounded-4" alt="Course 1" width="95%" height="95%">
 
-                  
-            
+
+
 
                   <div class="card-body">
                     <h5 class="card-title course-title">{{Course.name}}</h5>
                     <p class="card-text course-description">{{Course.description}}</p>
                     <p class="card-text">
-                        <i class="fa-solid fa-star me-2"></i> 
-                    <small class="text-muted">{{Course.rate}} ({{Course.rate}}k reviews)</small></p>
-                    
+                        <i class="fa-solid fa-star me-2"></i>
+                    <small class="text-muted"> ({{Course.rate}}k reviews)</small></p>
+
                     <p class="card-text course-duration">
                         <i class="fa-regular fa-clock me-2"></i>
-                        <small>Duration: {{Course.duration}} weeks</small> 
-                    
+                        <small>Duration: {{Course.duration}} weeks</small>
+
                     </p>
 
                     <a href="#" class="btn  enroll-button me-5">Details</a>
@@ -93,8 +93,8 @@
                 </div>
               </div>
             </div>
-          
-       
-        
+
+
+
     </div>
 </div>

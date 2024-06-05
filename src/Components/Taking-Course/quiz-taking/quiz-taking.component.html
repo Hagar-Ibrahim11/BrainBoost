@@ -1,0 +1,10 @@
+<ng-container *ngFor="let question of Quiz.questions" >
+  <textarea name="" id="">{{question.content}}</textarea><br>
+  <ng-container *ngFor="let item of question.answers" >
+
+    <input type="radio" [name]="'question-' + question.id"  id="" [value]="item.id"(change)="handleCorrectAnswer(item.id,question.id)" >
+    <label for="">{{item.content}}</label><br>
+
+  </ng-container>
+
+</ng-container>
