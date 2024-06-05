@@ -4,7 +4,12 @@
     
     z-index: 25000;
 }
-
+.navtogle
+{
+    color: var(--ceyan);
+    outline: none;
+    
+}
 
 .navbar-toggler-icon
 {
