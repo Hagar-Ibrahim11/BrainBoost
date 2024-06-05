@@ -1,27 +1,30 @@
-<!-- <p>add-course works!</p> -->
 <mat-stepper [linear]="true" #stepper>
-  <mat-step >
-    <form >
-      <ng-template matStepLabel>Job Requirment</ng-template>
-      <div>
+  <mat-step [stepControl]="courseDetailsForm">
+    <form [formGroup]="courseDetailsForm">
+      <ng-template matStepLabel>Course Details</ng-template>
+      <app-add-course-details [courseDetailsForm]="courseDetailsForm"></app-add-course-details>
         <button
           mat-button
           matStepperNext
           class="btn btn-secondary"
+          [disabled]="courseDetailsForm.invalid"
+          (click)="addCourseDetails()"
         >
           Next
         </button>
-      </div>
     </form>
   </mat-step>
-  <mat-step  [optional]="false">
-    <form >
-      <ng-template matStepLabel>About You</ng-template>
+  <mat-step [stepControl]="courseLecturesForm">
+    <form>
+      <ng-template matStepLabel>Add course videos</ng-template>
+      <app-add-course-videos [courseLecturesForm]="courseLecturesForm"></app-add-course-videos>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button
           mat-button
           matStepperNext
+          (click)="addCourseLectures()"
+          [disabled]="courseLecturesForm.invalid"
         >
           Next
         </button>
@@ -30,7 +33,7 @@
   </mat-step>
   <mat-step  [optional]="false">
     <form >
-      <ng-template matStepLabel>Job Detail</ng-template>
+      <ng-template matStepLabel>Add Certifiacate</ng-template>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button

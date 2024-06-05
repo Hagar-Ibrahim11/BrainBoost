@@ -1,1 +1,41 @@
-<p>add-course-details works!</p>
+<div class="container">
+  <h1>Course Details</h1>
+  <div class="form-container">
+      <div class="form-group">
+        <app-auto-select-angular-material
+          [class]="'col-md-12'"
+          (optionSelected)="
+            courseDetailsForm.controls['categoryId'].setValue($event)
+          "
+          [placeHolder]="'select category'"
+          [options]="categoryOptions"
+        ></app-auto-select-angular-material>
+      </div>
+      <div class="form-group">
+        <app-input-angular-material
+          [class]="'col-md-12'"
+          (valueChanged)="
+            courseDetailsForm.controls['courseName'].setValue($event)
+          "
+          [PlaceHolder]="'Course Name'"
+        ></app-input-angular-material>
+      </div>
+      <div class="form-group">
+        <app-input-angular-material
+          [class]="'col-md-12'"
+          (valueChanged)="
+            courseDetailsForm.controls['courseDescription'].setValue($event)
+          "
+          [PlaceHolder]="'Course Description'"
+        ></app-input-angular-material>
+      </div>
+      <div class="form-group">
+        <app-input-angular-material
+          [class]="'col-md-12'"
+          (valueChanged)="courseDetailsForm.controls['price'].setValue($event)"
+          [PlaceHolder]="'Course price'"
+          [type]="'number'"
+        ></app-input-angular-material>
+      </div>
+  </div>
+</div>

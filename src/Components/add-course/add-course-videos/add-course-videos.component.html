@@ -1,0 +1,48 @@
+<div class="container">
+  <h1>Course Videos</h1>
+  <h2>Upload the Lecture Videos You want</h2>
+  <div
+    *ngFor="let Lecture of courseLecturesForm.controls; index as i"
+    class="form-container shadow-5"
+    [formGroup]="Lecture"
+  >
+    <h3>Lecture {{ i + 1 }}</h3>
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        id="inputGroupFile02"
+        formControlName="title"
+      />
+    </div>
+    <div class="form-group">
+      <input
+        [type]="'file'"
+        class="form-control"
+        id="inputGroupFile02"
+        (change)="handleFileInput($event, i)"
+      />
+      <label class="form-control" for="inputGroupFile02"
+        >Upload Course Video</label
+      >
+    </div>
+    <div class="class d-flex justify-content-end">
+      <button
+        type="button"
+        class="btn btn-outline-primary text-center"
+        (click)="courseLecturesForm.controls.splice(i, 1)"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+  <div class="class d-flex justify-content-end text-center">
+    <button
+      type="button"
+      class="btn btn-outline-primary"
+      (click)="AddLectureForm()"
+    >
+      Add Lecture
+    </button>
+  </div>
+</div>
