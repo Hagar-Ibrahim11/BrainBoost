@@ -6,7 +6,6 @@
   min-height: 250px;
   /* Sets a minimum height, adjust as needed */
   margin: 0px;
-
 }
 
 .search-region::before {
@@ -18,7 +17,11 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(rgba(3, 45, 85, 0.336), rgba(3, 45, 85, 0.336)), url('https://img.freepik.com/free-photo/confident-teacher-explaining-lesson-pupils_74855-9751.jpg?t=st=1717406909~exp=1717410509~hmac=7aa86d80f56f7ecae02adc19a56948a535a813f003cdef015a2d269aeaeef8ea&w=740');
+  background-image: linear-gradient(
+      rgba(3, 45, 85, 0.336),
+      rgba(3, 45, 85, 0.336)
+    ),
+    url("https://img.freepik.com/free-photo/confident-teacher-explaining-lesson-pupils_74855-9751.jpg?t=st=1717406909~exp=1717410509~hmac=7aa86d80f56f7ecae02adc19a56948a535a813f003cdef015a2d269aeaeef8ea&w=740");
   /* Replace with the path to your image */
   background-size: cover;
   /* Ensures the image covers the entire div */
@@ -39,11 +42,10 @@
 
 /* Add the following styles */
 
-
 .search {
   position: relative;
 
-  box-shadow: 0 0 40px rgba(51, 51, 51, .1);
+  box-shadow: 0 0 40px rgba(51, 51, 51, 0.1);
   z-index: 2;
   /* Ensure the search bar is above the overlay */
   background-color: white;
@@ -99,22 +101,16 @@
   }
 }
 
-
-
-
 .filters {
   background-color: var(--white) !important;
   border: 1px solid #ced4da;
   border-radius: 10px;
   font-size: 20px;
-
 }
 
 .filters:hover {
   background-color: var(--ceyan);
 }
-
-
 
 /* responsive cards and filtrations  */
 
@@ -145,8 +141,6 @@
     max-width: 100%;
   }
 }
-
-
 
 /* course cards */
 .course-section {
@@ -187,14 +181,10 @@
 }
 
 .price-badge {
-  position: absolute;
   top: 20px;
   right: 15px;
   background-color: var(--green-600);
 }
-
-
-
 
 /* filter*/
 
@@ -202,10 +192,7 @@
   background-color: var(--ceyan);
   color: white;
   font-size: 20px;
-
 }
-
-
 
 @media (max-width: 768px) {
   .course-section {
@@ -233,7 +220,6 @@
     transform: none !important;
     transition: none !important;
   }
-
 }
 
 @media (max-width: 576px) {
@@ -243,17 +229,11 @@
   }
 }
 
-
-
-
-
-
 .ratings {
   margin-right: 10px;
 }
 
 .ratings i {
-
   color: #cecece;
   font-size: 20px;
 }
@@ -277,8 +257,6 @@
   font-size:15px; */
   margin-bottom: 2px;
 }
-
-
 
 .filter {
   background-color: var(--ceyan);

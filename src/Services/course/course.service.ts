@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ICourseDetails } from '../../models/icourse-details';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../Enviroment/enviroment';
 import { Observable } from 'rxjs';
 import { ICourseCardDetails } from '../../models/icourse-card-details';
@@ -22,11 +22,13 @@ export class CourseService {
       `${environment.baseUrl}/api/Course/GetAllCoursesAsCards`
     );
   }
-  GetFilteredCourses(
-    filterationObj: ICourseFilteration
-  ): Observable<ICourseCardDetails[]> {
+  GetFilteredCourses(filterationObj: any): Observable<ICourseCardDetails[]> {
+    let params = new HttpParams();
+    params = params.append('CategoryName', filterationObj.categoryName);
+    params = params.append('Price', filterationObj.price);
+    params = params.append('Rate', filterationObj.rate);
     return this.http.get<ICourseCardDetails[]>(
-      `${environment.baseUrl}/api/Course/GetFilteredCourses/${filterationObj}`
+      `${environment.baseUrl}/api/Course/GetFilteredCourses`,{params}
     );
   }
   GetSearchedCourses(searchString: string): Observable<ICourseCardDetails[]> {
