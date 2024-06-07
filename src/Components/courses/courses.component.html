@@ -15,6 +15,7 @@
                 type="text"
                 class="form-control"
                 placeholder="Search on your favorite course"
+                (input)="GetSearchCourses($event)"
               />
               <button class="btn text-light rounded-3">Search</button>
             </div>
@@ -256,7 +257,10 @@
       <div class="col-9">
         <div class="row">
           <!-- Example of a course card -->
-          <div class="col-lg-3 col-md-6 courses" *ngFor="let Course of ListOfCourses">
+          <div
+            class="col-lg-3 col-md-6 courses"
+            *ngFor="let Course of ListOfCourses"
+          >
             <div
               class="card course-card rounded-4 shadow-lg"
               data-aos="zoom-in"
@@ -284,7 +288,11 @@
                   <i class="fa-regular fa-clock me-2"></i>
                   <small>Duration: {{ Course.duration }} weeks</small>
                 </p>
-                <a href="#" class="btn enroll-button me-5">Details</a>
+                <a
+                  class="btn enroll-button me-5"
+                  (click)="GoToCourseDetails(Course.id)"
+                  >Details</a
+                >
 
                 <span class="badge price-badge"
                   >{{ checkPrice(Course.price) }}{{ priceString }}</span
