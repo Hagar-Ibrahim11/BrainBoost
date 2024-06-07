@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ICourseDetails } from '../../models/icourse-details';
 import { environment } from '../../Enviroment/enviroment';
 import { CourseService } from '../../Services/course/course.service';
+import { DataService } from '../../Services/sharedData/data.service';
 
 @Component({
   selector: 'app-course-details',
@@ -17,19 +18,16 @@ export class CourseDetailsComponent {
   env: string = environment.baseUrl + '/Images/Courses/';
   constructor(
     private route: ActivatedRoute,
-    private courseService: CourseService
-  ) {
-    // this.route.params.subscribe(params => {
-    //   this.courseId = +params['id']; // Convert to number (if needed)
-    //   console.log(this.courseId)
-    // });
-  }
+    private courseService: CourseService,
+    private dataService: DataService
+  ) {}
   ngOnInit(): void {
-    console.log(this.crsDetails);
-    this.courseService.getCourseDetails(1).subscribe({
+    this.dataService.data$.subscribe((data) => {
+      this.courseId = data;
+    });
+    this.courseService.getCourseDetails(this.courseId).subscribe({
       next: (data: ICourseDetails) => {
         this.crsDetails = data;
-        console.log(this.crsDetails);
       },
       error: (error) => {
         console.error('Error fetching courses:', error); // Log any errors
