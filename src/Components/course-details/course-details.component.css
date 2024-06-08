@@ -261,6 +261,39 @@
 }
 
 
+
+@media (min-width: 992px) {
+  .mini-info .course-card,
+  .mini-info .instructor-card {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .mini-info .course-card,
+  .mini-info .instructor-card {
+      margin-bottom: 20px;
+  }
+
+  .mini-info .course-card .info-item,
+  .mini-info .instructor-card {
+      width: 100%;
+  }
+
+  .mini-info .instructor-card img {
+      margin-bottom: 10px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
   .progress-bar-custom {
     background-color: #007bff;
 }
