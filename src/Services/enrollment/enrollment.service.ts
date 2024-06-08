@@ -10,7 +10,7 @@ import { IEnrollment } from '../../models/ienrollment';
 })
 export class EnrollmentService {
   constructor(private httpclient: HttpClient) {}
-  createSubscription(enrollmentData: IEnrollment): Observable<IPaymentUrl> {
+  Enroll(enrollmentData: IEnrollment): Observable<IPaymentUrl> {
     const authToken = localStorage.getItem('BrainBoostJwtToken');
     const header = new HttpHeaders().set(
       'Authorization',

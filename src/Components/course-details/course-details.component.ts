@@ -4,6 +4,10 @@ import { ICourseDetails } from '../../models/icourse-details';
 import { environment } from '../../Enviroment/enviroment';
 import { CourseService } from '../../Services/course/course.service';
 import { DataService } from '../../Services/sharedData/data.service';
+import { AuthService } from '../../Services/auth.service';
+import { EnrollmentService } from '../../Services/enrollment/enrollment.service';
+import { IEnrollment } from '../../models/ienrollment';
+import { IPaymentUrl } from '../../models/ipayment-url';
 
 @Component({
   selector: 'app-course-details',
@@ -15,11 +19,15 @@ import { DataService } from '../../Services/sharedData/data.service';
 export class CourseDetailsComponent {
   courseId!: number;
   crsDetails!: ICourseDetails;
+  enrollmentData!: IEnrollment;
+  paymentUrl!: IPaymentUrl;
   env: string = environment.baseUrl + '/Images/Courses/';
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
-    private dataService: DataService
+    private dataService: DataService,
+    private authService: AuthService,
+    private enrollmentService: EnrollmentService
   ) {}
   ngOnInit(): void {
     this.dataService.data$.subscribe((data) => {
@@ -36,5 +44,26 @@ export class CourseDetailsComponent {
         console.log('courses fetched successfully'); // Log completion
       },
     });
+  }
+  handleEnrollCourse(courseId: number) {
+    console.log(this.authService.userData);
+    this.enrollmentData = {
+      courseId: courseId,
+      studentId: 1,
+      isActive: false,
+      id: 1,
+    };
+    this.enrollmentService
+      .Enroll(this.enrollmentData)
+      .subscribe((data: IPaymentUrl) => {
+        window.location.href = data.url;
+      });
+  }
+  checkUserLogged(userdata: any): boolean {
+    if (userdata != null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
