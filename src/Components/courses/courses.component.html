@@ -1,100 +1,221 @@
 <div class="">
-    <div class="row search-region">
-        <div class="row">
-            <div class="col-12 p-0 search-content mt-5">
-                <div class="row height d-flex justify-content-center align-items-center">
-                    <div class="col-md-8 search-elements" data-aos="zoom-in" data-aos-duration="3000">
-                        <div class="search rounded-3 shadow-lg">
-                            <input type="text" class="form-control" placeholder="Search on your favorite course">
-                            <button class="btn text-light rounded-3">Search</button>
-                        </div>
-                    </div>
-                </div>
+  <div class="row search-region">
+    <div class="row">
+      <div class="col-12 p-0 search-content mt-5">
+        <div class="row height d-flex justify-content-center align-items-center">
+          <div class="col-md-8 search-elements">
+            <div class="search rounded-3 shadow-lg">
+              <input type="text" class="form-control" placeholder="Search on your favorite course"
+                (input)="GetSearchCourses($event)" />
+              <button class="btn text-light rounded-3">Search</button>
             </div>
-
-            <div class="container">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-2">
-                        <button href="#" class="btn btn-light w-100 filters" data-aos="zoom-in-up" data-aos-duration="3000">ALL</button>
-                    </div>
-                    <div class="col-md-2 higherzindex">
-                        <div class="dropdown w-100" data-aos="zoom-in-down" data-aos-duration="3000">
-                            <button class="btn dropdown-toggle w-100 filters" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Category
-                            </button>
-                            <ul class="dropdown-menu w-100">
-                                <li><a class="dropdown-item" href="#">Programming</a></li>
-                                <li><a class="dropdown-item" href="#">Ecommerce</a></li>
-                                <li><a class="dropdown-item" href="#">Front-end</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-2 higherzindex">
-                        <div class="dropdown w-100" data-aos="zoom-in-up" data-aos-duration="3000">
-                            <button class="btn dropdown-toggle w-100 filters" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Reviews
-                            </button>
-                            <ul class="dropdown-menu w-100">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-md-2  ">
-                        <div class="dropdown w-100" data-aos="zoom-in-down" data-aos-duration="3000">
-                            <button class="btn dropdown-toggle w-100 filters" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Hours
-                            </button>
-                            <ul class="dropdown-menu w-100">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+
+  <div class="container-fliud mt-5">
+    <div class="row m-0 course-section d-flex">
+      <!-- Sidebar -->
+      <div class="col-3">
+        <div class="card rounded-5">
+          <div class="card-header filtersearch rounded-top-4 text-center" id="filter-header" data-bs-toggle="collapse"
+            data-bs-target="#filter-body" aria-expanded="true" aria-controls="filter-body" style="cursor: pointer">
+            <i class="fa-solid fa-sliders ml-2" style="color: #ffffff"></i>
+            Filter
+          </div>
+          <div class="collapse show" id="filter-body">
+            <div class="card-body">
+              <form id="filter-form">
 
 
-    <div class="row m-0 d-flex mt-5 justify-content-center course-section">
+                <!-- Course Category -->
+                <div class="mb-3">
 
+                  <label for="category" class="form-label fw-bold">Course Category</label>
+                  <select class="form-select" id="category" name="category">
+                    <option [value]="category.id" *ngFor="let category of ListOfCategories"
+                      (click)="getFilteredCoursesWithCatName(category.name)">
+                      {{ category.name }}
+                    </option>
 
-            <div class="row">
-              <div class="col-lg-3" *ngFor="let Course of ListOfCourses">
-                <div class="card course-card rounded-4 shadow-lg " data-aos="flip-left" data-aos-duration="3000">
+                    <!-- Add more categories as needed -->
+                  </select>
+                </div>
+                <!-- Rating -->
+                <div class="mb-3">
+                  <hr class="mt-4" />
+                  <label class="form-label">Rating</label>
+                  <div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="rating" id="rating1" value="5"
+                        (change)="getFilteredCoursesWithRate(5)" />
 
-                    <img [src]="Course.photoUrl" class="image-fluid mt-2 rounded-4" alt="Course 1" width="95%" height="95%">
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="ratings">
+                          <i class="fa fa-star rating-color"></i>
+                          <i class="fa fa-star rating-color"></i>
+                          <i class="fa fa-star rating-color"></i>
+                          <i class="fa fa-star rating-color"></i>
+                          <i class="fa fa-star rating-color"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="rating" id="rating2" value="4"
+                        (click)="getFilteredCoursesWithRate(4)" />
+                      <div class="ratings">
+                        <i class="fa fa-star rating-color"></i>
+                        <i class="fa fa-star rating-color"></i>
+                        <i class="fa fa-star rating-color"></i>
+                        <i class="fa fa-star rating-color"></i>
+                        <i class="fa fa-star"></i>
+                      </div>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="rating" id="rating3" value="3"
+                        (click)="getFilteredCoursesWithRate(3)" />
+                      <div class="ratings">
+                        <i class="fa fa-star rating-color"></i>
+                        <i class="fa fa-star rating-color"></i>
+                        <i class="fa fa-star rating-color"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                      </div>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="rating" id="rating2" value="2"
+                        (click)="getFilteredCoursesWithRate(2)" />
+                      <div class="ratings">
+                        <i class="fa fa-star rating-color"></i>
+                        <i class="fa fa-star rating-color"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                      </div>
+                    </div>
 
+                    <!-- Add more ratings as needed -->
+                  </div>
 
-
-
-                  <div class="card-body">
-                    <h5 class="card-title course-title">{{Course.name}}</h5>
-                    <p class="card-text course-description">{{Course.description}}</p>
-                    <p class="card-text">
-                        <i class="fa-solid fa-star me-2"></i>
-                    <small class="text-muted"> ({{Course.rate}}k reviews)</small></p>
-
-                    <p class="card-text course-duration">
-                        <i class="fa-regular fa-clock me-2"></i>
-                        <small>Duration: {{Course.duration}} weeks</small>
-
-                    </p>
-
-                    <a href="#" class="btn  enroll-button me-5">Details</a>
-                    <span class="badge  price-badge">${{Course.price}}</span>
+                  <div class="form-check" (click)="getFilteredCoursesWithRate(1)">
+                    <input class="form-check-input" type="radio" name="rating" id="rating1" value="3" />
+                    <div class="ratings">
+                      <i class="fa fa-star rating-color"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                    </div>
                   </div>
                 </div>
+
+                <!-- Video Duration -->
+                <div class="mb-3">
+                  <hr class="mt-4" />
+                  <label class="form-label fw-bold">Video Duration</label>
+                  <div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="duration" id="duration1" value="short" />
+                      <label class="form-check-label" for="duration1">
+                        0-1 Hour (1000)
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="duration" id="duration2" value="medium" />
+                      <label class="form-check-label" for="duration2">
+                        1-3 (1000)
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="duration" id="duration3" value="long" />
+                      <label class="form-check-label" for="duration3">
+                        3-5 (1000)
+                      </label>
+                    </div>
+                    <!-- Add more durations as needed -->
+                  </div>
+                </div>
+                <!-- Price -->
+                <div class="mb-3">
+                  <hr class="mt-4" />
+                  <label class="form-label fw-bold">Price</label>
+                  <div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="price" id="price1" value="free"
+                        (click)="getFilteredCoursesWithPrice(0)" />
+                      <label class="form-check-label" for="price1">
+                        Free
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="price" id="price2" value="paid"
+                        (click)="getFilteredCoursesWithPrice(1)" />
+                      <label class="form-check-label" for="price2">
+                        Paid
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <div class="d-flex justify-content-center">
+
+                  <button class="btn btn-danger ">Reset filter</button>
+
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- End of Sidebar -->
+
+      <!-- Courses Section -->
+      <div class="col-9">
+        <div class="row">
+          <!-- Example of a course card -->
+          <div class="col-lg-3 col-md-6 courses" *ngFor="let Course of ListOfCourses">
+            <div class="card course-card rounded-4 shadow-lg">
+              <img [src]="Course.photoUrl" class="image-fluid mt-2 rounded-4" alt="Course 1" width="95%" height="95%" />
+              <div class="card-body">
+                <h5 class="card-title course-title">{{ Course.name }}</h5>
+                <p class="card-text course-description">
+                  {{ Course.description }}
+                </p>
+                <p class="card-text">
+                  <i class="fa-solid fa-star me-2"></i>
+                  <small class="text-muted">{{ Course.rate }} ({{ Course.rate }}k reviews)</small>
+                </p>
+                <p class="card-text course-duration">
+                  <i class="fa-regular fa-clock me-2"></i>
+                  <small>Duration: {{ Course.duration }} weeks</small>
+                </p>
+                <a class="btn enroll-button me-5" (click)="GoToCourseDetails(Course.id)">Details</a>
+
+                <span class="badge price-badge p-2">{{ checkPrice(Course.price) }}{{ priceString }}</span>
               </div>
             </div>
-
-
+          </div>
+          <!-- Repeat course card for each course in the list -->
+        </div>
+        <div class="row mt-3 ">
+          <nav aria-label="Page navigation example  ">
+            <ul class="pagination d-flex justify-content-center">
+              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!-- End of Courses Section -->
 
     </div>
+
+
+  </div>
 </div>

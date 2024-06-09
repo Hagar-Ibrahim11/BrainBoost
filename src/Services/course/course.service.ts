@@ -26,16 +26,22 @@ export class CourseService {
       `${environment.baseUrl}/api/Course/GetAllCoursesAsCards`
     );
   }
-  GetFilteredCourses(
-    filterationObj: ICourseFilteration
-  ): Observable<ICourseCardDetails[]> {
+  GetFilteredCourses(filterationObj: any): Observable<ICourseCardDetails[]> {
+    let params = new HttpParams();
+    params = params.append('CategoryName', filterationObj.categoryName);
+    params = params.append('Price', filterationObj.price);
+    params = params.append('Rate', filterationObj.rate);
     return this.http.get<ICourseCardDetails[]>(
-      `${environment.baseUrl}/api/Course/GetFilteredCourses/${filterationObj}`
+      `${environment.baseUrl}/api/Course/GetFilteredCourses`,
+      { params }
     );
   }
   GetSearchedCourses(searchString: string): Observable<ICourseCardDetails[]> {
+    let params = new HttpParams();
+    params = params.append('searchString', searchString);
     return this.http.get<ICourseCardDetails[]>(
-      `${environment.baseUrl}/api/Course/GetSearchedCourses/${searchString}`
+      `${environment.baseUrl}/api/Course/GetSearchedCourses`,
+      { params }
     );
   }
   GetTakingQuiz(id:number):Observable<IQuiz>

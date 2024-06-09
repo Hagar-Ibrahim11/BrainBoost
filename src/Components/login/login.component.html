@@ -86,8 +86,8 @@
             <div class="text-center text-lg-start mt-4 pt-2">
               <button [disabled]="loginForm.invalid"  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg"
                 style="padding-left: 2.5rem; padding-right: 2.5rem;" (click)="login()">Login</button>
-              <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="#!"
-                  class="link-danger">Register</a></p>
+              <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a 
+                  class="link-danger" routerLink="/register" routerLinkActive="active">Register</a></p>
             </div>
   
           </form>

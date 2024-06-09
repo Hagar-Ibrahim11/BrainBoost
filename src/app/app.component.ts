@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from '../Components/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-
+import { AuthService } from '../Services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -14,4 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   title = 'BrainBoost';
+  constructor(private authService: AuthService ){
+    authService.loadUserData();
+  }
 }

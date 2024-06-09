@@ -6,13 +6,24 @@ import {
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, RouterLink, ReactiveFormsModule, CommonModule],
+  imports: [
+    FormsModule,
+    RouterLink,
+    ReactiveFormsModule,
+    CommonModule,
+    RouterLinkActive,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -22,7 +33,12 @@ export class LoginComponent {
     password: new FormControl(null, Validators.required),
   });
   credentials = { userName: '', password: '' };
-  constructor(private router: Router, private authService: AuthService) {}
+  returnUrl!: string;
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private route: ActivatedRoute
+  ) {}
   login(): void {
     this.authService
       .login({
@@ -33,11 +49,14 @@ export class LoginComponent {
         (response) => {
           this.authService.setToken(response.token);
           this.authService.decodeUserData();
-          this.router.navigate(['/home']);
+          this.router.navigateByUrl(this.returnUrl);
         },
         (error) => {
           console.log('Login failed:', error);
         }
       );
+  }
+  ngOnInit(): void {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 }
