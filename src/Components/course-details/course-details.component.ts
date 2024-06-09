@@ -32,6 +32,9 @@ export class CourseDetailsComponent {
     private enrollmentService: EnrollmentService,
     private router: Router
   ) {
+    this.route.params.subscribe((params) => {
+      this.courseId = +params['id'];
+    });
     this.authService.userData.subscribe({
       next: () => {
         if (this.authService.userData.value != null) {
@@ -49,12 +52,10 @@ export class CourseDetailsComponent {
     });
   }
   ngOnInit(): void {
-    this.dataService.data$.subscribe((data) => {
-      this.courseId = data;
-    });
     this.courseService.getCourseDetails(this.courseId).subscribe({
       next: (data: ICourseDetails) => {
         this.crsDetails = data;
+        console.log(data);
       },
       error: (error) => {
         console.error('Error fetching courses:', error); // Log any errors

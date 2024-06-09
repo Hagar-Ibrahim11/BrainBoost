@@ -49,8 +49,7 @@ export class CoursesComponent {
       });
   }
   GoToCourseDetails(id: number) {
-    this.dataService.setData(id); // for share data between unrelated components
-    this.router.navigate(['/courseDetails']);
+    this.router.navigate(['/courseDetails', id]);
   }
   GetAllCourses() {
     this.courseservice.GetAllCoursesAsCards().subscribe(
