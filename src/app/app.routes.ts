@@ -9,6 +9,7 @@ import { NotFoundComponent } from '../Components/not-found/not-found.component';
 import { PricingComponent } from '../Components/pricing/pricing.component';
 import { CourseContentComponent } from '../Components/Taking-Course/course-content/course-content.component';
 import { QuizTakingComponent } from '../Components/Taking-Course/quiz-taking/quiz-taking.component';
+import { CertificateComponent } from '../Components/Taking-Course/certificate/certificate.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -16,6 +17,8 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'TakingCourse', component: CourseContentComponent },
   { path: 'TakingQuiz', component: QuizTakingComponent },
+  { path: 'TakingCertificate', component: CertificateComponent },
+
 
 
   {
