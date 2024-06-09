@@ -11,13 +11,13 @@ import { IEnrollment } from '../../models/ienrollment';
 export class EnrollmentService {
   constructor(private httpclient: HttpClient) {}
   Enroll(enrollmentData: IEnrollment): Observable<IPaymentUrl> {
-    const authToken = localStorage.getItem('BrainBoostJwtToken');
+    const authToken = localStorage.getItem('token');
     const header = new HttpHeaders().set(
       'Authorization',
       `Bearer ${authToken}`
     );
     return this.httpclient.post<IPaymentUrl>(
-      `${environment.baseUrl}/api/Subscription/Create`,
+      `${environment.baseUrl}/api/Enrollment/Enroll`,
       enrollmentData,
       { headers: header }
     );

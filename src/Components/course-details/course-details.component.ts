@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ICourseDetails } from '../../models/icourse-details';
 import { environment } from '../../Enviroment/enviroment';
 import { CourseService } from '../../Services/course/course.service';
@@ -21,14 +21,33 @@ export class CourseDetailsComponent {
   crsDetails!: ICourseDetails;
   enrollmentData!: IEnrollment;
   paymentUrl!: IPaymentUrl;
+  Role!: string;
+  UserIsLogged!: boolean;
   env: string = environment.baseUrl + '/Images/Courses/';
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
     private dataService: DataService,
     private authService: AuthService,
-    private enrollmentService: EnrollmentService
-  ) {}
+    private enrollmentService: EnrollmentService,
+    private router: Router
+  ) {
+    this.authService.userData.subscribe({
+      next: () => {
+        if (this.authService.userData.value != null) {
+          this.Role =
+            this.authService.userData.value[
+              'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+            ];
+          this.UserIsLogged = true;
+        } else {
+          this.UserIsLogged = false;
+          this.Role = '';
+        }
+      },
+      error: () => {},
+    });
+  }
   ngOnInit(): void {
     this.dataService.data$.subscribe((data) => {
       this.courseId = data;
@@ -46,24 +65,22 @@ export class CourseDetailsComponent {
     });
   }
   handleEnrollCourse(courseId: number) {
-    console.log(this.authService.userData);
-    this.enrollmentData = {
-      courseId: courseId,
-      studentId: 1,
-      isActive: false,
-      id: 1,
-    };
-    this.enrollmentService
-      .Enroll(this.enrollmentData)
-      .subscribe((data: IPaymentUrl) => {
-        window.location.href = data.url;
-      });
-  }
-  checkUserLogged(userdata: any): boolean {
-    if (userdata != null) {
-      return true;
+    const currentUrl = this.router.url;
+    if (this.UserIsLogged) {
+      this.enrollmentData = {
+        studentId: 1,
+        courseId: courseId,
+        isActive: false,
+      };
+      this.enrollmentService
+        .Enroll(this.enrollmentData)
+        .subscribe((data: IPaymentUrl) => {
+          window.location.href = data.url;
+        });
     } else {
-      return false;
+      this.router.navigate(['/login'], {
+        queryParams: { returnUrl: currentUrl },
+      });
     }
   }
 }

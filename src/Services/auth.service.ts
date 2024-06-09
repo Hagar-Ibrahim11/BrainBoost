@@ -9,8 +9,7 @@ import { environment } from '../Enviroment/enviroment';
 })
 export class AuthService {
   userData = new BehaviorSubject<any>(null);
-  constructor(private http: HttpClient, private router: Router) 
-  {
+  constructor(private http: HttpClient, private router: Router) {
     this.loadUserData();
   }
 
