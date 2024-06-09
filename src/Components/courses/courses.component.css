@@ -181,9 +181,10 @@
 }
 
 .price-badge {
-  top: 20px;
+  position: absolute;
+  top: 5px;
   right: 15px;
-  background-color: var(--green-600);
+  background-color: var(--primary-red);
 }
 
 /* filter*/
