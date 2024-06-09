@@ -11,10 +11,10 @@ export class AuthService {
   userData = new BehaviorSubject<any>(null);
   constructor(private http: HttpClient, private router: Router) 
   {
-    this.loadUserData();
+    
   }
 
-  private loadUserData() {
+  loadUserData() {
     const token = this.getToken();
     if (token) {
       this.decodeUserData();
