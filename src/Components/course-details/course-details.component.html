@@ -19,14 +19,28 @@
               <i class="fas fa-star-half-alt"></i>
             </div>
             <span class="rating-value">{{ crsDetails.rate }}</span>
-            <a href="#" class="reviews">(47 ratings)</a>
+            <a href="#" class="reviews"
+              >({{ crsDetails.numOfRates }} ratings)</a
+            >
             <span class="students">2,117 students</span>
           </div>
-          <p class="creator">Created by <a href="#">Suly S Peerally</a></p>
+          <p class="creator">
+            Created by
+            <a
+              >{{ crsDetails.teacherDataDto?.fname }}
+              {{ crsDetails.teacherDataDto?.lname }}</a
+            >
+          </p>
           <div class="course-meta">
-            <span><i class="fas fa-sync-alt"></i> Last updated 8/2023</span>
-            <span><i class="fas fa-globe"></i> English</span>
-            <span><i class="fas fa-closed-captioning"></i> English [CC]</span>
+            <span
+              ><i class="fas fa-sync-alt"></i> Last updated
+              {{ crsDetails.lastUpdate }}</span
+            >
+            <span><i class="fas fa-globe"></i> {{ crsDetails.language }}</span>
+            <span
+              ><i class="fas fa-closed-captioning"></i>
+              {{ crsDetails.language }} [CC]</span
+            >
           </div>
         </div>
       </div>
@@ -56,9 +70,9 @@
               <i class="fas fa-star-half-alt"></i>
               <span class="ml-2">{{ crsDetails.rate }}</span>
             </div>
-            <p class="days-left mb-3">
+            <!-- <p class="days-left mb-3">
               <i class="fa-regular fa-clock"></i> 5 days left
-            </p>
+            </p> -->
             <a
               (click)="handleEnrollCourse(crsDetails.id)"
               class="btn btn-enroll mb-2 w-100"
@@ -79,20 +93,7 @@
         <div class="card-body">
           <h5 class="card-title">Description</h5>
           <p class="card-text">
-            At vero eos et accusamus et iusto odio dignissimos ducimus qui
-            blanditiis praesentium voluptatum deleniti atque corrupti quos
-            dolores et quas molestias excepturi sint occaecati cupiditate non
-            provident, similique sunt in culpa qui officia deserunt mollitia
-            animi, id est laborum et dolorum fuga.
-          </p>
-          <p class="card-text">
-            On the other hand, we denounce with righteous indignation and
-            dislike men who are so beguiled and demoralized by the charms of
-            pleasure of the moment, so blinded by desire, that they cannot
-            foresee the pain and trouble that are bound to ensue; and equal
-            blame belongs to those who fail in their duty through weakness of
-            will, which is the same as saying through shrinking from toil and
-            pain.
+            {{ crsDetails.longDescription }}
           </p>
         </div>
       </div>
@@ -141,19 +142,19 @@
         <h3>Course Info</h3>
         <div class="info-item">
           <i class="fas fa-chalkboard-teacher"></i>
-          <span>Instructor:</span> John Doe
+          <span>Instructor:</span> {{ crsDetails.teacherDataDto?.fname }}
         </div>
         <div class="info-item">
           <i class="fas fa-clock"></i>
-          <span>Duration:</span> 10 hours
+          <span>Duration:</span> {{ crsDetails.duration }} hours
         </div>
         <div class="info-item">
           <i class="fas fa-video"></i>
-          <span>Lectures:</span> 30
+          <span>Lectures:</span> {{ crsDetails.numOfVideos }}
         </div>
         <div class="info-item">
           <i class="fas fa-signal"></i>
-          <span>Level:</span> Intermediate
+          <span>Level:</span> {{ crsDetails.level }}
         </div>
       </div>
 
@@ -162,8 +163,11 @@
           src="https://www.shutterstock.com/image-photo/young-happy-business-woman-sitting-260nw-2223351415.jpg"
           alt="Instructor Image"
         />
-        <h3>Ellena Jhone</h3>
-        <p>Web Development Instructor</p>
+        <h3>
+          {{ crsDetails.teacherDataDto?.fname }}
+          {{ crsDetails.teacherDataDto?.lname }}
+        </h3>
+        <p>{{ crsDetails.teacherDataDto?.career }}</p>
         <div class="social-icons">
           <a href="#"><i class="fab fa-facebook-f"></i></a>
           <a href="#"><i class="fab fa-twitter"></i></a>
@@ -171,9 +175,18 @@
           <a href="#"><i class="fab fa-instagram"></i></a>
         </div>
         <div class="contact-info">
-          <p><i class="fas fa-envelope"></i> johndoe.com</p>
-          <p><i class="fas fa-phone"></i> (123) 456-7890</p>
-          <p><i class="fas fa-map-marker-alt"></i> New York, USA</p>
+          <p>
+            <i class="fas fa-envelope"></i>
+            {{ crsDetails.teacherDataDto?.email }}
+          </p>
+          <p>
+            <i class="fas fa-phone"></i>
+            {{ crsDetails.teacherDataDto?.phoneNumber }}
+          </p>
+          <p>
+            <i class="fas fa-map-marker-alt"></i>
+            {{ crsDetails.teacherDataDto?.address }}
+          </p>
         </div>
       </div>
     </div>
