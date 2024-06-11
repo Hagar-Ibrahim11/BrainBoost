@@ -1,20 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { environment } from '../Enviroment/enviroment';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  userData = null;
-  constructor(private http: HttpClient, private router: Router) {}
+  userData = new BehaviorSubject<any>(null);
+  constructor(private http: HttpClient, private router: Router) {
+    this.loadUserData();
+  }
+
+  loadUserData() {
+    const token = this.getToken();
+    if (token) {
+      this.decodeUserData();
+    }
+  }
   decodeUserData() {
     let encodedToken = JSON.stringify(this.getToken());
     let decodedToken: any = jwtDecode(encodedToken);
-    console.log(decodedToken);
-    this.userData = decodedToken;
+    this.userData.next(decodedToken);
   }
   login(credentials: { userName: string; password: string }): Observable<any> {
     return this.http.post<any>(
@@ -32,6 +40,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('token');
+    this.userData.next(null);
     this.router.navigate(['/login']);
   }
 

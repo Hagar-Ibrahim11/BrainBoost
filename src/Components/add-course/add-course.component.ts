@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
 import { AddCourseDetailsComponent } from './add-course-details/add-course-details.component';
 import { AddCourseVideosComponent } from './add-course-videos/add-course-videos.component';
 import { CourseServiceService } from '../../Services/course/course-service.service';
+import { AddCourseQuestionsComponent } from './add-course-questions/add-course-questions.component';
 @Component({
   selector: 'app-add-course',
   standalone: true,
@@ -33,6 +34,7 @@ import { CourseServiceService } from '../../Services/course/course-service.servi
     MatInputModule,
     MatButtonModule,
     AddCourseVideosComponent,
+    AddCourseQuestionsComponent,
   ],
 })
 export class AddCourseComponent {
@@ -40,7 +42,10 @@ export class AddCourseComponent {
     courseName: new FormControl('', Validators.required),
     courseDescription: new FormControl('', Validators.required),
     price: new FormControl(0, Validators.required),
-    categoryId: new FormControl(null, Validators.required),
+    categoryName: new FormControl('', Validators.required),
+    courseLanguage: new FormControl('', Validators.required),
+    courseLevel: new FormControl('', Validators.required),
+    courseImage: new FormControl<File | null>(null, Validators.required),
   });
   courseLecturesForm = new FormArray<FormGroup>(
     [
@@ -51,19 +56,31 @@ export class AddCourseComponent {
     ],
     Validators.minLength(1)
   );
-  constructor(
-    private courseService: CourseServiceService,
-  ) {}
+  courseQuestionsForm = new FormArray<FormGroup>(
+    [
+      new FormGroup({
+        headLine: new FormControl<string>('', Validators.required),
+        answers: new FormControl<string[]>([''], Validators.minLength(2)),
+        rightAnswer: new FormControl<string>('', Validators.required),
+      }),
+    ],
+    Validators.minLength(1)
+  );
+  constructor(private courseService: CourseServiceService) {}
   addCourseDetails() {
+    console.log(this.courseDetailsForm);
     this.courseService
       .addCourse({
         Name: this.courseDetailsForm.value.courseName!,
         Description: this.courseDetailsForm.value.courseDescription!,
         Price: this.courseDetailsForm.value.price!,
         TeacherId: 1,
-        CategoryId: this.courseDetailsForm.value.categoryId!,
+        CategoryName: this.courseDetailsForm.value.categoryName!,
+        Level: this.courseDetailsForm.value.courseLevel!,
+        Image: this.courseDetailsForm.value.courseImage!,
         CertificateHeadline: 'string',
         CertificateAppreciationParagraph: 'string',
+        Language: this.courseDetailsForm.value.courseLanguage!,
       })
       .subscribe({
         next: (response) => {
@@ -94,5 +111,8 @@ export class AddCourseComponent {
         },
       });
     });
+  }
+  display() {
+    console.log(this.courseQuestionsForm);
   }
 }

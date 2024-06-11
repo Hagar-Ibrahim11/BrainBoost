@@ -24,11 +24,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AutoSelectAngularMaterialComponent {
   myControl = new FormControl(null);
-  @Input() options: {id:number,name:string}[] = [];
+  // @Input() options: {id:number,name:string}[] = [];
+  @Input() options: string[] = [];
   @Input() placeHolder: string = '';
   @Input() class: string = '';
   @Output() optionSelected = new EventEmitter<any>();
-  filteredOptions: Observable<{id:number,name:string}[]> | undefined;
+  filteredOptions: Observable<string[]> | undefined;
   constructor(private http:HttpClient){}
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -37,9 +38,9 @@ export class AutoSelectAngularMaterialComponent {
     );
   }
 
-  private _filter(value: string): {id:number,name:string}[] {
+  private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
-    return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
+    return this.options.filter(option => option.toLowerCase().includes(filterValue));
   }
 }

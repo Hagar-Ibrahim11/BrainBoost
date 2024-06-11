@@ -1,3 +1,4 @@
+import { ICourseDetailsTeacherData } from "../models/Teaher/icourse-details-teacher-data";
 import { ICourseDetails } from "../models/icourse-details";
 
 export class CoureDetails implements ICourseDetails {
@@ -12,6 +13,15 @@ export class CoureDetails implements ICourseDetails {
     public fname: string | null = "",
     public lname: string | null = "",
     public review =[],
-    public whatToLearn=[]  
+    public whatToLearn=[],
+    public longDescription: string | null,
+    public lastUpdate: Date | null,
+    public language: string | null,
+    public duration: number | null,
+    public level: string | null,
+    public numOfRates: number | null,
+    public numOfVideos: number | null,
+    public isApproved: boolean,
+    public teacherDataDto: ICourseDetailsTeacherData | null
   ) {}
 }

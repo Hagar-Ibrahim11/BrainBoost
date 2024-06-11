@@ -3,8 +3,8 @@ import { InputAngularMaterialComponent } from '../../Inputs/input-angular-materi
 import { AutoSelectAngularMaterialComponent } from '../../Inputs/auto-select-angular-material/auto-select-angular-material.component';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../Enviroment/enviroment';
-import { response } from 'express';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+import { Options } from '../../../classes/options';
 
 @Component({
   selector: 'app-add-course-details',
@@ -15,17 +15,27 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class AddCourseDetailsComponent {
   @Input() courseDetailsForm !:FormGroup;
-  categoryOptions: { id: number; name: string }[] = [];
+  languageOptions=Options.languages
+  levelOptions=Options.level
+  categoryOptions:string[] =[]
   constructor(http: HttpClient) {
+    
     http
-      .get<{ id: number; name: string }[]>(
-        `${environment.baseUrl}/api/Category/GetCategory`
+      .get<{id:number,name:string}[]>(
+        `${environment.baseUrl}/api/Category/GetAllCategories`
       )
       .subscribe({
         next: (response) => {
-          this.categoryOptions = response;
+          response.forEach((value)=>{
+            this.categoryOptions.push(value.name)
+          })
         },
         error: (error) => {},
       });
+  }
+  handleImageInput(img: any) {
+    const file = img.target.files[0] as File;
+    this.courseDetailsForm.controls['courseImage'].setValue(file)
+    console.log(this.courseDetailsForm.controls['courseImage'])
   }
 }

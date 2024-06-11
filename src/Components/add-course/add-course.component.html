@@ -1,5 +1,5 @@
 <mat-stepper [linear]="true" #stepper>
-  <mat-step [stepControl]="courseDetailsForm">
+  <!-- <mat-step [stepControl]="courseDetailsForm">
     <form [formGroup]="courseDetailsForm">
       <ng-template matStepLabel>Course Details</ng-template>
       <app-add-course-details [courseDetailsForm]="courseDetailsForm"></app-add-course-details>
@@ -7,13 +7,13 @@
           mat-button
           matStepperNext
           class="btn btn-secondary"
-          [disabled]="courseDetailsForm.invalid"
           (click)="addCourseDetails()"
+          [disabled]="courseDetailsForm.invalid"
         >
           Next
         </button>
     </form>
-  </mat-step>
+  </mat-step> 
   <mat-step [stepControl]="courseLecturesForm">
     <form>
       <ng-template matStepLabel>Add course videos</ng-template>
@@ -30,17 +30,18 @@
         </button>
       </div>
     </form>
-  </mat-step>
+  </mat-step> -->
   <mat-step  [optional]="false">
     <form >
-      <ng-template matStepLabel>Add Certifiacate</ng-template>
+      <ng-template matStepLabel>Add Qizzes for the course</ng-template>
+      <app-add-course-questions [courseQuestionsForm]="courseQuestionsForm"></app-add-course-questions>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
+        <button (click)="display()" mat-button matStepperPrevious>Back</button>
         <button
+          
           mat-button
           matStepperNext
         >
-          Next
         </button>
       </div>
     </form>

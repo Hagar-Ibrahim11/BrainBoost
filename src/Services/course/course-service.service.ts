@@ -19,14 +19,28 @@ export class CourseServiceService {
     Description: string;
     Price: number;
     TeacherId: number;
-    CategoryId: number;
+    CategoryName: string;
     CertificateHeadline: string;
+    Level: string;
     CertificateAppreciationParagraph: string;
+    Language: string;
+    Image: File;
   }): Observable<any> {
-    console.log(insertedCourse)
+    const insertedCourseForm = new FormData();
+    insertedCourseForm.append('Name', insertedCourse.Name);
+    insertedCourseForm.append('Description', insertedCourse.Description!);
+    insertedCourseForm.append('Price', insertedCourse.Price.toString());
+    insertedCourseForm.append('TeacherId', '1'); // assuming TeacherId is always 1
+    insertedCourseForm.append('CategoryName', insertedCourse.CategoryName);
+    insertedCourseForm.append('Level', insertedCourse.Level);
+    insertedCourseForm.append('Image', insertedCourse.Image);
+    insertedCourseForm.append('CertificateHeadline', 'string');
+    insertedCourseForm.append('CertificateAppreciationParagraph', 'string');
+    insertedCourseForm.append('Language', insertedCourse.Language!);
+    console.log(insertedCourse);
     return this.http.post(
       `${environment.baseUrl}/api/Course/AddCourse`,
-      insertedCourse
+      insertedCourseForm
     );
   }
 }

@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../Components/navbar/navbar.component';
 
+import { AuthService } from '../Services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -15,4 +16,7 @@ import { NavbarComponent } from '../Components/navbar/navbar.component';
 })
 export class AppComponent {
   title = 'BrainBoost';
+  constructor(private authService: AuthService ){
+    authService.loadUserData();
+  }
 }
