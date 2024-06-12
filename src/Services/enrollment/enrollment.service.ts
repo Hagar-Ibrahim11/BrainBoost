@@ -22,4 +22,14 @@ export class EnrollmentService {
       { headers: header }
     );
   }
+  CheckStatus(orderNumber: string | null): Observable<any> {
+    return this.httpclient.get<any>(
+      `${environment.baseUrl}/api/Enrollment/CheckStatus/${orderNumber}`
+    );
+  }
+  CheckEnroll(courseId: number, studentId: number): Observable<any> {
+    return this.httpclient.get<any>(
+      `${environment.baseUrl}/api/Enrollment/CheckEnroll?courseId=${courseId}&studentId=${studentId}`
+    );
+  }
 }
