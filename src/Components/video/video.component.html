@@ -1,1 +1,13 @@
-<p>video works!</p>
+
+<ng-container *ngFor="let vid of comingVideo; let i = index" >
+  <div (click)="handleLink(vid)">
+  <label [for]="'video-' + i" >
+    {{vid.title}}
+  </label>
+<input type="radio"   [id]="'video-' + i" [checked]="vid.state" >
+</div>
+</ng-container>
+<br>
+
+<video style="width: 400px;" [src]="contLink+vidLink" controls></video>
+

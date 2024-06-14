@@ -1,5 +1,22 @@
-<p>course-content works!</p>
+<!-- <p>course-content works!</p>
 
 <h2 *ngIf="msg">
   {{msg}}
-</h2>
+</h2> -->
+<ng-container *ngIf="Course">
+<button class="btn btn-outline-danger mx-1" (click)="navigateToVideos(CrsId)"   >Videos</button>
+<button class="btn btn-outline-danger mx-1" (click)="navigateToQuiz(CrsId)"  [disabled]="!Course.states?.hasFinishedallVideos" >Quiz</button>
+<button class="btn btn-outline-danger mx-1" (click)="navigateToCertificate(CrsId)"  [disabled]="!Course.states?.hasFinishedallVideos||!Course.states?.quizState" >Certificate</button>
+</ng-container>
+
+<div>
+  <textarea name="" id="" style="width: 300px;height: 300px;" (change)="review($event)"></textarea>
+  <div class="star-rating">
+    <span *ngFor="let star of stars; let i = index" (click)="rate(i + 1)">
+      <i class="fa" [class.fa-star]="i < rating" [class.fa-star-o]="i >= rating"></i>
+    </span>
+  </div>
+  <p>Your rating: {{rating}}</p>
+</div>
+
+

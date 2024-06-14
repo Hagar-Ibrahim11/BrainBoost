@@ -17,7 +17,7 @@ import { QuizService } from '../../../Services/quiz.service';
   styleUrl: './quiz-taking.component.css'
 })
 export class QuizTakingComponent implements OnInit  {
-
+  CourseId!:number
   Quiz!:IQuiz
   QuizCheckAnswer!:ICheckAnswer
   QuestionAndAnswer!:IQuestionAndAnswerIDs
@@ -28,16 +28,19 @@ export class QuizTakingComponent implements OnInit  {
     private quizService: QuizService,
     private router: Router
   ) {
-    this.GetQuiz()
+    this.route.params.subscribe(params => {
+      this.CourseId = +params['id']; // Convert to number (if needed)
+      console.log(this.CourseId)
+    });
   }
   ngOnInit(): void {
 
 
-
+    this.GetQuiz(this.CourseId)
   }
-  GetQuiz()
+  GetQuiz(crsId:number)
   {
-    this.courseService.GetTakingQuiz(1).subscribe({
+    this.courseService.GetTakingQuiz(crsId).subscribe({
 
       next: (data: IQuiz) => {
         this.Quiz = data;
@@ -99,7 +102,7 @@ changeState(id: number,status:boolean)
   {
       this.quizService.stdState="succeeded"
       this.Quiz.quizState=true
-      this.quizService.changeQuizState(1,this.Quiz.quizState).subscribe({
+      this.quizService.changeQuizState(2,this.Quiz.quizState).subscribe({
         next: (data: any) => {
           this.router.navigate(['/TakingCertificate']);
         },
@@ -109,9 +112,6 @@ changeState(id: number,status:boolean)
       this.quizService.stdState="Failed"
       this.router.navigate(['/TakingCourse']);
   }
-
-
   console.log(this.quizService.stdState,this.quizService.stdDegree)
-
   }
 }

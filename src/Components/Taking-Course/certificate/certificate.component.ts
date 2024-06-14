@@ -3,6 +3,7 @@ import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 import { CourseService } from '../../../Services/course/course.service'
 import { ICertificate } from '../../../models/icertificate'
+import { ActivatedRoute } from '@angular/router'
 
 
 @Component({
@@ -13,8 +14,14 @@ import { ICertificate } from '../../../models/icertificate'
   styleUrl: './certificate.component.css'
 })
 export class CertificateComponent implements OnInit{
+  CourseId!:number
 Certificate!:ICertificate
-  constructor (private crsService:CourseService){}
+  constructor (private crsService:CourseService,private route:ActivatedRoute){
+    this.route.params.subscribe(params => {
+      this.CourseId = +params['id']; // Convert to number (if needed)
+      console.log(this.CourseId)
+    });
+  }
   ngOnInit(): void {
    this.getCert(1)
   }
