@@ -7,10 +7,13 @@ import { CoursesComponent } from '../Components/courses/courses.component';
 import { CourseDetailsComponent } from '../Components/course-details/course-details.component';
 import { NotFoundComponent } from '../Components/not-found/not-found.component';
 import { PricingComponent } from '../Components/pricing/pricing.component';
+import { AdminDashboardComponent } from '../Components/admin-dashboard/admin-dashboard.component';
+
 import { CourseContentComponent } from '../Components/Taking-Course/course-content/course-content.component';
 import { QuizTakingComponent } from '../Components/Taking-Course/quiz-taking/quiz-taking.component';
 import { CertificateComponent } from '../Components/Taking-Course/certificate/certificate.component';
 import { EnrollmentSuccessComponent } from '../Components/EnrollmentSuccess/enrollment-success/enrollment-success.component';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -33,6 +36,8 @@ export const routes: Routes = [
       { path: 'courseDetails/:id', component: CourseDetailsComponent },
     ],
   },
+  {path:'adminDashboard',component:AdminDashboardComponent},
+
   { path: 'pricing', component: PricingComponent },
   { path: '**', component: NotFoundComponent },
 ];
