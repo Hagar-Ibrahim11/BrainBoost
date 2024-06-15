@@ -7,6 +7,7 @@ import { CoursesComponent } from '../Components/courses/courses.component';
 import { CourseDetailsComponent } from '../Components/course-details/course-details.component';
 import { NotFoundComponent } from '../Components/not-found/not-found.component';
 import { PricingComponent } from '../Components/pricing/pricing.component';
+import { AdminDashboardComponent } from '../Components/admin-dashboard/admin-dashboard.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -21,6 +22,8 @@ export const routes: Routes = [
       { path: 'courseDetails', component: CourseDetailsComponent },
     ],
   },
+  {path:'adminDashboard',component:AdminDashboardComponent},
+
   { path: 'pricing', component: PricingComponent },
   { path: '**', component: NotFoundComponent },
 ];
