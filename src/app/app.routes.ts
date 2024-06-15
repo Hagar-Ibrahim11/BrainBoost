@@ -9,17 +9,31 @@ import { NotFoundComponent } from '../Components/not-found/not-found.component';
 import { PricingComponent } from '../Components/pricing/pricing.component';
 import { AdminDashboardComponent } from '../Components/admin-dashboard/admin-dashboard.component';
 
+import { CourseContentComponent } from '../Components/Taking-Course/course-content/course-content.component';
+import { QuizTakingComponent } from '../Components/Taking-Course/quiz-taking/quiz-taking.component';
+import { CertificateComponent } from '../Components/Taking-Course/certificate/certificate.component';
+import { EnrollmentSuccessComponent } from '../Components/EnrollmentSuccess/enrollment-success/enrollment-success.component';
+
+
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  {
+    path: 'EnrollmentSuccess/:orderNumber/:courseId',
+    component: EnrollmentSuccessComponent,
+  },
+  { path: 'TakingCourse/:id', component: CourseContentComponent },
+  { path: 'TakingQuiz', component: QuizTakingComponent },
+  { path: 'TakingCertificate', component: CertificateComponent },
+
   {
     path: '',
     component: LayoutComponent,
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'courses', component: CoursesComponent },
-      { path: 'courseDetails', component: CourseDetailsComponent },
+      { path: 'courseDetails/:id', component: CourseDetailsComponent },
     ],
   },
   {path:'adminDashboard',component:AdminDashboardComponent},
