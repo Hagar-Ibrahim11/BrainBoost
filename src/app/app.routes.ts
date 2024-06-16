@@ -36,7 +36,7 @@ export const routes: Routes = [
       { path: 'courseDetails/:id', component: CourseDetailsComponent },
     ],
   },
-  {path:'adminDashboard',component:AdminDashboardComponent},
+  {path:'admindashboard',component:AdminDashboardComponent},
 
   { path: 'pricing', component: PricingComponent },
   { path: '**', component: NotFoundComponent },
