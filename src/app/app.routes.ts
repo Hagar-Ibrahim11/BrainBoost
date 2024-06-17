@@ -8,6 +8,7 @@ import { CourseDetailsComponent } from '../Components/course-details/course-deta
 import { NotFoundComponent } from '../Components/not-found/not-found.component';
 import { PricingComponent } from '../Components/pricing/pricing.component';
 import { AdminDashboardComponent } from '../Components/admin-dashboard/admin-dashboard.component';
+import { NonApprovedCouresesComponent } from '../Components/non-approved-coureses/non-approved-coureses.component';
 
 import { CourseContentComponent } from '../Components/Taking-Course/course-content/course-content.component';
 import { QuizTakingComponent } from '../Components/Taking-Course/quiz-taking/quiz-taking.component';
@@ -36,7 +37,12 @@ export const routes: Routes = [
       { path: 'courseDetails/:id', component: CourseDetailsComponent },
     ],
   },
-  {path:'admindashboard',component:AdminDashboardComponent},
+
+  {path:'adminDashboard',component:AdminDashboardComponent},
+{path:'nonApprovedCourses',component:NonApprovedCouresesComponent},
+
+ 
+
 
   { path: 'pricing', component: PricingComponent },
   { path: '**', component: NotFoundComponent },
