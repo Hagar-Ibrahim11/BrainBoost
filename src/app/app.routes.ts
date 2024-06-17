@@ -8,6 +8,7 @@ import { CourseDetailsComponent } from '../Components/course-details/course-deta
 import { NotFoundComponent } from '../Components/not-found/not-found.component';
 import { PricingComponent } from '../Components/pricing/pricing.component';
 import { AdminDashboardComponent } from '../Components/admin-dashboard/admin-dashboard.component';
+import { NonApprovedCouresesComponent } from '../Components/non-approved-coureses/non-approved-coureses.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -23,7 +24,7 @@ export const routes: Routes = [
     ],
   },
   {path:'adminDashboard',component:AdminDashboardComponent},
-
+{path:'nonApprovedCourses',component:NonApprovedCouresesComponent},
   { path: 'pricing', component: PricingComponent },
   { path: '**', component: NotFoundComponent },
 ];
