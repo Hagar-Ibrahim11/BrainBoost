@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 import {
   AbstractControl,
   FormArray,
@@ -8,21 +8,21 @@ import {
   FormsModule,
   ReactiveFormsModule,
   Validators,
-} from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatStepperModule } from '@angular/material/stepper';
-import { CommonModule } from '@angular/common';
-import { AddCourseDetailsComponent } from './add-course-details/add-course-details.component';
-import { AddCourseVideosComponent } from './add-course-videos/add-course-videos.component';
-import { CourseServiceService } from '../../Services/course/course-service.service';
-import { AddCourseQuestionsComponent } from './add-course-questions/add-course-questions.component';
+} from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatStepperModule } from "@angular/material/stepper";
+import { CommonModule } from "@angular/common";
+import { AddCourseDetailsComponent } from "./add-course-details/add-course-details.component";
+import { AddCourseVideosComponent } from "./add-course-videos/add-course-videos.component";
+import { CourseServiceService } from "../../Services/course/course-service.service";
+import { AddCourseQuestionsComponent } from "./add-course-questions/add-course-questions.component";
 @Component({
-  selector: 'app-add-course',
+  selector: "app-add-course",
   standalone: true,
-  templateUrl: './add-course.component.html',
-  styleUrl: './add-course.component.css',
+  templateUrl: "./add-course.component.html",
+  styleUrl: "./add-course.component.css",
   imports: [
     AddCourseDetailsComponent,
     CommonModule,
@@ -39,12 +39,12 @@ import { AddCourseQuestionsComponent } from './add-course-questions/add-course-q
 })
 export class AddCourseComponent {
   courseDetailsForm = new FormGroup({
-    courseName: new FormControl('', Validators.required),
-    courseDescription: new FormControl('', Validators.required),
+    courseName: new FormControl("", Validators.required),
+    courseDescription: new FormControl("", Validators.required),
     price: new FormControl(0, Validators.required),
-    categoryName: new FormControl('', Validators.required),
-    courseLanguage: new FormControl('', Validators.required),
-    courseLevel: new FormControl('', Validators.required),
+    categoryName: new FormControl("", Validators.required),
+    courseLanguage: new FormControl("", Validators.required),
+    courseLevel: new FormControl("", Validators.required),
     courseImage: new FormControl<File | null>(null, Validators.required),
   });
   courseLecturesForm = new FormArray<FormGroup>(
@@ -59,9 +59,16 @@ export class AddCourseComponent {
   courseQuestionsForm = new FormArray<FormGroup>(
     [
       new FormGroup({
-        headLine: new FormControl<string>('', Validators.required),
-        answers: new FormControl<string[]>([''], Validators.minLength(2)),
-        rightAnswer: new FormControl<string>('', Validators.required),
+        headLine: new FormControl<string>("", Validators.required),
+        answers: new FormArray<FormControl>(
+          [
+            new FormControl("", Validators.required),
+            new FormControl("", Validators.required)
+          ],
+          Validators.minLength(2)
+        ),
+        // answers: new FormControl<string[]>([''], Validators.minLength(2)),
+        rightAnswer: new FormControl<string>("", Validators.required),
       }),
     ],
     Validators.minLength(1)
@@ -78,8 +85,8 @@ export class AddCourseComponent {
         CategoryName: this.courseDetailsForm.value.categoryName!,
         Level: this.courseDetailsForm.value.courseLevel!,
         Image: this.courseDetailsForm.value.courseImage!,
-        CertificateHeadline: 'string',
-        CertificateAppreciationParagraph: 'string',
+        CertificateHeadline: "string",
+        CertificateAppreciationParagraph: "string",
         Language: this.courseDetailsForm.value.courseLanguage!,
       })
       .subscribe({
@@ -95,11 +102,11 @@ export class AddCourseComponent {
     this.courseLecturesForm.controls.forEach((element, index) => {
       const formdata = new FormData();
       formdata.append(
-        'Title',
+        "Title",
         this.courseLecturesForm.controls.at(index)?.value.title
       );
       formdata.append(
-        'VideoFile',
+        "VideoFile",
         this.courseLecturesForm.controls.at(index)?.value.videoFile
       );
       this.courseService.addVideo(formdata).subscribe({
