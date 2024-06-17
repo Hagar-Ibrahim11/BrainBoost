@@ -1,29 +1,62 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ICourseDetails } from '../../models/icourse-details';
 import { environment } from '../../Enviroment/enviroment';
 import { CourseService } from '../../Services/course/course.service';
 import { DataService } from '../../Services/sharedData/data.service';
+import { AuthService } from '../../Services/auth.service';
+import { EnrollmentService } from '../../Services/enrollment/enrollment.service';
+import { IEnrollment } from '../../models/ienrollment';
+import { IPaymentUrl } from '../../models/ipayment-url';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-course-details',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './course-details.component.html',
   styleUrl: './course-details.component.css',
 })
 export class CourseDetailsComponent {
   courseId!: number;
+  currentUserId!: number;
   crsDetails!: ICourseDetails;
+  enrollmentData!: IEnrollment;
+  paymentUrl!: IPaymentUrl;
+  Role!: string;
+  UserIsLogged!: boolean;
+  IsEnrolled: boolean = false;
   env: string = environment.baseUrl + '/Images/Courses/';
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
-    private dataService: DataService
-  ) {}
+    private authService: AuthService,
+    private enrollmentService: EnrollmentService,
+    private router: Router
+  ) {
+    this.route.params.subscribe((params) => {
+      this.courseId = +params['id'];
+    });
+  }
   ngOnInit(): void {
-    this.dataService.data$.subscribe((data) => {
-      this.courseId = data;
+    this.authService.userData.subscribe({
+      next: () => {
+        if (this.authService.userData.value != null) {
+          this.Role =
+            this.authService.userData.value[
+              'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+            ];
+          this.UserIsLogged = true;
+          this.currentUserId =
+            this.authService.userData.value[
+              'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+            ];
+        } else {
+          this.UserIsLogged = false;
+          this.Role = '';
+        }
+      },
+      error: () => {},
     });
     this.courseService.getCourseDetails(this.courseId).subscribe({
       next: (data: ICourseDetails) => {
@@ -36,5 +69,30 @@ export class CourseDetailsComponent {
         console.log('courses fetched successfully'); // Log completion
       },
     });
+    this.enrollmentService
+      .CheckEnroll(this.courseId, this.currentUserId)
+      .subscribe((data) => (this.IsEnrolled = data));
+  }
+  handleEnrollCourse(courseId: number) {
+    const currentUrl = this.router.url;
+    if (this.UserIsLogged) {
+      this.enrollmentData = {
+        studentId: 1,
+        courseId: courseId,
+        isActive: false,
+      };
+      this.enrollmentService
+        .Enroll(this.enrollmentData)
+        .subscribe((data: IPaymentUrl) => {
+          window.location.href = data.url;
+        });
+    } else {
+      this.router.navigate(['/login'], {
+        queryParams: { returnUrl: currentUrl },
+      });
+    }
+  }
+  handleGoToCourse(id: number): void {
+    this.router.navigate(['/TakingCourse' , id]);
   }
 }

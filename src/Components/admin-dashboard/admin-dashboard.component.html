@@ -9,30 +9,8 @@
           <div class="position-sticky">
             <div class="list-group list-group-flush mx-3 mt-4">
               <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Main dashboard</span>
+                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>All Courses</span>
               </a>
-              <a href="#" class="list-group-item list-group-item-action py-2 ripple active">
-                <i class="fas fa-chart-area fa-fw me-3"></i><span>Webiste traffic</span>
-              </a>
-              <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
-                  class="fas fa-lock fa-fw me-3"></i><span>Password</span></a>
-              <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
-                  class="fas fa-chart-line fa-fw me-3"></i><span>Analytics</span></a>
-              <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                <i class="fas fa-chart-pie fa-fw me-3"></i><span>SEO</span>
-              </a>
-              <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
-                  class="fas fa-chart-bar fa-fw me-3"></i><span>Orders</span></a>
-              <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
-                  class="fas fa-globe fa-fw me-3"></i><span>International</span></a>
-              <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
-                  class="fas fa-building fa-fw me-3"></i><span>Partners</span></a>
-              <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
-                  class="fas fa-calendar fa-fw me-3"></i><span>Calendar</span></a>
-              <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
-                  class="fas fa-users fa-fw me-3"></i><span>Users</span></a>
-              <a href="#" class="list-group-item list-group-item-action py-2 ripple"><i
-                  class="fas fa-money-bill fa-fw me-3"></i><span>Sales</span></a>
             </div>
           </div>
         </nav>
@@ -183,8 +161,8 @@
                   <div class="icon-wrapper bullseye">
                     <i class="fa-solid fa-bullseye fa-2xl fs-1"></i>
                   </div>
-                  <h1 class="mt-2">120</h1>
-                  <p class="card-text mt-3 text-dark">Enrolled Courses</p>
+                  <h1 class="mt-2">{{NumOfStudent}}</h1>
+                  <p class="card-text mt-3 text-dark">Total Students</p>
                 </div>
               </div>
             </div>
@@ -194,8 +172,8 @@
                   <div class="icon-wrapper book">
                     <i class="fa-solid fa-book-open fa-2xl fs-1"></i>
                   </div>
-                  <h1 class="mt-2">17</h1>
-                  <p class="card-text mt-3 text-dark">Active Courses</p>
+                  <h1 class="mt-2">{{NumOfCourse}}</h1>
+                  <p class="card-text mt-3 text-dark">Total Courses</p>
                 </div>
               </div>
             </div>
@@ -205,8 +183,8 @@
                   <div class="icon-wrapper check">
                     <i class="fa-solid fa-check fa-2xl fs-1"></i>
                   </div>
-                  <h1 class="mt-2">64</h1>
-                  <p class="card-text mt-3 text-dark">Completed Courses</p>
+                  <h1 class="mt-2">{{NumOfTeacher}}</h1>
+                  <p class="card-text mt-3 text-dark">Total Teachers</p>
                 </div>
               </div>
             </div>
@@ -220,8 +198,8 @@
                   <div class="icon-wrapper people">
                     <i class="fa-solid fa-people-group fa-2xl fs-1"></i>
                   </div>
-                  <h1 class="mt-2">1.5M</h1>
-                  <p class="card-text mt-3 text-dark">Total Students</p>
+                  <h1 class="mt-2">50</h1>
+                  <p class="card-text mt-3 text-dark">Enrolled Courses</p>
                 </div>
               </div>
             </div>
@@ -256,29 +234,14 @@
             <h2 class="mb-4 p-2">Top Instructors</h2>
           </div>
           <!-- First Instructor -->
-          <div class="col-md-6">
+          <div class="col-md-6" *ngFor="let Teacher of TopTeacher">
             <div class="instructor-card d-flex align-items-center shadow-lg rounded-3 border-0">
               <img
-                src="https://img.freepik.com/free-photo/young-beautiful-woman-looking-camera-trendy-girl-casual-summer-white-t-shirt-jeans-shorts-positive-female-shows-facial-emotions-funny-model-isolated-yellow_158538-15796.jpg?t=st=1718342833~exp=1718346433~hmac=bc2faebfe38957f6bf91be2626ecaa84199f49ab7fe30adaa7a8c8ea27d8943b&w=740"
+                [src]="Teacher.pictureUrl"
                 alt="Instructor 1" class="instructor-img me-3">
               <div class="instructor-info">
-                <h5 class="mb-1">John Doe</h5>
-                <p class="mb-0 text-muted">johndoe</p>
-              </div>
-              <div class="ms-auto rounded-pill follow p-1">
-                <i class="fa-solid fa-plus fa-2xl follow-icon"></i>
-              </div>
-            </div>
-          </div>
-          <!-- Second Instructor -->
-          <div class="col-md-6">
-            <div class="instructor-card d-flex align-items-center shadow-lg rounded-3 border-0">
-              <img
-                src="https://img.freepik.com/free-photo/young-beautiful-woman-looking-camera-trendy-girl-casual-summer-white-t-shirt-jeans-shorts-positive-female-shows-facial-emotions-funny-model-isolated-yellow_158538-15796.jpg?t=st=1718342833~exp=1718346433~hmac=bc2faebfe38957f6bf91be2626ecaa84199f49ab7fe30adaa7a8c8ea27d8943b&w=740"
-                alt="Instructor 2" class="instructor-img me-3">
-              <div class="instructor-info">
-                <h5 class="mb-1">Jane Smith</h5>
-                <p class="mb-0 text-muted">janesmith</p>
+                <h5 class="mb-1">{{Teacher.fname}} {{Teacher.lname}}</h5>
+                <p class="mb-0 text-muted">{{Teacher.career}}</p>
               </div>
               <div class="ms-auto rounded-pill follow p-1">
                 <i class="fa-solid fa-plus fa-2xl follow-icon"></i>
@@ -297,54 +260,20 @@
           <div class="col-12">
             <h2 class="mb-4">Current Courses</h2>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4" *ngFor="let Course of CurrentCourses">
             <div class="course-card  rounded-3 shadow-lg">
               <div class="course-header">
                 <div>
-                  <h4>C++</h4>
-                  <div class="course-category">IT & Software</div>
+                  <h4>{{Course.name}}</h4>
+                  <div class="course-category">{{Course.description}}</div>
                 </div>
                 <div class="course-icon">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg" alt="C++">
+                  <img [src]="Course.photoUrl" alt="C++">
                 </div>
               </div>
               <div class="course-footer">
-                <div class="course-score">4.5 Score</div>
-                <div class="course-days">37 Days Left</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="course-card  rounded-3 shadow-lg">
-              <div class="course-header">
-                <div>
-                  <h4>JavaScript</h4>
-                  <div class="course-category">Language</div>
-                </div>
-                <div class="course-icon">
-                  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript">
-                </div>
-              </div>
-              <div class="course-footer">
-                <div class="course-score">3.5 Score</div>
-                <div class="course-days">25 Days Left</div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="course-card  rounded-3 shadow-lg">
-              <div class="course-header">
-                <div>
-                  <h4>Haskell</h4>
-                  <div class="course-category">Backend</div>
-                </div>
-                <div class="course-icon">
-                  <img src="https://cdn.worldvectorlogo.com/logos/c--4.svg" alt="Haskell">
-                </div>
-              </div>
-              <div class="course-footer">
-                <div class="course-score">2.5 Score</div>
-                <div class="course-days">15 Days Left</div>
+                <div class="course-score">{{Course.rate}}</div>
+                <div class="course-days">{{Course.durtion}}</div>
               </div>
             </div>
           </div>
