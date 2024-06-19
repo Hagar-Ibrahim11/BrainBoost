@@ -38,7 +38,7 @@ export const routes: Routes = [
     ],
   },
 
-  {path:'adminDashboard',component:AdminDashboardComponent},
+  {path:'admindashboard',component:AdminDashboardComponent},
 {path:'nonApprovedCourses',component:NonApprovedCouresesComponent},
 
  

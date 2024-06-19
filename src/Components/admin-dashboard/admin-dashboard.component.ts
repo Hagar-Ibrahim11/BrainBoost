@@ -3,6 +3,7 @@ import { AdminDashboardServiceService } from '../../Services/AdminDashboard/admi
 import { ITopTeacher } from '../../models/itop-teacher';
 import { CommonModule } from '@angular/common';
 import { ICurrentCourses } from '../../models/icurrent-courses';
+import { ITopStudent } from '../../models/itop-student';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -17,7 +18,9 @@ export class AdminDashboardComponent implements OnInit {
   NumOfStudent!:Number
   NumOfCourse!:Number
   NumOfTeacher!:Number
+  NumOfEnrolledCourses!:Number
   TopTeacher!:ITopTeacher[]
+  TopStudent!:ITopStudent[]
   CurrentCourses!:ICurrentCourses[]
   ngOnInit(): void {
     this.GetTotalNumOfStudent()
@@ -25,6 +28,8 @@ export class AdminDashboardComponent implements OnInit {
     this.GetTotalNumOfTeacher()
     this.GetTopTeacher()
     this.GetCurrentCourses()
+    this.GetTotalNumOfEnrolledCourses()
+    this.GetTopStudent()
   }
 
   GetTotalNumOfStudent() {
@@ -78,6 +83,28 @@ export class AdminDashboardComponent implements OnInit {
       },
       (error) => {
         console.error('Error fetching Current Courses', error);
+      }
+    );
+  }
+
+  GetTotalNumOfEnrolledCourses() {
+    this.admindashboardservice.GetNumOfEnrolledCourses().subscribe(
+      (data: Number) => {
+        this.NumOfEnrolledCourses = data;
+      },
+      (error) => {
+        console.error('Error fetching Num of Enrolled Courses', error);
+      }
+    );
+  }
+
+  GetTopStudent() {
+    this.admindashboardservice.GetTopStudent().subscribe(
+      (data: ITopStudent[]) => {
+        this.TopStudent = data;
+      },
+      (error) => {
+        console.error('Error fetching Top Student', error);
       }
     );
   }
