@@ -11,16 +11,22 @@ import { CourseContentComponent } from '../Components/Taking-Course/course-conte
 import { QuizTakingComponent } from '../Components/Taking-Course/quiz-taking/quiz-taking.component';
 import { CertificateComponent } from '../Components/Taking-Course/certificate/certificate.component';
 import { VideoComponent } from '../Components/video/video.component';
+import { EnrollmentSuccessComponent } from '../Components/EnrollmentSuccess/enrollment-success/enrollment-success.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'TakingCourse', component: CourseContentComponent },
+
+  
+  {
+    path: 'EnrollmentSuccess/:orderNumber/:courseId',
+    component: EnrollmentSuccessComponent,
+  },
+  { path: 'TakingCourse/:id', component: CourseContentComponent },
   { path: 'TakingQuiz/:id', component: QuizTakingComponent },
   { path: 'TakingCertificate/:id', component: CertificateComponent },
   { path: 'TakingVideo/:id', component: VideoComponent },
-
 
 
   {

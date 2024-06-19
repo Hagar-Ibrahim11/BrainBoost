@@ -50,9 +50,11 @@ export class VideoComponent implements OnInit {
   }
   handleLink(video:IVideoState)
   {
+    debugger
     if(video.state==false)
       {
         this.changeState(video.id,true)
+
       }
         this.vidLink = video.videoUrl;
         this.comingVideo.forEach(video =>{
@@ -67,18 +69,21 @@ export class VideoComponent implements OnInit {
           {
             this.changeAllState(this.CourseId,true)
           }
-  }
-  changeState(id:number,state:boolean)
-  {
-    this.videoService.changeVideoState(id,state).subscribe({
 
-    })
 
   }
+  changeState(id: number, state: boolean) {
+    this.videoService.changeVideoState(id, state).subscribe({
+      
+    });
+  }
+
   changeAllState(id:number,state:boolean)
   {
     this.videoService.changeAllVideoState(id,state).subscribe({
-
+      next: (data: any) => {
+        this.getAllstates(this.CourseId)
+      }
     })
 
   }

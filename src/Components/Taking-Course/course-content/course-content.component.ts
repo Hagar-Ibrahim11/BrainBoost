@@ -5,16 +5,19 @@ import { IQuiz } from '../../../models/iquiz';
 import { QuizService } from '../../../Services/quiz.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
 import { ICourseTaking } from '../../../models/someCourseTakingModels/icourse-taking';
 import { IReviewService } from '../../../Services/ireview.service';
 import { IReview } from '../../../models/ireview';
+
+import { EnrollmentService } from '../../../Services/enrollment/enrollment.service';
 
 @Component({
   selector: 'app-course-content',
   standalone: true,
   imports: [FormsModule,CommonModule,RouterLink,RouterOutlet],
   templateUrl: './course-content.component.html',
-  styleUrl: './course-content.component.css'
+  styleUrl: './course-content.component.css',
 })
 export class CourseContentComponent implements OnInit  {
   CrsId:number=2
@@ -25,11 +28,11 @@ export class CourseContentComponent implements OnInit  {
   StdReview!:IReview
 
   constructor(
-    private route: ActivatedRoute,
     private courseService: CourseService,
     private QuizService: QuizService,
     private router: Router,
-    private revService:IReviewService
+    private revService:IReviewService,
+    private enrollmentService: EnrollmentService
   ) {}
 
   ngOnInit(): void {
@@ -53,14 +56,11 @@ export class CourseContentComponent implements OnInit  {
   navigateToCertificate(CrsId:number){
     this.router.navigate(['/TakingCertificate', CrsId]);
   }
-handleExamSuccess()
-{
-  if(this.QuizService.stdDegree>-1)
-    {
-      if(this.QuizService.stdState=='succeeded')
-     this.msg= `you have successfully finish quiz go take your certificate`
-    else
-    this.msg= `you have failed in the quiz please try again`
+  handleExamSuccess() {
+    if (this.QuizService.stdDegree > -1) {
+      if (this.QuizService.stdState == 'succeeded')
+        this.msg = `you have successfully finish quiz go take your certificate`;
+      else this.msg = `you have failed in the quiz please try again`;
     }
     this.QuizService.stdDegree=-1
 

@@ -8,7 +8,7 @@ import { environment } from '../Enviroment/enviroment';
   providedIn: 'root',
 })
 export class AuthService {
-  userData = new BehaviorSubject<any>(null);
+  userData: BehaviorSubject<any> = new BehaviorSubject<any>(null);
   constructor(private http: HttpClient, private router: Router) {
     this.loadUserData();
   }
