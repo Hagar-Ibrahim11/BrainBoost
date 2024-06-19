@@ -5,6 +5,7 @@ import { environment } from '../../Enviroment/enviroment';
 import { Observable } from 'rxjs';
 import { ITopTeacher } from '../../models/itop-teacher';
 import { ICurrentCourses } from '../../models/icurrent-courses';
+import { ITopStudent } from '../../models/itop-student';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +43,18 @@ export class AdminDashboardServiceService {
       `${environment.baseUrl}/api/Course/GetLastThreeCourses`
     );
   }
+
+  GetNumOfEnrolledCourses(): Observable<Number> {
+    return this.httpclient.get<Number>(
+      `${environment.baseUrl}/api/Student/GetTotalNumOfEnrolledCourses`
+    );
+  }
+
+  GetTopStudent(): Observable<ITopStudent[]> {
+    return this.httpclient.get<ITopStudent[]>(
+      `${environment.baseUrl}/api/Student/GetTopStudent`
+    );
+  }
+
 }
 
