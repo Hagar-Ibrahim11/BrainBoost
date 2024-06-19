@@ -4,11 +4,12 @@ import { ITopTeacher } from '../../models/itop-teacher';
 import { CommonModule } from '@angular/common';
 import { ICurrentCourses } from '../../models/icurrent-courses';
 import { ITopStudent } from '../../models/itop-student';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink,RouterLinkActive],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.css'
 })
