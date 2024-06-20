@@ -1,8 +1,22 @@
 <div class="container">
+  <h1>Course Photo</h1>
+  <!-- <h2>Upload the Course Photo You want</h2>
+  <div class="form-container shadow-5">
+    <div class="form-group">
+      <input
+        [type]="'file'"
+        class="form-control"
+        id="inputGroupFile02"
+      />
+      <label class="form-control" for="inputGroupFile02"
+        >Course Photo</label
+      >
+    </div>
+  </div> -->
   <h1>Course Videos</h1>
   <h2>Upload the Lecture Videos You want</h2>
   <div
-    *ngFor="let Lecture of courseLecturesForm.controls; index as i"
+    *ngFor="let Lecture of courseMediaForm.controls; index as i"
     class="form-container shadow-5"
     [formGroup]="Lecture"
   >
@@ -30,7 +44,7 @@
       <button
         type="button"
         class="btn btn-outline-primary text-center"
-        (click)="courseLecturesForm.controls.splice(i, 1)"
+        (click)="courseMediaForm.controls.splice(i, 1)"
       >
         Delete
       </button>

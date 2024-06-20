@@ -24,17 +24,17 @@ import { CourseServiceService } from '../../../Services/course/course-service.se
   ],
 })
 export class AddCourseVideosComponent {
-  @Input() courseLecturesForm!: FormArray<FormGroup>;
+  @Input() courseMediaForm!: FormArray<FormGroup>;
   constructor(private courseService: CourseServiceService) {}
   handleFileInput($event: any, index: number) {
     const file = $event.target.files[0] as File;
-    this.courseLecturesForm.at(index).get('videoFile')?.setValue(file);
+    this.courseMediaForm.at(index).get('videoFile')?.setValue(file);
   }
   handleTitle($event: any, index: number) {
-    this.courseLecturesForm.at(index).get('title')?.setValue($event);
+    this.courseMediaForm.at(index).get('title')?.setValue($event);
   }
   AddLectureForm() {
-    this.courseLecturesForm.controls.push(
+    this.courseMediaForm.controls.push(
       new FormGroup({
         videoFile: new FormControl<File | null>(null, Validators.required),
         title: new FormControl<string | null>(null, Validators.required),

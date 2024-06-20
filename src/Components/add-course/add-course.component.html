@@ -1,48 +1,52 @@
 <mat-stepper [linear]="true" #stepper>
-  <!-- <mat-step [stepControl]="courseDetailsForm">
+  <mat-step [stepControl]="courseDetailsForm">
     <form [formGroup]="courseDetailsForm">
       <ng-template matStepLabel>Course Details</ng-template>
-      <app-add-course-details [courseDetailsForm]="courseDetailsForm"></app-add-course-details>
-        <button
-          mat-button
-          matStepperNext
-          class="btn btn-secondary"
-          (click)="addCourseDetails()"
-          [disabled]="courseDetailsForm.invalid"
-        >
-          Next
-        </button>
+      <app-add-course-details
+        [courseDetailsForm]="courseDetailsForm"
+      ></app-add-course-details>
+      <button
+        mat-button
+        matStepperNext
+        class="btn btn-secondary"
+        [disabled]="courseDetailsForm.invalid"
+      >
+        Next
+      </button>
     </form>
-  </mat-step> 
-  <mat-step [stepControl]="courseLecturesForm">
+  </mat-step>
+  <mat-step [stepControl]="courseMediaForm">
     <form>
       <ng-template matStepLabel>Add course videos</ng-template>
-      <app-add-course-videos [courseLecturesForm]="courseLecturesForm"></app-add-course-videos>
+      <app-add-course-videos [courseMediaForm]="courseMediaForm"></app-add-course-videos>
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button
           mat-button
           matStepperNext
-          (click)="addCourseLectures()"
-          [disabled]="courseLecturesForm.invalid"
+          [disabled]="courseMediaForm.invalid"
         >
           Next
         </button>
       </div>
     </form>
-  </mat-step> -->
-  <mat-step  [optional]="false">
-    <form >
+  </mat-step>
+  <mat-step [optional]="false">
+    <form>
       <ng-template matStepLabel>Add Qizzes for the course</ng-template>
-      <app-add-course-questions [courseQuestionsForm]="courseQuestionsForm"></app-add-course-questions>
+      <app-add-course-questions
+        [courseQuestionsForm]="courseQuestionsForm"
+      ></app-add-course-questions>
       <div>
-        <button (click)="display()" mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperPrevious>Back</button>
         <button
-          
           mat-button
           matStepperNext
+          (click)="
+          addCourseQuiz();
+          addCourse()"
         >
-        Finish
+          Finish
         </button>
       </div>
     </form>

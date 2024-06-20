@@ -29,8 +29,16 @@ export class AddCourseQuestionsComponent {
           Validators.minLength(2)
         ),
         rightAnswer: new FormControl<string>("", Validators.required),
+        degree: new FormControl<number>(0, Validators.required)
       })
     );
+  }
+  getCourseQuizzDegree():number{
+     let quizDegree = 0
+    this.courseQuestionsForm.controls.forEach((formGroup)=>{
+      quizDegree += formGroup.get('degree')?.value
+    })
+    return quizDegree
   }
   getAnswers(questionIndex: number): FormArray {
     return this.courseQuestionsForm

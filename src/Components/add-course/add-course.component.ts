@@ -7,6 +7,8 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
   Validators,
 } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
@@ -18,6 +20,7 @@ import { AddCourseDetailsComponent } from "./add-course-details/add-course-detai
 import { AddCourseVideosComponent } from "./add-course-videos/add-course-videos.component";
 import { CourseServiceService } from "../../Services/course/course-service.service";
 import { AddCourseQuestionsComponent } from "./add-course-questions/add-course-questions.component";
+import { InsertedQuiz } from "./classes/inserted-quiz";
 @Component({
   selector: "app-add-course",
   standalone: true,
@@ -38,6 +41,8 @@ import { AddCourseQuestionsComponent } from "./add-course-questions/add-course-q
   ],
 })
 export class AddCourseComponent {
+  constructor(private courseService: CourseServiceService) {}
+  Quiz: InsertedQuiz = new InsertedQuiz();
   courseDetailsForm = new FormGroup({
     courseName: new FormControl("", Validators.required),
     courseDescription: new FormControl("", Validators.required),
@@ -45,10 +50,12 @@ export class AddCourseComponent {
     categoryName: new FormControl("", Validators.required),
     courseLanguage: new FormControl("", Validators.required),
     courseLevel: new FormControl("", Validators.required),
-    courseImage: new FormControl<File | null>(null, Validators.required),
   });
-  courseLecturesForm = new FormArray<FormGroup>(
+  courseMediaForm = new FormArray<FormGroup>(
     [
+      // new FormGroup({
+      //   courseImage: new FormControl<File | null>(null, Validators.required),
+      // }),
       new FormGroup({
         videoFile: new FormControl<File | null>(null, Validators.required),
         title: new FormControl<string | null>(null, Validators.required),
@@ -63,53 +70,28 @@ export class AddCourseComponent {
         answers: new FormArray<FormControl>(
           [
             new FormControl("", Validators.required),
-            new FormControl("", Validators.required)
+            new FormControl("", Validators.required),
           ],
           Validators.minLength(2)
         ),
-        // answers: new FormControl<string[]>([''], Validators.minLength(2)),
         rightAnswer: new FormControl<string>("", Validators.required),
+        degree: new FormControl<number>(0, Validators.required),
       }),
     ],
-    Validators.minLength(1)
+    [Validators.minLength(1)]
   );
-  constructor(private courseService: CourseServiceService) {}
-  addCourseDetails() {
-    console.log(this.courseDetailsForm);
-    this.courseService
-      .addCourse({
-        Name: this.courseDetailsForm.value.courseName!,
-        Description: this.courseDetailsForm.value.courseDescription!,
-        Price: this.courseDetailsForm.value.price!,
-        TeacherId: 1,
-        CategoryName: this.courseDetailsForm.value.categoryName!,
-        Level: this.courseDetailsForm.value.courseLevel!,
-        Image: this.courseDetailsForm.value.courseImage!,
-        CertificateHeadline: "string",
-        CertificateAppreciationParagraph: "string",
-        Language: this.courseDetailsForm.value.courseLanguage!,
-      })
-      .subscribe({
-        next: (response) => {
-          console.log(response);
-        },
-        error: (error) => {
-          console.log(error);
-        },
-      });
-  }
-  addCourseLectures() {
-    this.courseLecturesForm.controls.forEach((element, index) => {
+  addCourseLectures(courseId:number) {
+    this.courseMediaForm.controls.forEach((element, index) => {
       const formdata = new FormData();
       formdata.append(
         "Title",
-        this.courseLecturesForm.controls.at(index)?.value.title
+        this.courseMediaForm.controls.at(index)?.value.title
       );
       formdata.append(
         "VideoFile",
-        this.courseLecturesForm.controls.at(index)?.value.videoFile
+        this.courseMediaForm.controls.at(index)?.value.videoFile
       );
-      this.courseService.addVideo(formdata).subscribe({
+      this.courseService.addVideo(formdata,courseId).subscribe({
         next: (response) => {
           console.log(response);
         },
@@ -118,6 +100,53 @@ export class AddCourseComponent {
         },
       });
     });
+  }
+  addCourseQuiz() {
+    console.log(this.courseQuestionsForm);
+    this.courseQuestionsForm.controls.forEach((FormGroup, questionsIndex) => {
+      this.Quiz.NumOfQuestions++;
+      this.Quiz.Degree += FormGroup.controls["degree"].value;
+      this.Quiz.Questions.push({
+        HeadLine: FormGroup.controls["headLine"].value,
+        Degree: FormGroup.controls["degree"].value,
+        Choices: [],
+      });
+      let answers = FormGroup.controls["answers"] as FormArray;
+      answers.controls.forEach((answer, answerIndex) => {
+        this.Quiz.Questions[questionsIndex].Choices.push({
+          Choice: answer.value,
+          isCorrect: false,
+        });
+        if (answer.value == FormGroup.controls["rightAnswer"].value) {
+          this.Quiz.Questions[questionsIndex].Choices[
+            answerIndex
+          ].isCorrect = true;
+        }
+      });
+    });
+  }
+  addCourse() {
+    this.courseService
+      .addCourse({
+        Name: this.courseDetailsForm.value.courseName!,
+        Description: this.courseDetailsForm.value.courseDescription!,
+        Price: this.courseDetailsForm.value.price!,
+        TeacherId: 2,
+        CategoryName: this.courseDetailsForm.value.categoryName!,
+        Level: this.courseDetailsForm.value.courseLevel!,
+        CertificateHeadline: "string",
+        CertificateAppreciationParagraph: "string",
+        Language: this.courseDetailsForm.value.courseLanguage!,
+        Quiz:this.Quiz
+      })
+      .subscribe({
+        next: (response) => {
+          this.addCourseLectures(response['id']);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
   }
   display() {
     console.log(this.courseQuestionsForm);
