@@ -14,6 +14,7 @@ import { CourseContentComponent } from '../Components/Taking-Course/course-conte
 import { QuizTakingComponent } from '../Components/Taking-Course/quiz-taking/quiz-taking.component';
 import { CertificateComponent } from '../Components/Taking-Course/certificate/certificate.component';
 import { EnrollmentSuccessComponent } from '../Components/EnrollmentSuccess/enrollment-success/enrollment-success.component';
+import { EarningComponent } from '../Components/earning/earning/earning.component';
 
 
 export const routes: Routes = [
@@ -40,8 +41,7 @@ export const routes: Routes = [
 
   {path:'admindashboard',component:AdminDashboardComponent},
 {path:'nonApprovedCourses',component:NonApprovedCouresesComponent},
-
- 
+{path:'earning',component:EarningComponent},
 
 
   { path: 'pricing', component: PricingComponent },
