@@ -13,6 +13,20 @@
               </a>
             </div>
           </div>
+          <div class="position-sticky">
+            <div class="list-group list-group-flush mx-3 mt-4">
+              <a routerLink="/nonApprovedCourses" routerLinkActive="active" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Not Approved Courses</span>
+              </a>
+            </div>
+          </div>
+          <div class="position-sticky">
+            <div class="list-group list-group-flush mx-3 mt-4">
+              <a routerLink="/earning" routerLinkActive="active" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Earning</span>
+              </a>
+            </div>
+          </div>
         </nav>
         <!-- Sidebar -->
 
@@ -198,7 +212,7 @@
                   <div class="icon-wrapper people">
                     <i class="fa-solid fa-people-group fa-2xl fs-1"></i>
                   </div>
-                  <h1 class="mt-2">50</h1>
+                  <h1 class="mt-2">{{NumOfEnrolledCourses}}</h1>
                   <p class="card-text mt-3 text-dark">Enrolled Courses</p>
                 </div>
               </div>
@@ -292,63 +306,17 @@
           <h2 class="mb-4">Top Students</h2>
           <div class="row">
             <div class="col-md-6">
-              <div class="student-card rounded-3 shadow-lg">
+              <div class="student-card rounded-3 shadow-lg" *ngFor="let student of TopStudent">
                 <img
-                  src="https://img.freepik.com/free-photo/happy-young-female-student-holding-notebooks-from-courses-smiling-camera-standing-spring-clothes-against-blue-background_1258-70161.jpg"
+                  [src]="student.pictureUrl"
                   alt="Andrew Burns">
                 <div class="student-info">
-                  <h5>Andrew Burns</h5>
-                  <p>programming</p>
-                </div>
-              </div>
-              <div class="student-card rounded-3 shadow-lg">
-                <img
-                  src="https://img.freepik.com/free-photo/happy-young-female-student-holding-notebooks-from-courses-smiling-camera-standing-spring-clothes-against-blue-background_1258-70161.jpg"
-                  alt="Andrew Burns">
-                <div class="student-info">
-                  <h5>Tammy Sanch</h5>
-                  <p>programming</p>
-                </div>
-              </div>
-              <div class="student-card rounded-3 shadow-lg">
-                <img
-                  src="https://img.freepik.com/free-photo/happy-young-female-student-holding-notebooks-from-courses-smiling-camera-standing-spring-clothes-against-blue-background_1258-70161.jpg"
-                  alt="Andrew Burns">
-                <div class="student-info">
-                  <h5>Dana Carey</h5>
-                  <p>physics</p>
+                  <h5>{{student.fname}}{{student.lname}}</h5>
+                  <p>Num of Certificates :{{student.numOfCertificates}}</p>
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="student-card rounded-3 shadow-lg">
-                <img
-                  src="https://img.freepik.com/free-photo/happy-young-female-student-holding-notebooks-from-courses-smiling-camera-standing-spring-clothes-against-blue-background_1258-70161.jpg"
-                  alt="Andrew Burns">
-                <div class="student-info">
-                  <h5>Richard Payne</h5>
-                  <p>physics</p>
-                </div>
-              </div>
-              <div class="student-card rounded-3 shadow-lg">
-                <img
-                  src="https://img.freepik.com/free-photo/happy-young-female-student-holding-notebooks-from-courses-smiling-camera-standing-spring-clothes-against-blue-background_1258-70161.jpg"
-                  alt="Andrew Burns">
-                <div class="student-info">
-                  <h5>Jennifer Sum</h5>
-                  <p>physics</p>
-                </div>
-              </div>
-              <div class="student-card rounded-3 shadow-lg">
-                <img
-                  src="https://img.freepik.com/free-photo/happy-young-female-student-holding-notebooks-from-courses-smiling-camera-standing-spring-clothes-against-blue-background_1258-70161.jpg"
-                  alt="Andrew Burns">
-                <div class="student-info">
-                  <h5>Jordan Enson</h5>
-                  <p>programming</p>
-                </div>
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>
