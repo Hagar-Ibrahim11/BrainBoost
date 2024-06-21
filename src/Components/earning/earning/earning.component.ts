@@ -23,7 +23,7 @@ export class EarningComponent implements OnInit{
         this.TotalInstructorEarning = data;
       },
       (error) => {
-        console.error('Error fetching Num of Student', error);
+        console.error(error);
       }
     );
   }
@@ -33,7 +33,7 @@ export class EarningComponent implements OnInit{
         this.TotalWebsiteEarning = data;
       },
       (error) => {
-        console.error('Error fetching Num of Student', error);
+        console.error(error);
       }
     );
   }

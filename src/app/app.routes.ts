@@ -19,6 +19,7 @@ import { VideoTakingComponent } from '../Components/Taking-Course/video-taking/v
 import { EarningComponent } from '../Components/earning/earning/earning.component';
 import { InstructorProfileComponent } from '../Components/instructor-profile/instructor-profile.component';
 import { NonApprovedCouresesComponent } from '../Components/non-approved-coureses/non-approved-coureses.component';
+import { CoursesForAdminComponent } from '../Components/courses-for-admin/courses-for-admin/courses-for-admin.component';
 
 
 
@@ -48,13 +49,14 @@ export const routes: Routes = [
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'courses', component: CoursesComponent },
-      { path: 'courseDetails', component: CourseDetailsComponent },
+      { path: 'courseDetails/:id', component: CourseDetailsComponent },
     ],
   },
 
   {path:'admindashboard',component:AdminDashboardComponent},
 {path:'nonApprovedCourses',component:NonApprovedCouresesComponent},
 {path:'earning',component:EarningComponent},
+{path:'courses-for-admin',component:CoursesForAdminComponent},
 
 
   { path: 'pricing', component: PricingComponent },
