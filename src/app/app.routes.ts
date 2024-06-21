@@ -13,9 +13,13 @@ import { CourseContentComponent } from '../Components/Taking-Course/course-conte
 import { QuizTakingComponent } from '../Components/Taking-Course/quiz-taking/quiz-taking.component';
 import { CertificateComponent } from '../Components/Taking-Course/certificate/certificate.component';
 import { EnrollmentSuccessComponent } from '../Components/EnrollmentSuccess/enrollment-success/enrollment-success.component';
+
+import { VideoTakingComponent } from '../Components/Taking-Course/video-taking/video-taking.component';
+
 import { EarningComponent } from '../Components/earning/earning/earning.component';
 import { InstructorProfileComponent } from '../Components/instructor-profile/instructor-profile.component';
 import { NonApprovedCouresesComponent } from '../Components/non-approved-coureses/non-approved-coureses.component';
+
 
 
 export const routes: Routes = [
@@ -31,6 +35,13 @@ export const routes: Routes = [
     path: 'EnrollmentSuccess/:orderNumber/:courseId',
     component: EnrollmentSuccessComponent,
   },
+
+  { path: 'TakingCourse/:id', component: CourseContentComponent },
+  { path: 'TakingQuiz', component: QuizTakingComponent },
+  { path: 'TakingCertificate', component: CertificateComponent },
+  {path:'TakingVideo',component:VideoTakingComponent},
+
+
   {
     path: '',
     component: LayoutComponent,
