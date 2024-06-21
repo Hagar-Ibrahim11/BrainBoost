@@ -66,6 +66,15 @@ export class AdminDashboardServiceService {
       `${environment.baseUrl}/api/Course/ApproveCourse?courseId=${CourseId}`,CourseId
     );
   }
-
+  GetTotalInstructorEarning(): Observable<Number> {
+    return this.httpclient.get<Number>(
+      `${environment.baseUrl}/api/Earning/GetTotalInstructorEarnings`
+    );
+  }
+  GetTotalWebsiteEarning(): Observable<Number> {
+    return this.httpclient.get<Number>(
+      `${environment.baseUrl}/api/Earning/GetTotalWebsiteEarnings`
+    );
+  }
 }
 
