@@ -14,6 +14,7 @@ import { CourseContentComponent } from '../Components/Taking-Course/course-conte
 import { QuizTakingComponent } from '../Components/Taking-Course/quiz-taking/quiz-taking.component';
 import { CertificateComponent } from '../Components/Taking-Course/certificate/certificate.component';
 import { EnrollmentSuccessComponent } from '../Components/EnrollmentSuccess/enrollment-success/enrollment-success.component';
+import { VideoTakingComponent } from '../Components/Taking-Course/video-taking/video-taking.component';
 
 
 export const routes: Routes = [
@@ -27,6 +28,7 @@ export const routes: Routes = [
   { path: 'TakingCourse/:id', component: CourseContentComponent },
   { path: 'TakingQuiz', component: QuizTakingComponent },
   { path: 'TakingCertificate', component: CertificateComponent },
+  {path:'TakingVideo',component:VideoTakingComponent},
 
   {
     path: '',
