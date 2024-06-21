@@ -7,6 +7,7 @@ import { ITopTeacher } from '../../models/itop-teacher';
 import { ICurrentCourses } from '../../models/icurrent-courses';
 import { ITopStudent } from '../../models/itop-student';
 import { IcourseNotApproved } from '../../models/icourse-not-approved';
+import { ICourseCardDetails } from '../../models/icourse-card-details';
 
 @Injectable({
   providedIn: 'root'
@@ -74,6 +75,17 @@ export class AdminDashboardServiceService {
   GetTotalWebsiteEarning(): Observable<Number> {
     return this.httpclient.get<Number>(
       `${environment.baseUrl}/api/Earning/GetTotalWebsiteEarnings`
+    );
+  }
+
+  GetAllCourses(): Observable<ICourseCardDetails[]> {
+    return this.httpclient.get<ICourseCardDetails[]>(
+      `${environment.baseUrl}/api/Course/GetAllCoursesAsCards`
+    );
+  }
+  DeleteCourse(courseId:number):Observable<ICourseCardDetails>{
+    return this.httpclient.delete<ICourseCardDetails>(
+      `${environment.baseUrl}/api/Course/DeleteCourse?courseId=${courseId}`
     );
   }
 }
