@@ -8,26 +8,28 @@ import { AuthService } from '../../Services/auth.service';
 import { EnrollmentService } from '../../Services/enrollment/enrollment.service';
 import { IEnrollment } from '../../models/ienrollment';
 import { IPaymentUrl } from '../../models/ipayment-url';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-course-details',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './course-details.component.html',
   styleUrl: './course-details.component.css',
 })
 export class CourseDetailsComponent {
   courseId!: number;
+  currentUserId!: number;
   crsDetails!: ICourseDetails;
   enrollmentData!: IEnrollment;
   paymentUrl!: IPaymentUrl;
   Role!: string;
   UserIsLogged!: boolean;
+  IsEnrolled: boolean = false;
   env: string = environment.baseUrl + '/Images/Courses/';
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
-    private dataService: DataService,
     private authService: AuthService,
     private enrollmentService: EnrollmentService,
     private router: Router
@@ -35,6 +37,8 @@ export class CourseDetailsComponent {
     this.route.params.subscribe((params) => {
       this.courseId = +params['id'];
     });
+  }
+  ngOnInit(): void {
     this.authService.userData.subscribe({
       next: () => {
         if (this.authService.userData.value != null) {
@@ -43,6 +47,10 @@ export class CourseDetailsComponent {
               'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
             ];
           this.UserIsLogged = true;
+          this.currentUserId =
+            this.authService.userData.value[
+              'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'
+            ];
         } else {
           this.UserIsLogged = false;
           this.Role = '';
@@ -50,12 +58,9 @@ export class CourseDetailsComponent {
       },
       error: () => {},
     });
-  }
-  ngOnInit(): void {
     this.courseService.getCourseDetails(this.courseId).subscribe({
       next: (data: ICourseDetails) => {
         this.crsDetails = data;
-        console.log(data);
       },
       error: (error) => {
         console.error('Error fetching courses:', error); // Log any errors
@@ -64,6 +69,9 @@ export class CourseDetailsComponent {
         console.log('courses fetched successfully'); // Log completion
       },
     });
+    this.enrollmentService
+      .CheckEnroll(this.courseId, this.currentUserId)
+      .subscribe((data) => (this.IsEnrolled = data));
   }
   handleEnrollCourse(courseId: number) {
     const currentUrl = this.router.url;
@@ -83,5 +91,8 @@ export class CourseDetailsComponent {
         queryParams: { returnUrl: currentUrl },
       });
     }
+  }
+  handleGoToCourse(id: number): void {
+    this.router.navigate(['/TakingCourse' , id]);
   }
 }
