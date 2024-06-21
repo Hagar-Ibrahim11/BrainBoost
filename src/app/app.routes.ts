@@ -13,7 +13,10 @@ import { CourseContentComponent } from '../Components/Taking-Course/course-conte
 import { QuizTakingComponent } from '../Components/Taking-Course/quiz-taking/quiz-taking.component';
 import { CertificateComponent } from '../Components/Taking-Course/certificate/certificate.component';
 import { EnrollmentSuccessComponent } from '../Components/EnrollmentSuccess/enrollment-success/enrollment-success.component';
+import { EarningComponent } from '../Components/earning/earning/earning.component';
 import { InstructorProfileComponent } from '../Components/instructor-profile/instructor-profile.component';
+import { NonApprovedCouresesComponent } from '../Components/non-approved-coureses/non-approved-coureses.component';
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -37,7 +40,12 @@ export const routes: Routes = [
       { path: 'courseDetails', component: CourseDetailsComponent },
     ],
   },
-  { path: 'admindashboard', component: AdminDashboardComponent },
+
+  {path:'admindashboard',component:AdminDashboardComponent},
+{path:'nonApprovedCourses',component:NonApprovedCouresesComponent},
+{path:'earning',component:EarningComponent},
+
+
   { path: 'pricing', component: PricingComponent },
   { path: '**', component: NotFoundComponent },
 ];
