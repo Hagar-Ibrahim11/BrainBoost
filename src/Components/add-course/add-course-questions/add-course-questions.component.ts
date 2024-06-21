@@ -18,7 +18,7 @@ import {
 export class AddCourseQuestionsComponent {
   @Input() courseQuestionsForm!: FormArray<FormGroup>;
   addNewQuestion() {
-    this.courseQuestionsForm.controls.push(
+    this.courseQuestionsForm.push(
       new FormGroup({
         headLine: new FormControl<string>("", Validators.required),
         answers: new FormArray<FormControl>(

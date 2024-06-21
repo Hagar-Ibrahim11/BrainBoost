@@ -5,6 +5,8 @@ import { environment } from '../../Enviroment/enviroment';
 import { Observable } from 'rxjs';
 import { ITopTeacher } from '../../models/itop-teacher';
 import { ICurrentCourses } from '../../models/icurrent-courses';
+import { ITopStudent } from '../../models/itop-student';
+import { IcourseNotApproved } from '../../models/icourse-not-approved';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +44,28 @@ export class AdminDashboardServiceService {
       `${environment.baseUrl}/api/Course/GetLastThreeCourses`
     );
   }
+
+  GetNumOfEnrolledCourses(): Observable<Number> {
+    return this.httpclient.get<Number>(
+      `${environment.baseUrl}/api/Student/GetTotalNumOfEnrolledCourses`
+    );
+  }
+
+  GetTopStudent(): Observable<ITopStudent[]> {
+    return this.httpclient.get<ITopStudent[]>(
+      `${environment.baseUrl}/api/Student/GetTopStudent`
+    );
+  }
+  GetNotApprovedCourses(): Observable<IcourseNotApproved[]> {
+    return this.httpclient.get<IcourseNotApproved[]>(
+      `${environment.baseUrl}/api/Course/GetNotApprovedCourses`
+    );
+  }
+  ApproveCourse(CourseId:number):Observable<IcourseNotApproved>{
+    return this.httpclient.put<IcourseNotApproved>(
+      `${environment.baseUrl}/api/Course/ApproveCourse?courseId=${CourseId}`,CourseId
+    );
+  }
+
 }
 

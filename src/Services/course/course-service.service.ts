@@ -9,10 +9,18 @@ import { InsertedQuiz } from '../../Components/add-course/classes/inserted-quiz'
 })
 export class CourseServiceService {
   constructor(private http: HttpClient) {}
-  addVideo(formdata: FormData,courseId:Number): Observable<any> {
+  addVideo(formdata: FormData, courseId: Number): Observable<any> {
     return this.http.post(
       `${environment.baseUrl}/api/Course/AddVideo/${courseId}`,
       formdata
+    );
+  }
+  uploadPhoto(photo: File, courseId: Number): Observable<any> {
+    const insertedCoursePhotoForm = new FormData();
+    insertedCoursePhotoForm.append('InsertedPhoto', photo);
+    return this.http.post(
+      `${environment.baseUrl}/api/Course/HandlePhoto/${courseId}`,
+      insertedCoursePhotoForm
     );
   }
   addCourse(insertedCourse: {
@@ -25,7 +33,8 @@ export class CourseServiceService {
     Level: string;
     CertificateAppreciationParagraph: string;
     Language: string;
-    Quiz:InsertedQuiz
+    Quiz: InsertedQuiz;
+    WhatToLearn: string[];
   }): Observable<any> {
     // const insertedCourseForm = new FormData();
     // insertedCourseForm.append('Name', insertedCourse.Name);

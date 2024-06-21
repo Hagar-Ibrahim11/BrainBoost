@@ -1,14 +1,11 @@
 import { Component } from "@angular/core";
 import {
-  AbstractControl,
   FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
-  ValidationErrors,
-  ValidatorFn,
   Validators,
 } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
@@ -21,6 +18,7 @@ import { AddCourseVideosComponent } from "./add-course-videos/add-course-videos.
 import { CourseServiceService } from "../../Services/course/course-service.service";
 import { AddCourseQuestionsComponent } from "./add-course-questions/add-course-questions.component";
 import { InsertedQuiz } from "./classes/inserted-quiz";
+import { AddCourseWhatToLearnComponent } from "./add-course-what-to-learn/add-course-what-to-learn.component";
 @Component({
   selector: "app-add-course",
   standalone: true,
@@ -38,24 +36,34 @@ import { InsertedQuiz } from "./classes/inserted-quiz";
     MatButtonModule,
     AddCourseVideosComponent,
     AddCourseQuestionsComponent,
+    AddCourseWhatToLearnComponent,
   ],
 })
 export class AddCourseComponent {
   constructor(private courseService: CourseServiceService) {}
   Quiz: InsertedQuiz = new InsertedQuiz();
+  WhatToLearn!: string[];
   courseDetailsForm = new FormGroup({
     courseName: new FormControl("", Validators.required),
     courseDescription: new FormControl("", Validators.required),
-    price: new FormControl(0, Validators.required),
+    price: new FormControl<number|null>(null, Validators.required),
     categoryName: new FormControl("", Validators.required),
     courseLanguage: new FormControl("", Validators.required),
     courseLevel: new FormControl("", Validators.required),
   });
+  courseWhatToLearnForm = new FormArray<FormControl>(
+    [new FormControl<string>("", Validators.required)],
+    Validators.minLength(1)
+  );
+  addWhatToLearn() {
+    this.WhatToLearn = [];
+    this.courseWhatToLearnForm.controls.forEach((point) => {
+      this.WhatToLearn.push(point.value);
+    });
+  }
+  coursePhoto = new FormControl<File | null>(null, Validators.required);
   courseMediaForm = new FormArray<FormGroup>(
     [
-      // new FormGroup({
-      //   courseImage: new FormControl<File | null>(null, Validators.required),
-      // }),
       new FormGroup({
         videoFile: new FormControl<File | null>(null, Validators.required),
         title: new FormControl<string | null>(null, Validators.required),
@@ -75,12 +83,12 @@ export class AddCourseComponent {
           Validators.minLength(2)
         ),
         rightAnswer: new FormControl<string>("", Validators.required),
-        degree: new FormControl<number>(0, Validators.required),
+        degree: new FormControl<number|null>(null, Validators.required),
       }),
     ],
     [Validators.minLength(1)]
   );
-  addCourseLectures(courseId:number) {
+  addCourseLectures(courseId: number) {
     this.courseMediaForm.controls.forEach((element, index) => {
       const formdata = new FormData();
       formdata.append(
@@ -91,7 +99,7 @@ export class AddCourseComponent {
         "VideoFile",
         this.courseMediaForm.controls.at(index)?.value.videoFile
       );
-      this.courseService.addVideo(formdata,courseId).subscribe({
+      this.courseService.addVideo(formdata, courseId).subscribe({
         next: (response) => {
           console.log(response);
         },
@@ -100,6 +108,18 @@ export class AddCourseComponent {
         },
       });
     });
+  }
+  addCoursePhoto(courseId: number) {
+    this.courseService
+      .uploadPhoto(this.coursePhoto.value!, courseId)
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
   }
   addCourseQuiz() {
     console.log(this.courseQuestionsForm);
@@ -118,30 +138,33 @@ export class AddCourseComponent {
           isCorrect: false,
         });
         if (answer.value == FormGroup.controls["rightAnswer"].value) {
-          this.Quiz.Questions[questionsIndex].Choices[
-            answerIndex
-          ].isCorrect = true;
+          this.Quiz.Questions[questionsIndex].Choices[answerIndex].isCorrect =
+            true;
         }
       });
     });
   }
   addCourse() {
+    this.addCourseQuiz();
+    this.addWhatToLearn();
     this.courseService
       .addCourse({
         Name: this.courseDetailsForm.value.courseName!,
         Description: this.courseDetailsForm.value.courseDescription!,
         Price: this.courseDetailsForm.value.price!,
-        TeacherId: 2,
+        TeacherId: 1,
         CategoryName: this.courseDetailsForm.value.categoryName!,
         Level: this.courseDetailsForm.value.courseLevel!,
         CertificateHeadline: "string",
         CertificateAppreciationParagraph: "string",
         Language: this.courseDetailsForm.value.courseLanguage!,
-        Quiz:this.Quiz
+        Quiz: this.Quiz,
+        WhatToLearn: this.WhatToLearn,
       })
       .subscribe({
         next: (response) => {
-          this.addCourseLectures(response['id']);
+          this.addCoursePhoto(response["id"]);
+          this.addCourseLectures(response["id"])
         },
         error: (error) => {
           console.log(error);

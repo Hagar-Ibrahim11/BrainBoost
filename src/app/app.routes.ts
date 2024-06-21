@@ -13,58 +13,31 @@ import { CourseContentComponent } from '../Components/Taking-Course/course-conte
 import { QuizTakingComponent } from '../Components/Taking-Course/quiz-taking/quiz-taking.component';
 import { CertificateComponent } from '../Components/Taking-Course/certificate/certificate.component';
 import { EnrollmentSuccessComponent } from '../Components/EnrollmentSuccess/enrollment-success/enrollment-success.component';
+import { InstructorProfileComponent } from '../Components/instructor-profile/instructor-profile.component';
 
-
-
-export const routes: Routes = 
-[
-    { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'addCourse', component: AddCourseComponent },
-    { path: 'TakingCourse', component: CourseContentComponent },
-    { path: 'TakingQuiz', component: QuizTakingComponent },
-    { path: 'TakingCertificate', component: CertificateComponent },  
-    {
-      path: 'EnrollmentSuccess/:orderNumber/:courseId',
-      component: EnrollmentSuccessComponent,
-    },  
-    {
-      path: '',
-      component: LayoutComponent,
-      children: [
-        { path: 'home', component: HomeComponent },
-        { path: 'courses', component: CoursesComponent },
-        { path: 'courseDetails', component: CourseDetailsComponent },
-      ]
-    },
-    {path:'admindashboard',component:AdminDashboardComponent},
-    { path: 'pricing', component: PricingComponent },
-    { path: '**', component: NotFoundComponent },  
-  ];
-// export const routes: Routes = [
-//   { path: '', redirectTo: 'home', pathMatch: 'full' },
-//   { path: 'login', component: LoginComponent },
-//   { path: 'register', component: RegisterComponent },
-//   {
-//     path: 'EnrollmentSuccess/:orderNumber/:courseId',
-//     component: EnrollmentSuccessComponent,
-//   },
-//   { path: 'TakingCourse/:id', component: CourseContentComponent },
-//   { path: 'TakingQuiz', component: QuizTakingComponent },
-//   { path: 'TakingCertificate', component: CertificateComponent },
-
-//   {
-//     path: '',
-//     component: LayoutComponent,
-//     children: [
-//       { path: 'home', component: HomeComponent },
-//       { path: 'courses', component: CoursesComponent },
-//       { path: 'courseDetails/:id', component: CourseDetailsComponent },
-//     ],
-//   },
-//   {path:'admindashboard',component:AdminDashboardComponent},
-
-//   { path: 'pricing', component: PricingComponent },
-//   { path: '**', component: NotFoundComponent },
-// ];
+export const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'teacherForm', component: InstructorProfileComponent },
+  { path: 'addCourse', component: AddCourseComponent },
+  { path: 'TakingCourse', component: CourseContentComponent },
+  { path: 'TakingQuiz', component: QuizTakingComponent },
+  { path: 'TakingCertificate', component: CertificateComponent },
+  {
+    path: 'EnrollmentSuccess/:orderNumber/:courseId',
+    component: EnrollmentSuccessComponent,
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      { path: 'home', component: HomeComponent },
+      { path: 'courses', component: CoursesComponent },
+      { path: 'courseDetails', component: CourseDetailsComponent },
+    ],
+  },
+  { path: 'admindashboard', component: AdminDashboardComponent },
+  { path: 'pricing', component: PricingComponent },
+  { path: '**', component: NotFoundComponent },
+];

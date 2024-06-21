@@ -1,9 +1,10 @@
 <div class="container">
   <h1>Course Photo</h1>
-  <!-- <h2>Upload the Course Photo You want</h2>
+  <h2>Upload the Course Photo You want</h2>
   <div class="form-container shadow-5">
     <div class="form-group">
       <input
+        (change)="handlePhotoInput($event)"
         [type]="'file'"
         class="form-control"
         id="inputGroupFile02"
@@ -12,7 +13,7 @@
         >Course Photo</label
       >
     </div>
-  </div> -->
+  </div>
   <h1>Course Videos</h1>
   <h2>Upload the Lecture Videos You want</h2>
   <div
@@ -34,7 +35,7 @@
         [type]="'file'"
         class="form-control"
         id="inputGroupFile02"
-        (change)="handleFileInput($event, i)"
+        (change)="handleVideoInput($event, i)"
       />
       <label class="form-control" for="inputGroupFile02"
         >Upload Course Video</label
@@ -44,7 +45,7 @@
       <button
         type="button"
         class="btn btn-outline-primary text-center"
-        (click)="courseMediaForm.controls.splice(i, 1)"
+        (click)="courseMediaForm.removeAt(i)"
       >
         Delete
       </button>
