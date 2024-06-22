@@ -10,6 +10,7 @@ import { IcourseNotApproved } from '../../models/icourse-not-approved';
 import { ICourseCardDetails } from '../../models/icourse-card-details';
 import { ITeacher } from '../../models/iteacher';
 import { IStudent } from '../../models/istudent';
+import { ITeacherEarning } from '../../models/iteacher-earning';
 
 @Injectable({
   providedIn: 'root'
@@ -118,6 +119,12 @@ export class AdminDashboardServiceService {
   DeleteStudent(studentId:Number):Observable<IStudent>{
     return this.httpclient.delete<IStudent>(
       `${environment.baseUrl}/api/Student/Delete/${studentId}`
+    );
+  }
+
+  GetTeacherWithHisEarning(): Observable<ITeacherEarning[]> {
+    return this.httpclient.get<ITeacherEarning[]>(
+      `${environment.baseUrl}/api/Earning/GetTeachersAndEarnings`
     );
   }
 }
