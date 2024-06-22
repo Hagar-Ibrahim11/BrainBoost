@@ -8,6 +8,8 @@ import { ICurrentCourses } from '../../models/icurrent-courses';
 import { ITopStudent } from '../../models/itop-student';
 import { IcourseNotApproved } from '../../models/icourse-not-approved';
 import { ICourseCardDetails } from '../../models/icourse-card-details';
+import { ITeacher } from '../../models/iteacher';
+import { IStudent } from '../../models/istudent';
 
 @Injectable({
   providedIn: 'root'
@@ -78,6 +80,12 @@ export class AdminDashboardServiceService {
     );
   }
 
+  GetTotalEarning(): Observable<Number> {
+    return this.httpclient.get<Number>(
+      `${environment.baseUrl}/api/Earning/GetTotalEarning`
+    );
+  }
+
   GetAllCourses(): Observable<ICourseCardDetails[]> {
     return this.httpclient.get<ICourseCardDetails[]>(
       `${environment.baseUrl}/api/Course/GetAllCoursesAsCards`
@@ -86,6 +94,30 @@ export class AdminDashboardServiceService {
   DeleteCourse(courseId:number):Observable<ICourseCardDetails>{
     return this.httpclient.delete<ICourseCardDetails>(
       `${environment.baseUrl}/api/Course/DeleteCourse?courseId=${courseId}`
+    );
+  }
+
+  DeleteTeacher(teacherId:Number):Observable<ITeacher>{
+    return this.httpclient.delete<ITeacher>(
+      `${environment.baseUrl}/api/Teacher/DeleteTeacher?teacherId=${teacherId}`
+    );
+  }
+
+  GetAllTeachers(): Observable<ITeacher[]> {
+    return this.httpclient.get<ITeacher[]>(
+      `${environment.baseUrl}/api/Teacher/GetTeachers`
+    );
+  }
+
+  GetAllStudents(): Observable<IStudent[]> {
+    return this.httpclient.get<IStudent[]>(
+      `${environment.baseUrl}/api/Student/GetAll`
+    );
+  }
+
+  DeleteStudent(studentId:Number):Observable<IStudent>{
+    return this.httpclient.delete<IStudent>(
+      `${environment.baseUrl}/api/Student/Delete/${studentId}`
     );
   }
 }

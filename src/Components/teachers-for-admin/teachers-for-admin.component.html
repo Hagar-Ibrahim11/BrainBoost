@@ -1,0 +1,27 @@
+<div class="container mt-5">
+    <h2 class="mb-4">Teacher Table</h2>
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">Address</th>
+          <th scope="col">Career</th>
+          <th scope="col">Number Of Courses</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let Teacher of ListOfTeachers">
+          <td>{{ Teacher.fname }} {{Teacher.lname}}</td>
+          <td>{{ Teacher.phoneNumber}}</td>
+          <td>{{ Teacher.address }}</td>
+          <td>{{ Teacher.career }}</td>
+          <td>{{ Teacher.numOfCrs }}</td>
+          <td><button type="button" class="btn btn-secondary" (click)="DeleteTeacher(Teacher.id)">Delete</button></td>
+          <td><button type="button" class="btn btn-secondary" (click)="GoToTeacherDetails(Teacher.id)">Details</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+

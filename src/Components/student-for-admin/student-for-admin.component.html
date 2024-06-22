@@ -1,0 +1,26 @@
+<div class="container mt-5">
+    <h2 class="mb-4">Teacher Table</h2>
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Number Of Certificates</th>
+          <th scope="col">Number Of Enrolled Courses</th>
+          <th scope="col">Number Of Saved Courses</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let Student of ListOfStudents">
+          <td>{{ Student.fname }} {{Student.lname}}</td>
+          <td>{{ Student.numOfCertificates }}</td>
+          <td>{{ Student.numOfCrsEnrolled }}</td>
+          <td>{{ Student.numOfCrsSaved }}</td>
+          <td><button type="button" class="btn btn-secondary" (click)="DeleteStudent(Student.id)">Delete</button></td>
+          <td><button type="button" class="btn btn-secondary" (click)="GoToStudentrDetails(Student.id)">Details</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+
+
