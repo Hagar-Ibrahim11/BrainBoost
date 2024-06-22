@@ -23,6 +23,7 @@ export class AdminDashboardComponent implements OnInit {
   TopTeacher!:ITopTeacher[]
   TopStudent!:ITopStudent[]
   CurrentCourses!:ICurrentCourses[]
+  
   ngOnInit(): void {
     this.GetTotalNumOfStudent()
     this.GetTotalNumOfCourse()

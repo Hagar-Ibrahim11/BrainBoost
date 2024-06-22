@@ -14,9 +14,11 @@ export class EarningComponent implements OnInit{
   ngOnInit(): void {
     this.GetTotalInstructorEarning();
     this.GetTotalWebsiteEarning();
+    this.GetTotalEarning()
   }
   TotalWebsiteEarning!:Number
   TotalInstructorEarning!:Number
+  TotalEarning!:Number
   GetTotalInstructorEarning() {
     this.admindashboardservice.GetTotalInstructorEarning().subscribe(
       (data: Number) => {
@@ -31,6 +33,17 @@ export class EarningComponent implements OnInit{
     this.admindashboardservice.GetTotalWebsiteEarning().subscribe(
       (data: Number) => {
         this.TotalWebsiteEarning = data;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  GetTotalEarning() {
+    this.admindashboardservice.GetTotalEarning().subscribe(
+      (data: Number) => {
+        this.TotalEarning = data;
       },
       (error) => {
         console.error(error);

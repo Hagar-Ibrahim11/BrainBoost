@@ -20,6 +20,8 @@ import { EarningComponent } from '../Components/earning/earning/earning.componen
 import { InstructorProfileComponent } from '../Components/instructor-profile/instructor-profile.component';
 import { NonApprovedCouresesComponent } from '../Components/non-approved-coureses/non-approved-coureses.component';
 import { CoursesForAdminComponent } from '../Components/courses-for-admin/courses-for-admin/courses-for-admin.component';
+import { TeachersForAdminComponent } from '../Components/teachers-for-admin/teachers-for-admin.component';
+import { StudentForAdminComponent } from '../Components/student-for-admin/student-for-admin.component';
 
 
 
@@ -57,6 +59,8 @@ export const routes: Routes = [
 {path:'nonApprovedCourses',component:NonApprovedCouresesComponent},
 {path:'earning',component:EarningComponent},
 {path:'courses-for-admin',component:CoursesForAdminComponent},
+{path:'teachersforadmin',component:TeachersForAdminComponent},
+{path:'studentsforadmin',component:StudentForAdminComponent},
 
 
   { path: 'pricing', component: PricingComponent },
