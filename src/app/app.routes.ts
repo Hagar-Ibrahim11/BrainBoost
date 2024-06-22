@@ -22,6 +22,9 @@ import { NonApprovedCouresesComponent } from '../Components/non-approved-courese
 import { CoursesForAdminComponent } from '../Components/courses-for-admin/courses-for-admin/courses-for-admin.component';
 import { TeachersForAdminComponent } from '../Components/teachers-for-admin/teachers-for-admin.component';
 import { StudentForAdminComponent } from '../Components/student-for-admin/student-for-admin.component';
+import { TeacherEarningDetailsComponent } from '../Components/teacher-earning-details/teacher-earning-details.component';
+import { StudentDetailsComponent } from '../Components/student-details/student-details.component';
+import { TeacherDetailsComponent } from '../Components/teacher-details/teacher-details.component';
 
 
 
@@ -61,6 +64,9 @@ export const routes: Routes = [
 {path:'courses-for-admin',component:CoursesForAdminComponent},
 {path:'teachersforadmin',component:TeachersForAdminComponent},
 {path:'studentsforadmin',component:StudentForAdminComponent},
+{path:'TeacherEarningDetails/:id',component:TeacherEarningDetailsComponent},
+{path:'StudentDetails/:id',component:StudentDetailsComponent},
+{path:'TeacherDetails/:id',component:TeacherDetailsComponent},
 
 
   { path: 'pricing', component: PricingComponent },

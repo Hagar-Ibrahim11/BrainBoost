@@ -36,6 +36,27 @@
             </div>
           </div>
         </div>
-        
 
+        <div class="container mt-5">
+          <h2 class="mb-4">Earning Table</h2>
+          <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Instructor Name</th>
+                <th scope="col">Instructor Earning</th>
+                <th scope="col">Website Earning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let Teacher of TeacherWithHisEarning">
+                <td>{{ Teacher.fname }} {{Teacher.lname}}</td>
+                <td>{{ Teacher.totalInstructorEarnings }}</td>
+                <td>{{ Teacher.totalWebsiteEarnings }}</td>
+                <td><button type="button" class="btn btn-secondary" (click)="GoToTeacheEarningDetails(Teacher.id)">Details</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+      
   </div>
