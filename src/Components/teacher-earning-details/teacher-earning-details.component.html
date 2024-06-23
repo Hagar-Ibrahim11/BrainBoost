@@ -1,0 +1,29 @@
+<!-- TopEarningCourses   -->
+<div class="container mt-5 shadow-lg rounded-3 bg-white p-3">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="mb-4">Courses</h2>
+      </div>
+      <div class="col-md-4" *ngFor="let Course of CoursesAndEarningsForInstructor">
+        <div class="course-card  rounded-3 shadow-lg">
+          <div class="course-header">
+            <div>
+              <h4>{{Course.name}}</h4>
+              <div class="course-category">{{Course.description}}</div>
+            </div>
+            <div class="course-icon">
+              <img [src]="Course.photoUrl" alt="C++">
+            </div>
+          </div>
+          <div class="course-footer">
+            <div class="course-score">{{Course.rate}}</div>
+            <p>Total Earning : {{Course.totalEarnings}}</p>
+            <p>Website Earning : {{Course.totalWebsiteEarnings}}</p>
+            <p>Instructor Earning : {{Course.totalInstructorEarnings}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- end of TopEarningCourses  -->

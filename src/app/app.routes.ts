@@ -13,9 +13,19 @@ import { CourseContentComponent } from '../Components/Taking-Course/course-conte
 import { QuizTakingComponent } from '../Components/Taking-Course/quiz-taking/quiz-taking.component';
 import { CertificateComponent } from '../Components/Taking-Course/certificate/certificate.component';
 import { EnrollmentSuccessComponent } from '../Components/EnrollmentSuccess/enrollment-success/enrollment-success.component';
+
+import { VideoTakingComponent } from '../Components/Taking-Course/video-taking/video-taking.component';
+
 import { EarningComponent } from '../Components/earning/earning/earning.component';
 import { InstructorProfileComponent } from '../Components/instructor-profile/instructor-profile.component';
 import { NonApprovedCouresesComponent } from '../Components/non-approved-coureses/non-approved-coureses.component';
+import { CoursesForAdminComponent } from '../Components/courses-for-admin/courses-for-admin/courses-for-admin.component';
+import { TeachersForAdminComponent } from '../Components/teachers-for-admin/teachers-for-admin.component';
+import { StudentForAdminComponent } from '../Components/student-for-admin/student-for-admin.component';
+import { TeacherEarningDetailsComponent } from '../Components/teacher-earning-details/teacher-earning-details.component';
+import { StudentDetailsComponent } from '../Components/student-details/student-details.component';
+import { TeacherDetailsComponent } from '../Components/teacher-details/teacher-details.component';
+
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -30,19 +40,34 @@ export const routes: Routes = [
     path: 'EnrollmentSuccess/:orderNumber/:courseId',
     component: EnrollmentSuccessComponent,
   },
+
+  { path: 'TakingCourse/:id', component: CourseContentComponent },
+  { path: 'TakingQuiz', component: QuizTakingComponent },
+  { path: 'TakingCertificate', component: CertificateComponent },
+  { path: 'TakingVideo', component: VideoTakingComponent },
+
   {
     path: '',
     component: LayoutComponent,
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'courses', component: CoursesComponent },
-      { path: 'courseDetails', component: CourseDetailsComponent },
+      { path: 'courseDetails/:id', component: CourseDetailsComponent },
+      { path: 'nonApprovedCourses', component: NonApprovedCouresesComponent },
+      { path: 'earning', component: EarningComponent },
+      { path: 'courses-for-admin', component: CoursesForAdminComponent },
+      { path: 'teachersforadmin', component: TeachersForAdminComponent },
+      { path: 'studentsforadmin', component: StudentForAdminComponent },
+      {
+        path: 'TeacherEarningDetails/:id',
+        component: TeacherEarningDetailsComponent,
+      },
+      { path: 'StudentDetails/:id', component: StudentDetailsComponent },
+      { path: 'TeacherDetails/:id', component: TeacherDetailsComponent },
     ],
   },
 
   { path: 'admindashboard', component: AdminDashboardComponent },
-  { path: 'nonApprovedCourses', component: NonApprovedCouresesComponent },
-  { path: 'earning', component: EarningComponent },
 
   { path: 'pricing', component: PricingComponent },
   { path: '**', component: NotFoundComponent },
@@ -50,4 +75,3 @@ export const routes: Routes = [
 function getRandom() {
   throw new Error('Function not implemented.');
 }
-
