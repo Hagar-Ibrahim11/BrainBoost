@@ -57,5 +57,7 @@ export class CourseService {
     const header= new HttpHeaders().set('Authorization', `Bearer ${api_key}`)
     return this.http.get<ICertificate>(`${environment.baseUrl}/api/Course/GetCertificate/${id}`,{headers: header})
  }
-
+ getCourseNumOfStds(courseId:number):Observable<number>{
+  return this.http.get<number>(`${environment.baseUrl}/api/Course/GetNumOfStdsOfCourse/${courseId}`)
+ }
 }
