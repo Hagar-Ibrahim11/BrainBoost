@@ -45,7 +45,7 @@ export const routes: Routes = [
   { path: 'TakingCourse/:id', component: CourseContentComponent },
   { path: 'TakingQuiz', component: QuizTakingComponent },
   { path: 'TakingCertificate', component: CertificateComponent },
-  {path:'TakingVideo',component:VideoTakingComponent},
+  { path: 'TakingVideo', component: VideoTakingComponent },
 
 
   {
@@ -55,19 +55,18 @@ export const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'courses', component: CoursesComponent },
       { path: 'courseDetails/:id', component: CourseDetailsComponent },
+      { path: 'nonApprovedCourses', component: NonApprovedCouresesComponent },
+      { path: 'earning', component: EarningComponent },
+      { path: 'courses-for-admin', component: CoursesForAdminComponent },
+      { path: 'teachersforadmin', component: TeachersForAdminComponent },
+      { path: 'studentsforadmin', component: StudentForAdminComponent },
+      { path: 'TeacherEarningDetails/:id', component: TeacherEarningDetailsComponent },
+      { path: 'StudentDetails/:id', component: StudentDetailsComponent },
+      { path: 'TeacherDetails/:id', component: TeacherDetailsComponent },
     ],
   },
 
-  {path:'admindashboard',component:AdminDashboardComponent},
-{path:'nonApprovedCourses',component:NonApprovedCouresesComponent},
-{path:'earning',component:EarningComponent},
-{path:'courses-for-admin',component:CoursesForAdminComponent},
-{path:'teachersforadmin',component:TeachersForAdminComponent},
-{path:'studentsforadmin',component:StudentForAdminComponent},
-{path:'TeacherEarningDetails/:id',component:TeacherEarningDetailsComponent},
-{path:'StudentDetails/:id',component:StudentDetailsComponent},
-{path:'TeacherDetails/:id',component:TeacherDetailsComponent},
-
+  { path: 'admindashboard', component: AdminDashboardComponent },
 
   { path: 'pricing', component: PricingComponent },
   { path: '**', component: NotFoundComponent },

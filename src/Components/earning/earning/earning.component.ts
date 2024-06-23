@@ -3,6 +3,7 @@ import { AdminDashboardServiceService } from '../../../Services/AdminDashboard/a
 import { ITeacherEarning } from '../../../models/iteacher-earning';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { IcourseEarning } from '../../../models/icourse-earning';
 
 @Component({
   selector: 'app-earning',
@@ -19,14 +20,15 @@ export class EarningComponent implements OnInit{
   ngOnInit(): void {
     this.GetTotalInstructorEarning();
     this.GetTotalWebsiteEarning();
-    this.GetTotalEarning()
-    this.GetTeachereWithHisEarning()
+    this.GetTotalEarning();
+    this.GetTeachereWithHisEarning();
+    this.GetTopEarningCourses();
     }
   TotalWebsiteEarning!:Number
   TotalInstructorEarning!:Number
   TotalEarning!:Number
   TeacherWithHisEarning!:ITeacherEarning[]
-
+  TopEarningCourses!:IcourseEarning[]
   GetTotalInstructorEarning() {
     this.admindashboardservice.GetTotalInstructorEarning().subscribe(
       (data: Number) => {
@@ -62,8 +64,18 @@ export class EarningComponent implements OnInit{
   GetTeachereWithHisEarning() {
     this.admindashboardservice.GetTeacherWithHisEarning().subscribe(
       (data: ITeacherEarning[]) => {
-        console.log(data)
         this.TeacherWithHisEarning = data;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+  GetTopEarningCourses()
+  {
+    this.admindashboardservice.GetTopEarningCourses().subscribe(
+      (data: IcourseEarning[]) => {
+        this.TopEarningCourses = data;
       },
       (error) => {
         console.error(error);
