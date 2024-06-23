@@ -26,13 +26,12 @@ import { TeacherEarningDetailsComponent } from '../Components/teacher-earning-de
 import { StudentDetailsComponent } from '../Components/student-details/student-details.component';
 import { TeacherDetailsComponent } from '../Components/teacher-details/teacher-details.component';
 
-
-
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'teacherForm', component: InstructorProfileComponent },
+  { path: 'TeacherForm/:id', component: InstructorProfileComponent },
+  { path: 'StudentForm/:id', component: InstructorProfileComponent },
   { path: 'addCourse', component: AddCourseComponent },
   { path: 'TakingCourse', component: CourseContentComponent },
   { path: 'TakingQuiz', component: QuizTakingComponent },
@@ -47,7 +46,6 @@ export const routes: Routes = [
   { path: 'TakingCertificate', component: CertificateComponent },
   { path: 'TakingVideo', component: VideoTakingComponent },
 
-
   {
     path: '',
     component: LayoutComponent,
@@ -60,7 +58,10 @@ export const routes: Routes = [
       { path: 'courses-for-admin', component: CoursesForAdminComponent },
       { path: 'teachersforadmin', component: TeachersForAdminComponent },
       { path: 'studentsforadmin', component: StudentForAdminComponent },
-      { path: 'TeacherEarningDetails/:id', component: TeacherEarningDetailsComponent },
+      {
+        path: 'TeacherEarningDetails/:id',
+        component: TeacherEarningDetailsComponent,
+      },
       { path: 'StudentDetails/:id', component: StudentDetailsComponent },
       { path: 'TeacherDetails/:id', component: TeacherDetailsComponent },
     ],
@@ -71,3 +72,6 @@ export const routes: Routes = [
   { path: 'pricing', component: PricingComponent },
   { path: '**', component: NotFoundComponent },
 ];
+function getRandom() {
+  throw new Error('Function not implemented.');
+}

@@ -59,6 +59,7 @@ export class AddCourseQuestionsComponent {
   }
   deleteChoice(questionIndex: number, answerIndex: number) {
     this.getAnswers(questionIndex).removeAt(answerIndex);
+    let answer = this.getAnswers(questionIndex).at(answerIndex).value;
   }
   addChoice(questionIndex: number) {
     this.getAnswers(questionIndex).push(
