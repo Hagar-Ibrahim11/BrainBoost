@@ -16,13 +16,12 @@ import { EnrollmentSuccessComponent } from '../Components/EnrollmentSuccess/enro
 import { EarningComponent } from '../Components/earning/earning/earning.component';
 import { InstructorProfileComponent } from '../Components/instructor-profile/instructor-profile.component';
 import { NonApprovedCouresesComponent } from '../Components/non-approved-coureses/non-approved-coureses.component';
-
-
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'teacherForm', component: InstructorProfileComponent },
+  { path: 'TeacherForm/:id', component: InstructorProfileComponent },
+  { path: 'StudentForm/:id', component: InstructorProfileComponent },
   { path: 'addCourse', component: AddCourseComponent },
   { path: 'TakingCourse', component: CourseContentComponent },
   { path: 'TakingQuiz', component: QuizTakingComponent },
@@ -41,11 +40,14 @@ export const routes: Routes = [
     ],
   },
 
-  {path:'admindashboard',component:AdminDashboardComponent},
-{path:'nonApprovedCourses',component:NonApprovedCouresesComponent},
-{path:'earning',component:EarningComponent},
-
+  { path: 'admindashboard', component: AdminDashboardComponent },
+  { path: 'nonApprovedCourses', component: NonApprovedCouresesComponent },
+  { path: 'earning', component: EarningComponent },
 
   { path: 'pricing', component: PricingComponent },
   { path: '**', component: NotFoundComponent },
 ];
+function getRandom() {
+  throw new Error('Function not implemented.');
+}
+

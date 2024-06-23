@@ -25,20 +25,11 @@
       ></app-add-course-what-to-learn>
       <div>
         <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext [disabled]="courseWhatToLearnForm.invalid">Next</button>
-      </div>
-    </form>
-  </mat-step>
-  <mat-step [stepControl]="courseMediaForm">
-    <form>
-      <ng-template matStepLabel>Add course videos</ng-template>
-      <app-add-course-videos
-        [coursePhoto]="coursePhoto"
-        [courseMediaForm]="courseMediaForm"
-      ></app-add-course-videos>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext [disabled]="courseMediaForm.invalid&&coursePhoto.invalid">
+        <button
+          mat-button
+          matStepperNext
+          [disabled]="courseWhatToLearnForm.invalid"
+        >
           Next
         </button>
       </div>
@@ -55,12 +46,32 @@
         <button
           mat-button
           matStepperNext
-          (click)="addCourse()"
           [disabled]="courseQuestionsForm.invalid"
         >
-          Finish
+          Next
         </button>
       </div>
     </form>
+  </mat-step>
+  <mat-step [stepControl]="courseMediaForm">
+    <form>
+      <ng-template matStepLabel>Add course videos</ng-template>
+      <app-add-course-videos
+        [coursePhoto]="coursePhoto"
+        [courseScheduleForm]="courseScheduleForm"
+      >
+      </app-add-course-videos>
+    </form>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button
+        mat-button
+        matStepperNext
+        (click)="addCourse()"
+        [disabled]="courseScheduleForm.invalid || coursePhoto.invalid"
+      >
+        Upload course
+      </button>
+    </div>
   </mat-step>
 </mat-stepper>
