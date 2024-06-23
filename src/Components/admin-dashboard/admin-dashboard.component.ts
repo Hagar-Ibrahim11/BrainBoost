@@ -5,11 +5,11 @@ import { CommonModule } from '@angular/common';
 import { ICurrentCourses } from '../../models/icurrent-courses';
 import { ITopStudent } from '../../models/itop-student';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-
+import { FooterComponent } from '../footer/footer.component';
 @Component({
   selector: 'app-admin-dashboard',
   standalone: true,
-  imports: [CommonModule,RouterLink,RouterLinkActive],
+  imports: [CommonModule,RouterLink,RouterLinkActive,FooterComponent],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.css'
 })

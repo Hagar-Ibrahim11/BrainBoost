@@ -11,6 +11,7 @@ import { ICourseCardDetails } from '../../models/icourse-card-details';
 import { ITeacher } from '../../models/iteacher';
 import { IStudent } from '../../models/istudent';
 import { ITeacherEarning } from '../../models/iteacher-earning';
+import { IcourseEarning } from '../../models/icourse-earning';
 
 @Injectable({
   providedIn: 'root'
@@ -125,6 +126,16 @@ export class AdminDashboardServiceService {
   GetTeacherWithHisEarning(): Observable<ITeacherEarning[]> {
     return this.httpclient.get<ITeacherEarning[]>(
       `${environment.baseUrl}/api/Earning/GetTeachersAndEarnings`
+    );
+  }
+  GetTopEarningCourses(): Observable<IcourseEarning[]> {
+    return this.httpclient.get<IcourseEarning[]>(
+      `${environment.baseUrl}/api/Course/GetTopEarningCourses`
+    );
+  }
+  GetCoursesAndEarningsForInstructor(InstructorId:number): Observable<IcourseEarning[]> {
+    return this.httpclient.get<IcourseEarning[]>(
+      `${environment.baseUrl}/api/Earning/GetCoursesAndEarningsForInstructor/${InstructorId}`
     );
   }
 }
