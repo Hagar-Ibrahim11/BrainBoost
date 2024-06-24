@@ -1,23 +1,26 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { IQuiz } from '../../../models/iquiz';
-import { ActivatedRoute, Route, Router } from '@angular/router';
-import { CourseService } from '../../../Services/course/course.service';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ICheckAnswer } from '../../../models/icheck-answer';
-import { IQuestionAndAnswerIDs } from '../../../models/iquestion-and-answer-ids';
-import { QuizService } from '../../../Services/quiz.service';
-
-
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { IQuiz } from '../../models/iquiz';
+import { ICheckAnswer } from '../../models/icheck-answer';
+import { IQuestionAndAnswerIDs } from '../../models/iquestion-and-answer-ids';
+import { CourseService } from '../../Services/course/course.service';
+import { QuizService } from '../../Services/quiz.service';
+interface Video {
+  title: string;
+  src: string;
+  watched: boolean;
+}
 @Component({
-  selector: 'app-quiz-taking',
+  selector: 'app-test',
   standalone: true,
-  imports: [FormsModule,CommonModule],
-  templateUrl: './quiz-taking.component.html',
-  styleUrl: './quiz-taking.component.css'
+  imports: [RouterLink,RouterOutlet,FormsModule,CommonModule],
+  templateUrl: './test.component.html',
+  styleUrl: './test.component.css'
 })
-export class QuizTakingComponent implements OnInit  {
-  CourseId!:number
+export class TestComponent {
+  CourseId:number=2
   Quiz!:IQuiz
   QuizCheckAnswer!:ICheckAnswer
   QuestionAndAnswer!:IQuestionAndAnswerIDs
@@ -28,10 +31,10 @@ export class QuizTakingComponent implements OnInit  {
     private quizService: QuizService,
     private router: Router
   ) {
-    this.route.params.subscribe(params => {
-      this.CourseId = +params['id']; // Convert to number (if needed)
-      console.log(this.CourseId)
-    });
+    // this.route.params.subscribe(params => {
+    //   this.CourseId = +params['id']; // Convert to number (if needed)
+    //   console.log(this.CourseId)
+    // });
   }
   ngOnInit(): void {
 
@@ -98,27 +101,19 @@ changeState(id: number,status:boolean)
            })
    });
    this.quizService.stdDegree=this.stdDegree
- if(this.stdDegree>=this.Quiz.minDegree )
+ if(this.stdDegree>=this.Quiz.minDegree)
   {
       this.quizService.stdState="succeeded"
-      if( !this.Quiz.quizState)
-        {
-          this.Quiz.quizState=true
-      this.quizService.changeQuizState(this.CourseId,this.Quiz.quizState).subscribe({
+      this.Quiz.quizState=true
+      this.quizService.changeQuizState(2,this.Quiz.quizState).subscribe({
         next: (data: any) => {
-          this.router.navigate(['/TakingCertificate',this.CourseId]);
+          this.router.navigate(['/TakingCertificate']);
         },
       })
-    }
-    else
-    {
-      this.router.navigate(['/TakingCertificate',this.CourseId]);
-    }
   }
-  else {
+  else{
       this.quizService.stdState="Failed"
-      this.router.navigate(['/TakingCourse',this.CourseId]);
+      this.router.navigate(['/TakingCourse']);
   }
   console.log(this.quizService.stdState,this.quizService.stdDegree)
-  }
-}
+  }}

@@ -73,93 +73,13 @@
   background: #000;
   margin-bottom: 20px;
 }
- video {
+.video-container iframe {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
 }
-.handlepart {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-}
-.handlepart i
- {
-  margin-left: 65px;
- }
-.video-label {
-  margin-right: 15px; /* Adjust as needed for spacing */
-  cursor: pointer;
-
-}
-
-.video-input {
-  margin-left: 15px; /* Adjust as needed for spacing */
-  cursor: pointer;
-
-}
-/* discuss */
-.card {
-  border: none;
- 
-
-}
-
-.chat {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.chat li {
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px dotted #B3A9A9;
-}
-
-.rounded-circle {
-  max-height: 50px;
-}
-/* comment */
-.comment {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
-}
-
-.comment img {
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.comment .comment-body {
-  background: #f9f9f9;
-  border-radius: 5px;
-  padding: 10px;
-  flex: 1;
-}
-
-.comment .comment-body .comment-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 5px;
-}
-
-.comment .comment-body .comment-header .name {
-  font-weight: bold;
-}
-
-.comment .comment-body .comment-header .timestamp {
-  font-size: 0.8em;
-  color: #777;
-}
-
 @media (min-width: 576px) {
   .video-title {
     font-size: 2rem;
@@ -199,9 +119,6 @@
     padding: .5rem 1rem;
   }
 }
-
-
-
 
 
 

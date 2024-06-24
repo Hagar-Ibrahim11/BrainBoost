@@ -10,6 +10,7 @@ import { ICourseFilteration } from '../../models/icourse-filteration';
 import { Router } from '@angular/router';
 import { ICourseDetails } from '../../models/icourse-details';
 import { DataService } from '../../Services/sharedData/data.service';
+import { environment } from '../../Enviroment/enviroment';
 
 @Component({
   selector: 'app-courses',
@@ -25,6 +26,7 @@ export class CoursesComponent {
   SearchString!: string;
   priceString: string = '';
   currentCourse!: ICourseDetails;
+  env: string = environment.baseUrl+'/'
   constructor(
     private courseservice: CourseService,
     private categoryService: CategoryService,
@@ -32,6 +34,7 @@ export class CoursesComponent {
     private dataService: DataService
   ) {
     this.FilterObj = { categoryName: null, price: -1, rate: -1 };
+    
   }
 
   ngOnInit() {
