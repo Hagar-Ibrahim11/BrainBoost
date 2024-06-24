@@ -24,12 +24,18 @@ import { VideotakingComponent } from '../Components/Taking-Course/video-taking/v
 import { TestComponent } from '../Components/test/test.component';
 
 
+import { TeachersForAdminComponent } from '../Components/teachers-for-admin/teachers-for-admin.component';
+import { StudentForAdminComponent } from '../Components/student-for-admin/student-for-admin.component';
+import { TeacherEarningDetailsComponent } from '../Components/teacher-earning-details/teacher-earning-details.component';
+import { StudentDetailsComponent } from '../Components/student-details/student-details.component';
+import { TeacherDetailsComponent } from '../Components/teacher-details/teacher-details.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'teacherForm', component: InstructorProfileComponent },
+  { path: 'TeacherForm/:id', component: InstructorProfileComponent },
+  { path: 'StudentForm/:id', component: InstructorProfileComponent },
   { path: 'addCourse', component: AddCourseComponent },
   { path: 'Test', component: TestComponent },
   {
@@ -43,10 +49,6 @@ export const routes: Routes = [
   { path: 'TakingVideo/:id', component: VideoComponent },
   { path: 'TakingVideo', component: VideotakingComponent },
 
-
-
-
-
   {
     path: '',
     component: LayoutComponent,
@@ -54,15 +56,25 @@ export const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'courses', component: CoursesComponent },
       { path: 'courseDetails/:id', component: CourseDetailsComponent },
+      { path: 'nonApprovedCourses', component: NonApprovedCouresesComponent },
+      { path: 'earning', component: EarningComponent },
+      { path: 'courses-for-admin', component: CoursesForAdminComponent },
+      { path: 'teachersforadmin', component: TeachersForAdminComponent },
+      { path: 'studentsforadmin', component: StudentForAdminComponent },
+      {
+        path: 'TeacherEarningDetails/:id',
+        component: TeacherEarningDetailsComponent,
+      },
+      { path: 'StudentDetails/:id', component: StudentDetailsComponent },
+      { path: 'TeacherDetails/:id', component: TeacherDetailsComponent },
     ],
   },
 
-  {path:'admindashboard',component:AdminDashboardComponent},
-{path:'nonApprovedCourses',component:NonApprovedCouresesComponent},
-{path:'earning',component:EarningComponent},
-{path:'courses-for-admin',component:CoursesForAdminComponent},
-
+  { path: 'admindashboard', component: AdminDashboardComponent },
 
   { path: 'pricing', component: PricingComponent },
   { path: '**', component: NotFoundComponent },
 ];
+function getRandom() {
+  throw new Error('Function not implemented.');
+}
