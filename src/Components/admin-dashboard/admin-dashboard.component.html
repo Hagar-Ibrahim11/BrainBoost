@@ -1,0 +1,327 @@
+<div class="container-fluid " style="background-color: #f5f5f5">
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-2">
+      <!--Main Navigation-->
+      <header>
+        <!-- Sidebar -->
+        <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+          <div class="position-sticky">
+            <div class="list-group list-group-flush mx-3 mt-4">
+              <a routerLink="/courses-for-admin" routerLinkActive="active" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>All Courses</span>
+              </a>
+            </div>
+          </div>
+          <div class="position-sticky">
+            <div class="list-group list-group-flush mx-3 mt-4">
+              <a routerLink="/nonApprovedCourses" routerLinkActive="active" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Not Approved Courses</span>
+              </a>
+            </div>
+          </div>
+          <div class="position-sticky">
+            <div class="list-group list-group-flush mx-3 mt-4">
+              <a routerLink="/earning" routerLinkActive="active" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Earning</span>
+              </a>
+            </div>
+          </div>
+        </nav>
+        <!-- Sidebar -->
+
+        <!-- Navbar -->
+        <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+          <!-- Container wrapper -->
+          <div class="container-fluid">
+            <!-- Toggle button -->
+            <button data-mdb-button-init class="navbar-toggler" type="button" data-mdb-collapse-init
+              data-mdb-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Brand -->
+            <a class="navbar-brand" href="#">
+              <h1>BrainBoost</h1>
+            </a>
+            <!-- Search form -->
+            <form class="d-none d-md-flex input-group w-auto my-auto">
+              <input autocomplete="off" type="search" class="form-control rounded"
+                placeholder='Search (ctrl + "/" to focus)' style="min-width: 225px;" />
+              <span class="input-group-text border-0"><i class="fas fa-search"></i></span>
+            </form>
+
+            <!-- Right links -->
+            <ul class="navbar-nav ms-auto d-flex flex-row">
+              <!-- Notification dropdown -->
+              <li class="nav-item dropdown">
+                <a data-mdb-dropdown-init class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#"
+                  id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                  <i class="fas fa-bell"></i>
+                  <span class="badge rounded-pill badge-notification bg-danger">1</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                  <li>
+                    <a class="dropdown-item" href="#">Some news</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Another news</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </li>
+                </ul>
+              </li>
+
+              <!-- Icon -->
+              <li class="nav-item">
+                <a class="nav-link me-3 me-lg-0" href="#">
+                  <i class="fas fa-fill-drip"></i>
+                </a>
+              </li>
+              <!-- Icon -->
+              <li class="nav-item me-3 me-lg-0">
+                <a class="nav-link" href="#">
+                  <i class="fab fa-github"></i>
+                </a>
+              </li>
+
+              <!-- Icon dropdown -->
+              <li class="nav-item dropdown">
+                <a data-mdb-dropdown-init class="nav-link me-3 me-lg-0 dropdown-toggle hidden-arrow" href="#"
+                  id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                  <i class="united kingdom flag m-0"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="united kingdom flag"></i>English
+                      <i class="fa fa-check text-success ms-2"></i></a>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider" />
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="flag-poland flag"></i>Polski</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="flag-china flag"></i>中文</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="flag-japan flag"></i>日本語</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="flag-germany flag"></i>Deutsch</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="flag-france flag"></i>Français</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="flag-spain flag"></i>Español</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="flag-russia flag"></i>Русский</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#"><i class="flag-portugal flag"></i>Português</a>
+                  </li>
+                </ul>
+              </li>
+
+              <!-- Avatar -->
+              <li class="nav-item dropdown">
+                <a data-mdb-dropdown-init class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
+                  href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img (31).webp" class="rounded-circle"
+                    height="22" alt="Avatar" loading="lazy" />
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                  <li>
+                    <a class="dropdown-item" href="#">My profile</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Settings</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Logout</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+      </header>
+      <!--Main Navigation-->
+
+      
+      <!--Main layout-->
+    </div>
+    <!-- Sidebar End -->
+
+    <!-- Dashboard content -->
+    <div class="col-md-10 " style="margin-top: 100px;">
+
+
+      <!-- Main Content -->
+      <div class="">
+        <!-- common analysis  -->
+        <div class="container ">
+          <div class="row ">
+            <div class="col-lg-4 col-md-6 col-12 mb-4 ">
+              <div class="card text-center pt-3 rounded-4 border-0 shadow-lg">
+                <div class="card-body">
+                  <div class="icon-wrapper bullseye">
+                    <i class="fa-solid fa-bullseye fa-2xl fs-1"></i>
+                  </div>
+                  <h1 class="mt-2">{{NumOfStudent}}</h1>
+                  <p class="card-text mt-3 text-dark">Total Students</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12 mb-4">
+              <div class="card text-center pt-3 rounded-4 border-0 shadow-lg">
+                <div class="card-body">
+                  <div class="icon-wrapper book">
+                    <i class="fa-solid fa-book-open fa-2xl fs-1"></i>
+                  </div>
+                  <h1 class="mt-2">{{NumOfCourse}}</h1>
+                  <p class="card-text mt-3 text-dark">Total Courses</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12 mb-4">
+              <div class="card text-center pt-3 rounded-4 border-0 shadow-lg">
+                <div class="card-body">
+                  <div class="icon-wrapper check">
+                    <i class="fa-solid fa-check fa-2xl fs-1"></i>
+                  </div>
+                  <h1 class="mt-2">{{NumOfTeacher}}</h1>
+                  <p class="card-text mt-3 text-dark">Total Teachers</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container mt-5">
+          <div class="row d-flex justify-content-center">
+            <div class="col-lg-4 col-md-6 col-12 mb-4">
+              <div class="card text-center pt-3 rounded-4 border-0 shadow-lg">
+                <div class="card-body">
+                  <div class="icon-wrapper people">
+                    <i class="fa-solid fa-people-group fa-2xl fs-1"></i>
+                  </div>
+                  <h1 class="mt-2">{{NumOfEnrolledCourses}}</h1>
+                  <p class="card-text mt-3 text-dark">Enrolled Courses</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-12 mb-4">
+              <div class="card text-center pt-3 rounded-4 border-0 shadow-lg">
+                <div class="card-body">
+                  <div class="icon-wrapper light">
+                    <i class="fa-regular fa-lightbulb fa-2xl fs-1"></i>
+                  </div>
+                  <h1 class="mt-2">300</h1>
+                  <p class="card-text mt-3 text-dark">Expert Mentors</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end of common analysis -->
+
+
+
+
+
+
+      </div>
+
+
+      <!-- top instructors  -->
+
+      <div class=" mt-5 shadow-lg rounded-3 bg-white p-3">
+        <div class="row">
+          <div class="col-12">
+            <h2 class="mb-4 p-2">Top Instructors</h2>
+          </div>
+          <!-- First Instructor -->
+          <div class="col-md-6" *ngFor="let Teacher of TopTeacher">
+            <div class="instructor-card d-flex align-items-center shadow-lg rounded-3 border-0">
+              <img
+                [src]="Teacher.pictureUrl"
+                alt="Instructor 1" class="instructor-img me-3">
+              <div class="instructor-info">
+                <h5 class="mb-1">{{Teacher.fname}} {{Teacher.lname}}</h5>
+                <p class="mb-0 text-muted">{{Teacher.career}}</p>
+              </div>
+              <div class="ms-auto rounded-pill follow p-1">
+                <i class="fa-solid fa-plus fa-2xl follow-icon"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end of top instructors section -->
+
+
+
+      <!-- current courses  -->
+      <div class="container mt-5 shadow-lg rounded-3 bg-white p-3">
+        <div class="row">
+          <div class="col-12">
+            <h2 class="mb-4">Current Courses</h2>
+          </div>
+          <div class="col-md-4" *ngFor="let Course of CurrentCourses">
+            <div class="course-card  rounded-3 shadow-lg">
+              <div class="course-header">
+                <div>
+                  <h4>{{Course.name}}</h4>
+                  <div class="course-category">{{Course.description}}</div>
+                </div>
+                <div class="course-icon">
+                  <img [src]="Course.photoUrl" alt="C++">
+                </div>
+              </div>
+              <div class="course-footer">
+                <div class="course-score">{{Course.rate}}</div>
+                <div class="course-days">{{Course.durtion}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- end of current courses  -->
+
+
+
+
+      <!-- Top students section -->
+
+      <div class="container mt-5 shadow-lg rounded-3 bg-white">
+        <div class="top-students-section border-0">
+          <h2 class="mb-4">Top Students</h2>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="student-card rounded-3 shadow-lg" *ngFor="let student of TopStudent">
+                <img
+                  [src]="student.pictureUrl"
+                  alt="Andrew Burns">
+                <div class="student-info">
+                  <h5>{{student.fname}}{{student.lname}}</h5>
+                  <p>Num of Certificates :{{student.numOfCertificates}}</p>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+
+
+      <!-- end of top students section  -->
+    </div>
+  </div>

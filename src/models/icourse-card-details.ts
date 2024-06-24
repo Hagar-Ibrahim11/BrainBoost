@@ -8,5 +8,5 @@ export interface ICourseCardDetails {
   rate: number | null;
   teacher: ICourseCardTeacherData | null;
   description: string | null;
-  duration: number | null;
+  durtion: number | null;
 }

@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-instructor-profile',
+  selector: "app-instructor-profile",
   standalone: true,
   imports: [],
-  templateUrl: './instructor-profile.component.html',
-  styleUrl: './instructor-profile.component.css'
+  templateUrl: "./instructor-profile.component.html",
+  styleUrl: "./instructor-profile.component.css",
 })
 export class InstructorProfileComponent {
-
+  containerClick() {
+    const container = document.querySelector(".container");
+    container!.classList.toggle("active");
+  }
 }

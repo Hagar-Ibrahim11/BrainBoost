@@ -1,4 +1,6 @@
+import { ICourseDetailsTeacherData } from "../Teaher/icourse-details-teacher-data";
 import { ICourseCardDetails } from "../icourse-card-details";
+import { WhatTToLearn } from "../what-tto-learn";
 import { IState } from "./istate";
 
 export interface ICourseTaking {
@@ -17,4 +19,6 @@ export interface ICourseTaking {
   numOfVideos?: number;
   states: IState | null;
   courseCardData: ICourseCardDetails[] | null;
+  whatToLearn: WhatTToLearn[] | null;
+  teacherDataDto: ICourseDetailsTeacherData | null;
 }

@@ -26,7 +26,7 @@ export class CourseDetailsComponent {
   Role!: string;
   UserIsLogged!: boolean;
   IsEnrolled: boolean = false;
-  env: string = environment.baseUrl + '/Images/Courses/';
+  env: string = environment.baseUrl+'/' 
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,

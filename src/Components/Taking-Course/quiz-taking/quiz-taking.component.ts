@@ -98,19 +98,26 @@ changeState(id: number,status:boolean)
            })
    });
    this.quizService.stdDegree=this.stdDegree
- if(this.stdDegree>=this.Quiz.minDegree)
+ if(this.stdDegree>=this.Quiz.minDegree )
   {
       this.quizService.stdState="succeeded"
-      this.Quiz.quizState=true
-      this.quizService.changeQuizState(2,this.Quiz.quizState).subscribe({
+      if( !this.Quiz.quizState)
+        {
+          this.Quiz.quizState=true
+      this.quizService.changeQuizState(this.CourseId,this.Quiz.quizState).subscribe({
         next: (data: any) => {
-          this.router.navigate(['/TakingCertificate']);
+          this.router.navigate(['/TakingCertificate',this.CourseId]);
         },
       })
+    }
+    else
+    {
+      this.router.navigate(['/TakingCertificate',this.CourseId]);
+    }
   }
-  else{
+  else {
       this.quizService.stdState="Failed"
-      this.router.navigate(['/TakingCourse']);
+      this.router.navigate(['/TakingCourse',this.CourseId]);
   }
   console.log(this.quizService.stdState,this.quizService.stdDegree)
   }

@@ -11,6 +11,8 @@ import { IReviewService } from '../../../Services/ireview.service';
 import { IReview } from '../../../models/ireview';
 
 import { EnrollmentService } from '../../../Services/enrollment/enrollment.service';
+import { environment } from '../../../Enviroment/enviroment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-course-content',
@@ -20,20 +22,28 @@ import { EnrollmentService } from '../../../Services/enrollment/enrollment.servi
   styleUrl: './course-content.component.css',
 })
 export class CourseContentComponent implements OnInit  {
-  CrsId:number=2
+  CrsId!:number
   Course!:ICourseTaking
   msg:string=''
   rating: number = 0;
   stars: boolean[] = Array(5).fill(false);
   StdReview!:IReview
+  env: string = environment.baseUrl
 
   constructor(
     private courseService: CourseService,
     private QuizService: QuizService,
     private router: Router,
+    private route: ActivatedRoute,
     private revService:IReviewService,
-    private enrollmentService: EnrollmentService
-  ) {}
+    private enrollmentService: EnrollmentService,
+    private toastr: ToastrService
+  ) {
+    this.route.params.subscribe(params => {
+      this.CrsId = +params['id']; // Convert to number (if needed)
+      console.log(this.CrsId)
+    });
+  }
 
   ngOnInit(): void {
     this.getTakenCourse(this.CrsId)
@@ -60,8 +70,13 @@ export class CourseContentComponent implements OnInit  {
     if (this.QuizService.stdDegree > -1) {
       if (this.QuizService.stdState == 'succeeded')
         this.msg = `you have successfully finish quiz go take your certificate`;
-      else this.msg = `you have failed in the quiz please try again`;
+      else
+      {
+       this.msg = `you have failed in the quiz please try again`;
+       }
+      this.toastr.success(this.msg);
     }
+
     this.QuizService.stdDegree=-1
 
 }
