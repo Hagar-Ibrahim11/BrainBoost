@@ -19,6 +19,7 @@ import { CourseServiceService } from "../../Services/course/course-service.servi
 import { AddCourseQuestionsComponent } from "./add-course-questions/add-course-questions.component";
 import { InsertedQuiz } from "./classes/inserted-quiz";
 import { AddCourseWhatToLearnComponent } from "./add-course-what-to-learn/add-course-what-to-learn.component";
+import { FaLayersCounterComponent } from "@fortawesome/angular-fontawesome";
 @Component({
   selector: "app-add-course",
   standalone: true,
@@ -46,7 +47,7 @@ export class AddCourseComponent {
   courseDetailsForm = new FormGroup({
     courseName: new FormControl("", Validators.required),
     courseDescription: new FormControl("", Validators.required),
-    price: new FormControl<number|null>(null, Validators.required),
+    price: new FormControl<number | null>(null, Validators.required),
     categoryName: new FormControl("", Validators.required),
     courseLanguage: new FormControl("", Validators.required),
     courseLevel: new FormControl("", Validators.required),
@@ -71,6 +72,14 @@ export class AddCourseComponent {
     ],
     Validators.minLength(1)
   );
+  courseScheduleForm = new FormArray<FormArray>([
+    new FormArray<FormGroup>([
+      new FormGroup({
+        videoFile: new FormControl<File | null>(null, Validators.required),
+        title: new FormControl<string | null>(null, Validators.required),
+      }),
+    ]),
+  ]);
   courseQuestionsForm = new FormArray<FormGroup>(
     [
       new FormGroup({
@@ -83,35 +92,57 @@ export class AddCourseComponent {
           Validators.minLength(2)
         ),
         rightAnswer: new FormControl<string>("", Validators.required),
-        degree: new FormControl<number|null>(null, Validators.required),
+        degree: new FormControl<number | null>(null, Validators.required),
       }),
     ],
     [Validators.minLength(1)]
   );
   addCourseLectures(courseId: number) {
-    this.courseMediaForm.controls.forEach((element, index) => {
-      const formdata = new FormData();
-      formdata.append(
-        "Title",
-        this.courseMediaForm.controls.at(index)?.value.title
-      );
-      formdata.append(
-        "VideoFile",
-        this.courseMediaForm.controls.at(index)?.value.videoFile
-      );
-      this.courseService.addVideo(formdata, courseId).subscribe({
-        next: (response) => {
-          console.log(response);
-        },
-        error: (error) => {
-          console.log(error);
-        },
+    // this.courseMediaForm.controls.forEach((element, index) => {
+    //   const formdata = new FormData();
+    //   formdata.append(
+    //     "Title",
+    //     this.courseMediaForm.controls.at(index)?.value.title
+    //   );
+    //   formdata.append(
+    //     "VideoFile",
+    //     this.courseMediaForm.controls.at(index)?.value.videoFile
+    //   );
+    //   this.courseService.addVideo(formdata, courseId).subscribe({
+    //     next: (response) => {
+    //       console.log(response);
+    //     },
+    //     error: (error) => {
+    //       console.log(error);
+    //     },
+    //   });
+    // });
+    this.courseScheduleForm.controls.forEach((chapter, chapterindex) => {
+      chapter.controls.forEach((lecture, lectureindex) => {
+        const formdata = new FormData();
+        formdata.append(
+          "Title",
+          lecture.get('title')?.value
+        );
+        formdata.append(
+          "VideoFile",
+          lecture.get("videoFile")?.value
+        );
+        formdata.append("Chapter", (chapterindex + 1).toString());
+        this.courseService.addVideo(formdata, courseId).subscribe({
+          next: (response) => {
+            console.log(response);
+          },
+          error: (error) => {
+            console.log(error);
+          },
+        });
       });
     });
   }
-  addCoursePhoto(courseId: number) {
+  addCoursePhoto(courseId: number, typeStore: string, FolderName: string) {
     this.courseService
-      .uploadPhoto(this.coursePhoto.value!, courseId)
+      .uploadPhoto(this.coursePhoto.value!, courseId, typeStore, FolderName)
       .subscribe({
         next: (response) => {
           console.log(response);
@@ -147,12 +178,14 @@ export class AddCourseComponent {
   addCourse() {
     this.addCourseQuiz();
     this.addWhatToLearn();
+    const CoursePhoto = new FormData();
+    CoursePhoto.append("CoursePhoto", this.coursePhoto.value!);
     this.courseService
       .addCourse({
         Name: this.courseDetailsForm.value.courseName!,
         Description: this.courseDetailsForm.value.courseDescription!,
         Price: this.courseDetailsForm.value.price!,
-        TeacherId: 1,
+        TeacherId: 2,
         CategoryName: this.courseDetailsForm.value.categoryName!,
         Level: this.courseDetailsForm.value.courseLevel!,
         CertificateHeadline: "string",
@@ -160,11 +193,16 @@ export class AddCourseComponent {
         Language: this.courseDetailsForm.value.courseLanguage!,
         Quiz: this.Quiz,
         WhatToLearn: this.WhatToLearn,
+        CoursePhoto: CoursePhoto.get("CoursePhoto"),
       })
       .subscribe({
         next: (response) => {
-          this.addCoursePhoto(response["id"]);
-          this.addCourseLectures(response["id"])
+          this.addCoursePhoto(
+            response["id"],
+            response["whereToStore"],
+            response["folderName"]
+          );
+          this.addCourseLectures(response["id"]);
         },
         error: (error) => {
           console.log(error);
@@ -172,6 +210,6 @@ export class AddCourseComponent {
       });
   }
   display() {
-    console.log(this.courseQuestionsForm);
+    console.log(this.courseScheduleForm);
   }
 }

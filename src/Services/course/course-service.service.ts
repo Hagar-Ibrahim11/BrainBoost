@@ -15,11 +15,11 @@ export class CourseServiceService {
       formdata
     );
   }
-  uploadPhoto(photo: File, courseId: Number): Observable<any> {
+  uploadPhoto(photo: File, courseId: Number,WhereToStore:string,FolderName:string): Observable<any> {
     const insertedCoursePhotoForm = new FormData();
     insertedCoursePhotoForm.append('InsertedPhoto', photo);
     return this.http.post(
-      `${environment.baseUrl}/api/Course/HandlePhoto/${courseId}`,
+      `${environment.baseUrl}/api/Course/HandlePhoto/${courseId}/${WhereToStore}/${FolderName}`,
       insertedCoursePhotoForm
     );
   }
@@ -35,6 +35,7 @@ export class CourseServiceService {
     Language: string;
     Quiz: InsertedQuiz;
     WhatToLearn: string[];
+    CoursePhoto:FormDataEntryValue|null
   }): Observable<any> {
     // const insertedCourseForm = new FormData();
     // insertedCourseForm.append('Name', insertedCourse.Name);
@@ -46,9 +47,10 @@ export class CourseServiceService {
     // insertedCourseForm.append('CertificateHeadline', 'string');
     // insertedCourseForm.append('CertificateAppreciationParagraph', 'string');
     // insertedCourseForm.append('Language', insertedCourse.Language!);
+
     return this.http.post(
       `${environment.baseUrl}/api/Course/AddCourse`,
-      insertedCourse
+      insertedCourse,
     );
   }
 }
