@@ -13,11 +13,9 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(),
     provideHttpClient(),
     provideAnimationsAsync(),
-<<<<<<< HEAD
-    provideAnimationsAsync(), provideAnimationsAsync(),
-=======
-    provideAnimationsAsync(),
+
+    
     provideToastr()
->>>>>>> c98215bb033200cc34515613820e528d58fe3faa
+
   ],
 };
