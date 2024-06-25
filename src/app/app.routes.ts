@@ -30,6 +30,7 @@ import { TeacherEarningDetailsComponent } from '../Components/teacher-earning-de
 import { StudentDetailsComponent } from '../Components/student-details/student-details.component';
 import { TeacherDetailsComponent } from '../Components/teacher-details/teacher-details.component';
 import { AdminComponent } from '../Components/Admin/admin/admin.component';
+import { CategoryComponent } from '../Components/category/category.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -68,7 +69,8 @@ export const routes: Routes = [
       },
       { path: 'StudentDetails/:id', component: StudentDetailsComponent },
       { path: 'TeacherDetails/:id', component: TeacherDetailsComponent },
-      {path: "admin",component:AdminComponent}
+      {path: "admin",component:AdminComponent},
+      {path: "category",component:CategoryComponent}
     ],
   },
 
