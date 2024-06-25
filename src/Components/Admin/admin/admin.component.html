@@ -1,0 +1,17 @@
+<div class="container my-4">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <div class="col" *ngFor="let Admin of AllAdmins">
+        <div class="card course-card border-0 shadow-lg rounded-3">
+          <img [src]="Admin.pictureUrl" class="card-img-top" alt="Admin Image">
+          <div class="card-body">
+            <h5 class="card-title">{{ Admin.fname }} {{Admin.lname}}</h5>
+            <div class="btn-group">
+              <button type="button" class="btn btn-secondary  me-4" >Update</button>
+              <button type="button" class="btn btn-secondary" (click)="Admin.id !== null ? DeleteAdmin(Admin.id) : null">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

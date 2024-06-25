@@ -29,6 +29,7 @@ import { StudentForAdminComponent } from '../Components/student-for-admin/studen
 import { TeacherEarningDetailsComponent } from '../Components/teacher-earning-details/teacher-earning-details.component';
 import { StudentDetailsComponent } from '../Components/student-details/student-details.component';
 import { TeacherDetailsComponent } from '../Components/teacher-details/teacher-details.component';
+import { AdminComponent } from '../Components/Admin/admin/admin.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -67,6 +68,7 @@ export const routes: Routes = [
       },
       { path: 'StudentDetails/:id', component: StudentDetailsComponent },
       { path: 'TeacherDetails/:id', component: TeacherDetailsComponent },
+      {path: "admin",component:AdminComponent}
     ],
   },
 
