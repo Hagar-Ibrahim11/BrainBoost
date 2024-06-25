@@ -19,4 +19,15 @@ export class CategoryService {
       `${environment.baseUrl}/api/Category/GetCategory/${id}`
     );
   }
+
+  DeleteCategory(categoryId:Number):Observable<ICategory>{
+    return this.httpClient.delete<ICategory>(
+      `${environment.baseUrl}/api/Category/DeleteCategory/${categoryId}`
+    );
+  }
+
+  AddCategory(category: ICategory): Observable<ICategory> {
+    return this.httpClient.post<ICategory>(
+      `${environment.baseUrl}/api/Category/addCategory/`,category);
+  }
 }
