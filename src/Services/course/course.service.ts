@@ -28,7 +28,10 @@ export class CourseService {
   }
   GetFilteredCourses(filterationObj: any): Observable<ICourseCardDetails[]> {
     let params = new HttpParams();
-    params = params.append('CategoryName', filterationObj.categoryName);
+    if(filterationObj.categoryName){
+
+      params = params.append('CategoryName', filterationObj.categoryName);
+    }
     params = params.append('Price', filterationObj.price);
     params = params.append('Rate', filterationObj.rate);
     return this.http.get<ICourseCardDetails[]>(
