@@ -30,16 +30,22 @@
             <h5 class="text-dark fw-2 me-3">Course videos:</h5>
 
             <div class="accordion mt-3" id="videoAccordion">
-              <ng-container >
+               <ng-container >
+              <ng-container *ngFor="let chapter of chapters; let chapterIndex = index" >
               <div class="accordion-item">
-                <h2 class="accordion-header" id="headingGeneral">
-                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseGeneral" aria-expanded="true" aria-controls="collapseGeneral">
-                    General
+                <h2 class="accordion-header" id="heading{{chapterIndex}}">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse' + chapterIndex"
+                  aria-expanded="true" [attr.aria-controls]="'collapse' + chapterIndex">
+                    Chapter {{chapter}}
                   </button>
                 </h2>
 
-                <div id="collapseGeneral" class="accordion-collapse collapse show" aria-labelledby="headingGeneral" data-bs-parent="#videoAccordion">
+                <div id="collapse{{chapterIndex}}" class="accordion-collapse collapse show" [attr.aria-labelledby]="'heading' + chapterIndex"
+                data-bs-parent="#videoAccordion">
+
+
                   <ng-container *ngFor="let vid of comingVideo; let i = index">
+                    <ng-container *ngIf="vid.chapter==chapter">
                   <div class="accordion-body">
                     <ul class="list-group">
                       <li class="list-group-item"><i class="fas fa-play-circle"></i>
@@ -50,6 +56,7 @@
                           <!-- <input type="radio" [id]="'video-' + i" [checked]="vid.state" class="video-input"> -->
                           <ng-container *ngIf="vid.state==true">
                             <i class="fa-solid fa-check"></i>
+
                           </ng-container>
                         </div>
 
@@ -57,11 +64,12 @@
                     </ul>
                   </div>
                 </ng-container>
+              </ng-container>
                 </div>
 
               </div>
             </ng-container>
-
+          </ng-container>
             </div>
           </div>
         </div>

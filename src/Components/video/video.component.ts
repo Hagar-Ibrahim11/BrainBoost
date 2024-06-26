@@ -29,6 +29,7 @@ export class VideoComponent implements OnInit {
   vidId!:number
   isfinish: boolean = true
   state!:IState
+  chapters:number[]=[]
   env:string=environment.baseUrl
   constructor(private videoService:VidService,private courseService:CourseService,private route:ActivatedRoute,private router:Router) {
     this.route.params.subscribe(params => {
@@ -52,7 +53,11 @@ export class VideoComponent implements OnInit {
 
       next: (data: IVideoState[]) => {
         this.comingVideo = data;
-      console.log(  this.comingVideo)
+          this.comingVideo.forEach(video =>{
+            this.chapters.push(video.chapter)
+          })
+          this.chapters = [...new Set(this.chapters)];
+          this.chapters.sort((a, b) => a - b);
       },
       error: (error) => {
         console.error('Error fetching courses:', error);
@@ -175,5 +180,9 @@ export class VideoComponent implements OnInit {
         console.log('videos fetched successfully');
       },
     })
+  }
+  getChapters()
+  {
+
   }
 }
