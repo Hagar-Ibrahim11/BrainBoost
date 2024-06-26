@@ -20,10 +20,10 @@ export class VidService {
       `${environment.baseUrl}/api/Video/GetCourseVideos/${id}`,{headers: header}
     );
   }
-  changeVideoState(id:number, status: boolean):Observable<any>{
+  changeVideoState(id:number, status: boolean):Observable<IVideoState[]>{
     const api_key = localStorage.getItem("token");
     const header= new HttpHeaders().set('Authorization', `Bearer ${api_key}`)
-    return this.http.get<any>(`${environment.baseUrl}/api/Video/ChangeVideoState/${id}?status=${status}`,{headers: header})
+    return this.http.get<IVideoState[]>(`${environment.baseUrl}/api/Video/ChangeVideoState/${id}?status=${status}`,{headers: header})
  }
  changeAllVideoState(id:number, status: boolean):Observable<any>{
   const api_key = localStorage.getItem("token");
