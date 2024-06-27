@@ -63,7 +63,7 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-  
+
 
 
 
@@ -124,7 +124,8 @@
               </div>
               <div class="col-12 col-lg-10">
                 <h4 class="mb-3">Easy Scheduling</h4>
-                <p class="mb-3 text-secondary">Schedule and reserve classrooms at one campus or multiple campuses. Keep detailed records of student attendance</p>
+                <p class="mb-3 text-secondary">Schedule and reserve classrooms at one campus or multiple campuses. Keep
+                  detailed records of student attendance</p>
                 <div>
                   <a href="#!" class="fw-bold text-decoration-none link-primary">
                     Learn More
@@ -207,8 +208,9 @@
               </div>
               <div class="col-12 col-lg-10">
                 <h4 class="mb-3">Digital Marketing for teachers</h4>
-                <p class="mb-3 text-secondary">We can help you to promote your courses , publish your courses with copyright on your videos.
-            </p>
+                <p class="mb-3 text-secondary">We can help you to promote your courses , publish your courses with
+                  copyright on your videos.
+                </p>
                 <div>
                   <a href="#!" class="fw-bold text-decoration-none link-primary">
                     Learn More
@@ -256,27 +258,123 @@
 
 
 
+  <!-- explore our courses -->
+
+  <div class="row mt-5">
+    <hr class="w-75 mx-auto mb-5 mb-xl-9 text-dark">
+
+    <div class="container mt-3">
+      <h1 class="text-center mb-4">Latest Courses</h1>
+      <p class="text-center mb-5">Discover our latest updates !</p>
+      <div class="row">
+        <div class="col-md-3 mb-4">
+          <div class="card course-card shadow-lg rounded-4">
+            <div class="card-body text-center">
+              <img
+                src="https://img.freepik.com/free-photo/top-view-unrecognizable-hacker-performing-cyberattack-night_1098-18706.jpg?uid=R122299971&ga=GA1.1.1776697005.1713226272&semt=sph"
+                alt="Beauty Classes" class="mb-3 rounded-4">
+              <h5 class="card-title">Beauty Classes</h5>
+              <p class="card-text">Online Classes, Training, Coding class, Examinations</p>
+              <div class="d-flex justify-content-center align-items-center">
+                <span class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                <span class="ms-2">(487 reviews)</span>
+              </div>
+              <p class="price">$35<span class="original-price">$65</span></p>
+              <button class="btn-read-more mt-3">Read More &gt;</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="card course-card shadow-lg rounded-4">
+            <div class="card-body text-center">
+              <img
+                src="https://img.freepik.com/free-photo/top-view-unrecognizable-hacker-performing-cyberattack-night_1098-18706.jpg?uid=R122299971&ga=GA1.1.1776697005.1713226272&semt=sph"
+                alt="Coding Classes" class="mb-3 rounded-4">
+              <h5 class="card-title">Coding Classes</h5>
+              <p class="card-text">Online Classes, Training, Coding class, Examinations</p>
+              <div class="d-flex justify-content-center align-items-center">
+                <span class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                <span class="ms-2">(487 reviews)</span>
+              </div>
+              <p class="price">$35<span class="original-price">$65</span></p>
+              <button class="btn-read-more mt-3">Read More &gt;</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="card course-card shadow-lg rounded-4">
+            <div class="card-body text-center">
+              <img
+                src="https://img.freepik.com/free-photo/top-view-unrecognizable-hacker-performing-cyberattack-night_1098-18706.jpg?uid=R122299971&ga=GA1.1.1776697005.1713226272&semt=sph"
+                alt="Law Classes" class="mb-3 rounded-4">
+              <h5 class="card-title">Law Classes</h5>
+              <p class="card-text">Law classes, Training, Coding class, Examinations</p>
+              <div class="d-flex justify-content-center align-items-center">
+                <span class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                <span class="ms-2">(754 reviews)</span>
+              </div>
+              <p class="price">$35<span class="original-price">$65</span></p>
+              <button class="btn-read-more mt-3">Read More &gt;</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 mb-4">
+          <div class="card course-card shadow-lg rounded-4">
+            <div class="card-body text-center">
+              <img
+                src="https://img.freepik.com/free-photo/top-view-unrecognizable-hacker-performing-cyberattack-night_1098-18706.jpg?uid=R122299971&ga=GA1.1.1776697005.1713226272&semt=sph"
+                alt="Photoshop" class="mb-3 rounded-4">
+              <h5 class="card-title">Photoshop</h5>
+              <p class="card-text">Photoshop, Training, Coding class, Examinations</p>
+              <div class="d-flex justify-content-center align-items-center">
+                <span class="rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                <span class="ms-2">(965 reviews)</span>
+              </div>
+              <p class="price">$35<span class="original-price">$65</span></p>
+              <button class="btn-read-more mt-3">Read More &gt;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center mt-5">
+        <button class="btn loadMore" (click)="loadMore()" [disabled]="loading">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+            {{ loading ? 'Loading...' : 'Load More' }}
+        </button>
+    </div>
+    </div>
+  </div>
+
+
+  <!-- End of explore courses -->
+
+
+
   <!-- students feedback -->
-  <div class="row mt-5 border-0  p-5">
+  <div class="row mt-5 border-0  p-5 ">
+    <hr class="w-75 mx-auto mb-5 mb-xl-9 text-dark">
+
     <section>
       <div class="row d-flex justify-content-center">
         <div class="col-md-10 col-xl-8 text-center">
-          <h3 class="mb-4">Our customers' opinions about our service</h3>
-          
+          <h1 class="mb-4">Our customers' opinions about our service</h1>
+
         </div>
       </div>
-    
-      <div class="row text-center">
+
+      <div class="row text-center mt-5">
         <div class="col-md-4 mb-5 mb-md-0">
           <div class="d-flex justify-content-center mb-4">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).webp"
-              class="rounded-circle shadow-1-strong" width="150" height="150" />
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).webp" class="rounded-circle shadow-1-strong"
+              width="150" height="150" />
           </div>
           <h5 class="mb-3">Maria Smantha</h5>
           <h6 class="text-primary mb-3">Web Developer</h6>
           <p class="px-xl-3">
-            <i class="fas fa-quote-left pe-2"></i>The site helped me a lot in understanding my field and taking content suitable for me and suitable for my time, and I also benefited a lot from the certificates I obtained.
-            
+            <i class="fas fa-quote-left pe-2"></i>The site helped me a lot in understanding my field and taking content
+            suitable for me and suitable for my time, and I also benefited a lot from the certificates I obtained.
+
           </p>
           <ul class="list-unstyled d-flex justify-content-center mb-0">
             <li>
@@ -298,13 +396,14 @@
         </div>
         <div class="col-md-4 mb-5 mb-md-0">
           <div class="d-flex justify-content-center mb-4">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(2).webp"
-              class="rounded-circle shadow-1-strong" width="150" height="150" />
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(2).webp" class="rounded-circle shadow-1-strong"
+              width="150" height="150" />
           </div>
           <h5 class="mb-3">Lisa Cudrow</h5>
           <h6 class="text-primary mb-3">Graphic Designer</h6>
           <p class="px-xl-3">
-            <i class="fas fa-quote-left pe-2"></i>I benefited greatly from the platform in terms of the content or the way it is presented, and also through the daily progress in the content displayed
+            <i class="fas fa-quote-left pe-2"></i>I benefited greatly from the platform in terms of the content or the
+            way it is presented, and also through the daily progress in the content displayed
           </p>
           <ul class="list-unstyled d-flex justify-content-center mb-0">
             <li>
@@ -326,13 +425,15 @@
         </div>
         <div class="col-md-4 mb-0">
           <div class="d-flex justify-content-center mb-4">
-            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(9).webp"
-              class="rounded-circle shadow-1-strong" width="150" height="150" />
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(9).webp" class="rounded-circle shadow-1-strong"
+              width="150" height="150" />
           </div>
           <h5 class="mb-3">John Smith</h5>
           <h6 class="text-primary mb-3">Marketing Specialist</h6>
           <p class="px-xl-3">
-            <i class="fas fa-quote-left pe-2"></i>Hello, this platform has helped me a lot in learning, especially in paying for courses and special price plans, which was truly the best investment and also in my progress in learning.
+            <i class="fas fa-quote-left pe-2"></i>Hello, this platform has helped me a lot in learning, especially in
+            paying for courses and special price plans, which was truly the best investment and also in my progress in
+            learning.
           </p>
           <ul class="list-unstyled d-flex justify-content-center mb-0">
             <li>
@@ -354,6 +455,13 @@
         </div>
       </div>
     </section>
+
+    <div class="text-center mt-5">
+      <button class="btn loadMore" (click)="loadMore()" [disabled]="loading">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+          {{ loading ? 'Loading...' : 'Load More' }}
+      </button>
+  </div>
   </div>
 
 

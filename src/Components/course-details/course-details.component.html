@@ -104,8 +104,8 @@
     <div class="col-lg-12 col-md-8 shadow-lg  rounded-4">
       <div class="card p-5  ">
         <div class="card-body">
-          <h5 class="card-title fw-bolder text-">What you will learn in this course</h5>
-          <p class="card-text">
+          <h2 class="card-title fw-bold ">What you will learn in this course</h2>
+          <p class="card-text fs-6 lh-base ">
             At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
             deleniti
             atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident,
@@ -116,11 +116,11 @@
         </div>
 
 <!-- course description -->
-<div class="row mt-5">
-  <div class="col-lg-8 col-md-12 shadow-lg rounded-4">
-    <div class="card p-5">
+<div class="row mt-3">
+  <div class="col-lg-8 col-md-12 border-end  ">
+    <div class="card  ">
       <div class="card-body">
-        <h5 class="card-title">Description</h5>
+        <h2 class="card-title fw-bold ">Description</h2>
         <p class="card-text">
           {{ crsDetails.longDescription }}
         </p>
@@ -128,9 +128,9 @@
       </div>
     </div>
 
-    <div class="card mt-4 specifications p-5">
+    <div class="card mt-4 specifications ">
       <div class="card-body">
-        <h5 class="card-title">Specifications</h5>
+        <h2 class="card-title">Specifications</h2>
         <div class="row mt-5">
           <div class="col-md-6">
             <ul class="card-text">
@@ -168,7 +168,7 @@
 
   <div class="col-lg-4 col-md-12 mini-info">
     <div class="course-card shadow-lg">
-      <h3>Course Info</h3>
+      <h3>Course Info :</h3>
       <div class="info-item">
         <i class="fas fa-chalkboard-teacher"></i>
         <span>Instructor:</span> {{ crsDetails.teacherDataDto?.fname }}
@@ -187,7 +187,7 @@
       </div>
     </div>
 
-    <div class="instructor-card shadow-lg">
+    <div class="instructor-card shadow-lg ">
       <img
         src="https://www.shutterstock.com/image-photo/young-happy-business-woman-sitting-260nw-2223351415.jpg"
         alt="Instructor Image"
@@ -220,99 +220,7 @@
     </div>
   </div>
 
-  <div class="container mt-5 rounded-4 shadow-lg">
-    <div class="row">
-      <div class="col-lg-12 col-md-6 mt-4 text-center">
-        <h3>Rating And Reviews</h3>
-        <h1 class="display-4">4.0</h1>
-        <p>Out Of 5.0</p>
-      </div>
-      <div class="col-12">
-        <div class="progress mb-2" style="height: 20px">
-          <div
-            class="progress-bar progress-bar-custom rounded-5"
-            style="width: 90%"
-          >
-            5stars (90%)
-          </div>
-        </div>
-      </div>
-      <div class="progress mb-2" style="height: 20px">
-        <div
-          class="progress-bar progress-bar-custom rounded-5"
-          style="width: 65%"
-        >
-          4stars (65%)
-        </div>
-      </div>
-      <div class="progress mb-2" style="height: 20px">
-        <div
-          class="progress-bar progress-bar-custom rounded-5"
-          style="width: 49%"
-        >
-          3stars (49%)
-        </div>
-      </div>
-      <div class="progress mb-2" style="height: 20px">
-        <div
-          class="progress-bar progress-bar-custom rounded-5"
-          style="width: 25%"
-        >
-          2stars (25%)
-        </div>
-      </div>
-      <div class="progress mb-4" style="height: 20px">
-        <div
-          class="progress-bar progress-bar-custom rounded-5"
-          style="width: 15%"
-        >
-          1stars (15%)
-        </div>
-      </div>
-    </div>
-    <div class="col-12 review-container">
-      <img
-        src="https://via.placeholder.com/50"
-        alt="Joanne Scott"
-        class="review-avatar"
-      />
-      <div class="review-body">
-        <h5>Joanne Scott <span class="badge bg-success">4.5</span></h5>
-        <p><small class="text-muted">Dec 21st, 13:00, Brazil</small></p>
-        <p>
-          Ut enim ad minim veniam, quis Neque porro quisquam est, qui dolorem
-          ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non
-          numquam eius modi tempora incidunt ut labore et nostrud exercitation
-          ullamco laboris commodo consequat.
-        </p>
-        <div class="review-actions">
-          <button class="btn-primary">Helpful</button>
-          <button class="btn-primary">Comment</button>
-          <button class="btn-primary">Report</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-12 review-container">
-      <img
-        src="https://via.placeholder.com/50"
-        alt="Rose Slater"
-        class="review-avatar"
-      />
-      <div class="review-body">
-        <h5>Rose Slater <span class="badge bg-success">4.0</span></h5>
-        <p><small class="text-muted">Dec 22nd, 6:00, Brazil</small></p>
-        <p>
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-          commodo Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-          accusantium laboriosam, nisi ut aliquid ex ea commodi consequatur
-          consequat.
-        </p>
-        <div class="review-actions">
-          <button class="text-primary">Comment</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  
 </div>
 
 <!-- end course details -->
