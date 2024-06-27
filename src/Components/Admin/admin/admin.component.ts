@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../../Services/admin/admin.service';
 import { Iadmin } from '../../../models/iadmin';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink,RouterLinkActive],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.css'
 })
