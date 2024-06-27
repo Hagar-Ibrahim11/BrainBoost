@@ -31,6 +31,7 @@ import { StudentDetailsComponent } from '../Components/student-details/student-d
 import { TeacherDetailsComponent } from '../Components/teacher-details/teacher-details.component';
 import { AdminComponent } from '../Components/Admin/admin/admin.component';
 import { CategoryComponent } from '../Components/category/category.component';
+import { AddAdminComponent } from '../Components/add-admin/add-admin/add-admin.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -70,7 +71,8 @@ export const routes: Routes = [
       { path: 'StudentDetails/:id', component: StudentDetailsComponent },
       { path: 'TeacherDetails/:id', component: TeacherDetailsComponent },
       {path: "admin",component:AdminComponent},
-      {path: "category",component:CategoryComponent}
+      {path: "category",component:CategoryComponent},
+      {path:"add-admin",component:AddAdminComponent}
     ],
   },
 
