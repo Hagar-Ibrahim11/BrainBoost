@@ -1,0 +1,24 @@
+<form (ngSubmit)="AddCategory()">
+  <div class="mb-3">
+    <label for="categoryName" class="form-label">Category Name</label>
+    <input type="text" class="form-control" id="categoryName" [(ngModel)]="categoryName" name="categoryName" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Add Category</button>
+</form>
+
+<div class="container my-4">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+        <div class="col" *ngFor="let category of categories">
+        <div class="card course-card border-0 shadow-lg rounded-3">
+          <div class="card-body">
+            <h5 class="card-title">Category Name Is:{{category.name}}</h5>
+            <div class="btn-group">
+              <button type="button" class="btn btn-secondary  me-4" >Update</button>
+              <button type="button" class="btn btn-secondary" (click)="category.id !== null ? DeleteCategory(category.id) : null">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

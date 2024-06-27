@@ -48,7 +48,7 @@
                   >
                   <select class="form-select" id="category" name="category">
                     <option
-                    *ngFor="let category of ListOfCategories"
+                      *ngFor="let category of ListOfCategories"
                       [value]="category.id"
                       (click)="getFilteredCoursesWithCatName(category.name)"
                     >
@@ -279,7 +279,7 @@
                   </p>
                   <p class="card-text course-duration">
                     <i class="fa-regular fa-clock me-2"></i>
-                    <small>Duration: {{ Course.duration }} weeks</small>
+                    <small>Duration: {{ Course.durtion }} weeks</small>
                   </p>
                   <a
                     class="btn enroll-button me-5"

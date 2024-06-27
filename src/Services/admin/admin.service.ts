@@ -1,0 +1,28 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Iadmin } from '../../models/iadmin';
+import { environment } from '../../Enviroment/enviroment';
+import { Observable } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AdminService {
+
+  constructor(private httpclient:HttpClient) { }
+  GetAllAdmins(): Observable<Iadmin[]> {
+    return this.httpclient.get<Iadmin[]>(
+      `${environment.baseUrl}/api/Admin/GetAllAdmins`
+    );
+  }
+  UpdateAdmin(updatedAdmin:Iadmin): Observable<Iadmin> {
+    return this.httpclient.put<Iadmin>(
+      `${environment.baseUrl}/api/Admin/UpdateAdminData`,updatedAdmin
+    );
+  }
+  DeleteAdmin(adminId:Number):Observable<Iadmin>{
+    return this.httpclient.delete<Iadmin>(
+      `${environment.baseUrl}/api/Admin/DeleteAdmin/${adminId}`
+    );
+  }
+}
