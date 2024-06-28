@@ -45,17 +45,21 @@ DeleteCategory(categoryId:Number)
     )
   }
 
-  AddCategory(): void {
-    const category: ICategory = { id: null, name: this.categoryName, isDeleted: null };
-    this.categoryservice.AddCategory(category).subscribe(
-      (response: ICategory) => {
-        console.log('Category added successfully:', response);
-        console.log(response)
-        this.categories.push(response);
+  addCategory() {
+    const newCategory: ICategory = {
+      id: null,
+      name: this.categoryName,
+      isDeleted: null,
+    };
+
+    this.categoryservice.addCategory(newCategory).subscribe(
+      () => {
+        this.GetAllCategories();
         this.categoryName = '';
+        console.log("Added successfully");
       },
-      (error: any) => {
-        console.error('Error adding category:', error);
+      (error) => {
+        console.error(error);
       }
     );
   }

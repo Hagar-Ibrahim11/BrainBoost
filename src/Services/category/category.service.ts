@@ -26,8 +26,7 @@ export class CategoryService {
     );
   }
 
-  AddCategory(category: ICategory): Observable<ICategory> {
-    return this.httpClient.post<ICategory>(
-      `${environment.baseUrl}/api/Category/addCategory/`,category);
+  addCategory(category: ICategory): Observable<ICategory> {
+    return this.httpClient.post<ICategory>(`${environment.baseUrl}/api/Category/addCategory`, category);
   }
 }

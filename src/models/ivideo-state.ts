@@ -3,4 +3,5 @@ export interface IVideoState {
   title: string | null;
   videoUrl: string | null;
   state: boolean;
+  chapter:number;
 }
