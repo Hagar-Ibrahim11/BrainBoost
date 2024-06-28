@@ -137,20 +137,20 @@
     </div>
 
     <!-- course description -->
-    <div class="row mt-5">
-      <div class="col-lg-8 col-md-12 shadow-lg rounded-4">
-        <div class="card p-5">
+    <div class="row mt-3">
+      <div class="col-lg-8 col-md-12 border-end">
+        <div class="card">
           <div class="card-body">
-            <h5 class="card-title">Description</h5>
+            <h2 class="card-title fw-bold">Description</h2>
             <p class="card-text">
               {{ crsDetails.longDescription }}
             </p>
           </div>
         </div>
 
-        <div class="card mt-4 specifications p-5">
+        <div class="card mt-4 specifications">
           <div class="card-body">
-            <h5 class="card-title">Specifications</h5>
+            <h2 class="card-title">Specifications</h2>
             <div class="row mt-5">
               <div class="col-md-6">
                 <ul class="card-text">
@@ -189,22 +189,22 @@
 
       <div class="col-lg-4 col-md-12 mini-info">
         <div class="course-card shadow-lg">
-          <h3>Course Info</h3>
+          <h3>Course Info :</h3>
           <div class="info-item">
             <i class="fas fa-chalkboard-teacher"></i>
             <span>Instructor:</span> {{ crsDetails.teacherDataDto?.fname }}
           </div>
           <div class="info-item">
             <i class="fas fa-clock"></i>
-            <span>Duration: </span> {{ crsDetails.durtion }} hours
+            <span>Duration:</span> {{ crsDetails.durtion }} hours
           </div>
           <div class="info-item">
             <i class="fas fa-video"></i>
-            <span>Lectures: </span> {{ crsDetails.numOfVideos }}
+            <span>Lectures:</span> {{ crsDetails.numOfVideos }}
           </div>
           <div class="info-item">
             <i class="fas fa-signal"></i>
-            <span>Level: </span> {{ crsDetails.level }}
+            <span>Level:</span> {{ crsDetails.level }}
           </div>
         </div>
 
@@ -218,6 +218,12 @@
             {{ crsDetails.teacherDataDto?.lname }}
           </h3>
           <p>{{ crsDetails.teacherDataDto?.career }}</p>
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
           <div class="contact-info">
             <p>
               <i class="fas fa-envelope"></i>
@@ -231,51 +237,6 @@
               <i class="fas fa-map-marker-alt"></i>
               {{ crsDetails.teacherDataDto?.address }}
             </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="container mt-5 rounded-4 shadow-lg">
-        <div class="col-12 review-container">
-          <img
-            src="https://via.placeholder.com/50"
-            alt="Joanne Scott"
-            class="review-avatar"
-          />
-          <div class="review-body">
-            <h5>Joanne Scott <span class="badge bg-success">4.5</span></h5>
-            <p><small class="text-muted">Dec 21st, 13:00, Brazil</small></p>
-            <p>
-              Ut enim ad minim veniam, quis Neque porro quisquam est, qui
-              dolorem ipsum quia dolor sit amet, consectetur, adipisci velit,
-              sed quia non numquam eius modi tempora incidunt ut labore et
-              nostrud exercitation ullamco laboris commodo consequat.
-            </p>
-            <div class="review-actions">
-              <button class="btn-primary">Helpful</button>
-              <button class="btn-primary">Comment</button>
-              <button class="btn-primary">Report</button>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 review-container">
-          <img
-            src="https://via.placeholder.com/50"
-            alt="Rose Slater"
-            class="review-avatar"
-          />
-          <div class="review-body">
-            <h5>Rose Slater <span class="badge bg-success">4.0</span></h5>
-            <p><small class="text-muted">Dec 22nd, 6:00, Brazil</small></p>
-            <p>
-              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              commodo Sed ut perspiciatis unde omnis iste natus error sit
-              voluptatem accusantium laboriosam, nisi ut aliquid ex ea commodi
-              consequatur consequat.
-            </p>
-            <div class="review-actions">
-              <button class="text-primary">Comment</button>
-            </div>
           </div>
         </div>
       </div>
