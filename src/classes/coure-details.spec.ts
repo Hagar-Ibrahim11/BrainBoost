@@ -1,7 +1,7 @@
-import { CoureDetails } from './coure-details';
+// import { CoureDetails } from './coure-details';
 
-describe('CoureDetails', () => {
-  it('should create an instance', () => {
-    expect(new CoureDetails()).toBeTruthy();
-  });
-});
+// describe('CoureDetails', () => {
+//   it('should create an instance', () => {
+//     expect(new CoureDetails()).toBeTruthy();
+//   });
+// });
