@@ -46,7 +46,7 @@ export class AdminDashboardServiceService {
 
   GetCurrentCourses(): Observable<ICurrentCourses[]> {
     return this.httpclient.get<ICurrentCourses[]>(
-      `${environment.baseUrl}/api/Course/GetLastThreeCourses`
+      `${environment.baseUrl}/api/Course/GetThreeCoursesForCategory`
     );
   }
 
