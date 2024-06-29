@@ -18,7 +18,7 @@
         <div class="card-body">
           <h5 class="card-title">Category Name Is:{{category.name}}</h5>
           <div class="btn-group">
-            <button type="button" class="btn btn-secondary me-4" [routerLink]="['/update/',category.id]">Update</button>
+            <button type="button" class="btn btn-secondary me-4" [routerLink]="['/layout-dashboard/update/',category.id]">Update</button>
             <button type="button" class="btn btn-secondary"
               (click)="category.id !== null ? DeleteCategory(category.id) : null">Delete</button>
           </div>
