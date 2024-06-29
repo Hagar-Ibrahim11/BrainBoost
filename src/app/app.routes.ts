@@ -32,6 +32,7 @@ import { TeacherDetailsComponent } from '../Components/teacher-details/teacher-d
 import { AdminComponent } from '../Components/Admin/admin/admin.component';
 import { CategoryComponent } from '../Components/category/category.component';
 import { AddAdminComponent } from '../Components/add-admin/add-admin/add-admin.component';
+import { UpdatecategoryComponent } from '../Components/updatecategory/updatecategory.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -72,7 +73,8 @@ export const routes: Routes = [
       { path: 'TeacherDetails/:id', component: TeacherDetailsComponent },
       {path: "admin",component:AdminComponent},
       {path: "category",component:CategoryComponent},
-      {path:"add-admin",component:AddAdminComponent}
+      {path:"add-admin",component:AddAdminComponent},
+      { path: 'update/:id', component: UpdatecategoryComponent},
     ],
   },
 
