@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Iadmin } from '../../models/iadmin';
 import { environment } from '../../Enviroment/enviroment';
@@ -25,4 +25,19 @@ export class AdminService {
       `${environment.baseUrl}/api/Admin/DeleteAdmin/${adminId}`
     );
   }
+ uploadPhoto(photo: File, adminId: number): Observable<string> {
+    const formData = new FormData();
+    formData.append('file', photo, photo.name);
+
+    // Note: Ensure correct headers for file upload
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    
+    return this.httpclient.post<string>(
+      `${environment.baseUrl}/api/Admin/uploadimage/${adminId}`,
+      formData,
+      { headers: headers, responseType: 'text' as 'json' } // Specify responseType as 'text'
+    );
+  }
+
 }
