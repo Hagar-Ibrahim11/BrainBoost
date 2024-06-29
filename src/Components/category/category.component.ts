@@ -3,11 +3,12 @@ import { CategoryService } from '../../Services/category/category.service';
 import { ICategory } from '../../models/icategory';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-category',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,RouterLink],
   templateUrl: './category.component.html',
   styleUrl: './category.component.css'
 })
