@@ -31,6 +31,7 @@ import { StudentDetailsComponent } from '../Components/student-details/student-d
 import { TeacherDetailsComponent } from '../Components/teacher-details/teacher-details.component';
 import { AdminComponent } from '../Components/Admin/admin/admin.component';
 import { CategoryComponent } from '../Components/category/category.component';
+import { ModifiedQuizComponent } from '../Components/modified-quiz/modified-quiz.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -46,7 +47,7 @@ export const routes: Routes = [
   },
 
   { path: 'TakingCourse/:id', component: CourseContentComponent },
-  { path: 'TakingQuiz/:id', component: QuizTakingComponent },
+  { path: 'TakingQuiz/:id', component: ModifiedQuizComponent },
   { path: 'TakingCertificate/:id', component: CertificateComponent },
   { path: 'TakingVideo/:id', component: VideoComponent },
   { path: 'TakingVideo', component: VideotakingComponent },
