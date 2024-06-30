@@ -31,6 +31,7 @@ import { StudentDetailsComponent } from '../Components/student-details/student-d
 import { TeacherDetailsComponent } from '../Components/teacher-details/teacher-details.component';
 import { AdminComponent } from '../Components/Admin/admin/admin.component';
 import { CategoryComponent } from '../Components/category/category.component';
+import { ModifiedQuizComponent } from '../Components/modified-quiz/modified-quiz.component';
 import { AddAdminComponent } from '../Components/add-admin/add-admin/add-admin.component';
 import { UpdatecategoryComponent } from '../Components/updatecategory/updatecategory.component';
 import { LayoutAdmindashboardComponent } from '../Components/layout-admindashboard/layout-admindashboard.component';
@@ -49,7 +50,7 @@ export const routes: Routes = [
   },
 
   { path: 'TakingCourse/:id', component: CourseContentComponent },
-  { path: 'TakingQuiz/:id', component: QuizTakingComponent },
+  { path: 'TakingQuiz/:id', component: ModifiedQuizComponent },
   { path: 'TakingCertificate/:id', component: CertificateComponent },
   { path: 'TakingVideo/:id', component: VideoComponent },
   { path: 'TakingVideo', component: VideotakingComponent },
@@ -61,7 +62,7 @@ export const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'courses', component: CoursesComponent },
       { path: 'courseDetails/:id', component: CourseDetailsComponent },
-      
+
     ],
   },
   {path:'layout-dashboard',component: LayoutAdmindashboardComponent,
@@ -85,7 +86,7 @@ export const routes: Routes = [
     ]
   },
 
-  
+
 
   { path: 'pricing', component: PricingComponent },
   { path: '**', component: NotFoundComponent },
