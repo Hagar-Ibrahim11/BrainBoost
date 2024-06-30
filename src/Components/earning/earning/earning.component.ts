@@ -84,6 +84,6 @@ export class EarningComponent implements OnInit{
   }
 
   GoToTeacheEarningDetails(id: Number) {
-    this.router.navigate(['/TeacherEarningDetails', id]);
+    this.router.navigate(['/layout-dashboard/TeacherEarningDetails', id]);
   }
 }

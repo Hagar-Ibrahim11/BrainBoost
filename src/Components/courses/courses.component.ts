@@ -83,8 +83,10 @@ export class CoursesComponent {
     }
   }
 
-  getFilteredCoursesWithCatName(catName: string) {
+  getFilteredCoursesWithCatName(catName: string | null) {
+    console.log(catName);
     this.FilterObj.categoryName = catName;
+    console.log(this.FilterObj);
     this.courseservice.GetFilteredCourses(this.FilterObj).subscribe(
       (data: ICourseCardDetails[]) => {
         this.ListOfCourses = data;
@@ -111,7 +113,6 @@ export class CoursesComponent {
     this.courseservice.GetFilteredCourses(this.FilterObj).subscribe(
       (data: ICourseCardDetails[]) => {
         this.ListOfCourses = data;
-        console.log(data);
       },
       (error) => {
         console.log('Error Fetching Filtered Courses');

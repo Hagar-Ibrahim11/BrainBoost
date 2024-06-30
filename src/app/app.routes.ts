@@ -32,6 +32,9 @@ import { TeacherDetailsComponent } from '../Components/teacher-details/teacher-d
 import { AdminComponent } from '../Components/Admin/admin/admin.component';
 import { CategoryComponent } from '../Components/category/category.component';
 import { ModifiedQuizComponent } from '../Components/modified-quiz/modified-quiz.component';
+import { AddAdminComponent } from '../Components/add-admin/add-admin/add-admin.component';
+import { UpdatecategoryComponent } from '../Components/updatecategory/updatecategory.component';
+import { LayoutAdmindashboardComponent } from '../Components/layout-admindashboard/layout-admindashboard.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -59,6 +62,12 @@ export const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'courses', component: CoursesComponent },
       { path: 'courseDetails/:id', component: CourseDetailsComponent },
+
+    ],
+  },
+  {path:'layout-dashboard',component: LayoutAdmindashboardComponent,
+    children: [
+      { path: 'admindashboard', component: AdminDashboardComponent },
       { path: 'nonApprovedCourses', component: NonApprovedCouresesComponent },
       { path: 'earning', component: EarningComponent },
       { path: 'courses-for-admin', component: CoursesForAdminComponent },
@@ -71,11 +80,13 @@ export const routes: Routes = [
       { path: 'StudentDetails/:id', component: StudentDetailsComponent },
       { path: 'TeacherDetails/:id', component: TeacherDetailsComponent },
       {path: "admin",component:AdminComponent},
-      {path: "category",component:CategoryComponent}
-    ],
+      {path: "category",component:CategoryComponent},
+      {path:"add-admin",component:AddAdminComponent},
+      { path: 'update/:id', component: UpdatecategoryComponent},
+    ]
   },
 
-  { path: 'admindashboard', component: AdminDashboardComponent },
+
 
   { path: 'pricing', component: PricingComponent },
   { path: '**', component: NotFoundComponent },

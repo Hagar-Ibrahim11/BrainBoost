@@ -16,7 +16,7 @@ export class CategoryService {
   }
   getCategoryById(id: number): Observable<ICategory> {
     return this.httpClient.get<ICategory>(
-      `${environment.baseUrl}/api/Category/GetCategory/${id}`
+      `${environment.baseUrl}/api/Category/GetCategoryById/${id}`
     );
   }
 
@@ -26,8 +26,13 @@ export class CategoryService {
     );
   }
 
-  AddCategory(category: ICategory): Observable<ICategory> {
-    return this.httpClient.post<ICategory>(
-      `${environment.baseUrl}/api/Category/addCategory/`,category);
+  addCategory(category: ICategory): Observable<ICategory> {
+    return this.httpClient.post<ICategory>(`${environment.baseUrl}/api/Category/addCategory`, category);
+  }
+
+  updateCategory(category: ICategory): Observable<ICategory> {
+    return this.httpClient.put<ICategory>(
+      `${environment.baseUrl}/api/Category/UpdateCategory/${category.id}`, category
+    );
   }
 }
