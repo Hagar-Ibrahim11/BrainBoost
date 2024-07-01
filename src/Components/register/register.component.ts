@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
 import {
   FormControl,
@@ -11,12 +11,17 @@ import {
 } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { AuthService } from "../../Services/auth.service";
-import { error } from "console";
 
 @Component({
   selector: "app-register",
   standalone: true,
-  imports: [FormsModule, HttpClientModule, ReactiveFormsModule, CommonModule],
+  imports: [
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    CommonModule,
+    FormsModule,
+  ],
   templateUrl: "./register.component.html",
   styleUrl: "./register.component.css",
 })
@@ -64,48 +69,66 @@ export class RegisterComponent {
     }
     return null;
   }
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private RegisterService: AuthService
-  ) {}
-  register() {
-    this.RegisterService.register(
-      {
-        UserName: this.UserRegisterForm.value["userName"]!,
-        FirstName: this.UserRegisterForm.value["firstName"]!,
-        LastName: this.UserRegisterForm.value["lastName"]!,
-        Password: this.UserRegisterForm.value["password"]!,
-        Email: this.UserRegisterForm.value["email"]!,
+  activationCode!: { activationCode: string; expirationDate: Date };
+  isSubmitted: boolean = false;
+  activationCodeInserted: string = "";
+  constructor(private router: Router, private RegisterService: AuthService) {}
+  confirmUser() {
+    this.RegisterService.confirmMail(
+      this.UserRegisterForm.controls.email.value!
+    ).subscribe({
+      next: (respone) => {
+        this.isSubmitted = true;
+        this.activationCode = respone;
       },
-      this.UserRegisterForm.value["Role"]!
-    ).subscribe(
-      (response) => {
-        console.log("Registration successful:", response);
-        this.login()
-        this.router.navigateByUrl(
-          `/${response["role"]}Form/${response["userId"]}`
-        );
+      error: (error) => {
+        alert("Error in Confirmation");
       },
-      (error) => {
-        console.error("Registration failed:", error);
-      }
-    );
+    });
   }
-  login(){
-    this.RegisterService
-      .login({
-        userName: this.UserRegisterForm.value["userName"]!,
-        password: this.UserRegisterForm.value["password"]!,
-      })
-      .subscribe(
+  register() {
+    let date = new Date().getMinutes()
+    let comparedDate = this.activationCode.expirationDate.getMinutes()
+    if (
+      this.activationCodeInserted == this.activationCode.activationCode
+    ) {
+      this.RegisterService.register(
+        {
+          UserName: this.UserRegisterForm.value["userName"]!,
+          FirstName: this.UserRegisterForm.value["firstName"]!,
+          LastName: this.UserRegisterForm.value["lastName"]!,
+          Password: this.UserRegisterForm.value["password"]!,
+          Email: this.UserRegisterForm.value["email"]!,
+        },
+        this.UserRegisterForm.value["Role"]!
+      ).subscribe(
         (response) => {
-          this.RegisterService.setToken(response.token);
-          this.RegisterService.decodeUserData();
+          alert("Registration successful");
+          this.login();
+          this.router.navigateByUrl(
+            `/${response["role"]}Form/${response["userId"]}`
+          );
         },
         (error) => {
-          console.log('Login failed:', error);
+          alert("Registration failed");
         }
       );
+    } else {
+      alert("Activation code is incorrect or expired");
+    }
+  }
+  login() {
+    this.RegisterService.login({
+      userName: this.UserRegisterForm.value["userName"]!,
+      password: this.UserRegisterForm.value["password"]!,
+    }).subscribe(
+      (response) => {
+        this.RegisterService.setToken(response.token);
+        this.RegisterService.decodeUserData();
+      },
+      (error) => {
+        console.log("Login failed:", error);
+      }
+    );
   }
 }

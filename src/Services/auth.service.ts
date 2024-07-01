@@ -12,7 +12,11 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {
     this.loadUserData();
   }
-
+  confirmMail(EmailReceiver:string){
+    return this.http.get<any>(
+      `${environment.baseUrl}/api/Account/sendMail?EmailReceiver=${EmailReceiver}`,
+    );
+  }
   loadUserData() {
     const token = this.getToken();
     if (token) {
