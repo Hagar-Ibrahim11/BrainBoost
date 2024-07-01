@@ -36,6 +36,8 @@ import { AddAdminComponent } from '../Components/add-admin/add-admin/add-admin.c
 import { UpdatecategoryComponent } from '../Components/updatecategory/updatecategory.component';
 import { LayoutAdmindashboardComponent } from '../Components/layout-admindashboard/layout-admindashboard.component';
 
+
+
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
