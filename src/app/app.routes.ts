@@ -30,6 +30,8 @@ import { TeacherEarningDetailsComponent } from '../Components/teacher-earning-de
 import { StudentDetailsComponent } from '../Components/student-details/student-details.component';
 import { TeacherDetailsComponent } from '../Components/teacher-details/teacher-details.component';
 
+
+
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
