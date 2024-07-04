@@ -2,18 +2,36 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AboutStudentComponent } from '../../app/about-student/about-student.component';
 import { StudentCoursesComponent } from '../../app/student-courses/student-courses.component';
+import { StudentService } from '../../Services/student/student.service';
+import { IstudentDetails } from '../../models/istudent-details';
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-student-details',
   standalone: true,
-  imports: [AboutStudentComponent, StudentCoursesComponent, CommonModule]
-  ,
+  imports: [AboutStudentComponent, StudentCoursesComponent, CommonModule],
   templateUrl: './student-details.component.html',
-  styleUrl: './student-details.component.css'
+  styleUrls: ['./student-details.component.css']
 })
-export class StudentDetailsComponent {
+export class StudentDetailsComponent implements OnInit {
   isSidebarCollapsed = false;
   isSidebarHidden = false; // Sidebar hidden by default on small screens
   currentComponent = 'about-student';
+  studentData: IstudentDetails | undefined;
+
+  constructor(
+    private studentservice: StudentService,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe(params => {
+      const studentId = Number(params.get('id'));
+      if (studentId) {
+        this.GetStudentData(studentId);
+      }
+    });
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -34,4 +52,14 @@ export class StudentDetailsComponent {
     this.currentComponent = component;
   }
 
+  GetStudentData(studentId: number) {
+    this.studentservice.GetStudentData(studentId).subscribe(
+      (data: IstudentDetails) => {
+        this.studentData = data;
+      },
+      (error) => {
+        console.error('Error fetching data of Student', error);
+      }
+    );
+  }
 }
