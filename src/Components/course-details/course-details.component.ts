@@ -28,7 +28,7 @@ export class CourseDetailsComponent {
   IsEnrolled: boolean = false;
   NumOfStudent: number;
   stars: boolean[] = [];
-  env: string = environment.baseUrl + '/Images/Courses/';
+  env: string = environment.baseUrl + '/';
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
@@ -64,6 +64,7 @@ export class CourseDetailsComponent {
     this.courseService.getCourseDetails(this.courseId).subscribe({
       next: (data: ICourseDetails) => {
         this.crsDetails = data;
+        console.log(this.crsDetails);
       },
       error: (error) => {
         console.error('Error fetching courses:', error); // Log any errors
