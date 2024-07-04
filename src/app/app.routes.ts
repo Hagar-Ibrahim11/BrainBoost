@@ -33,6 +33,7 @@ import { ModifiedQuizComponent } from '../Components/modified-quiz/modified-quiz
 import { AddAdminComponent } from '../Components/add-admin/add-admin/add-admin.component';
 import { UpdatecategoryComponent } from '../Components/updatecategory/updatecategory.component';
 import { LayoutAdmindashboardComponent } from '../Components/layout-admindashboard/layout-admindashboard.component';
+import { EnrollmentFailedComponent } from '../Components/EnrollmentSuccess/enrollment-failed/enrollment-failed.component';
 
 
 
@@ -47,6 +48,10 @@ export const routes: Routes = [
   {
     path: 'EnrollmentSuccess/:orderNumber/:courseId',
     component: EnrollmentSuccessComponent,
+  },
+  {
+    path: 'EnrollmentFailed/:orderNumber/:courseId',
+    component: EnrollmentFailedComponent,
   },
 
   { path: 'TakingCourse/:id', component: CourseContentComponent },

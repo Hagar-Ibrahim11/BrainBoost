@@ -6,12 +6,14 @@ import { ICertificate } from '../../../models/icertificate'
 import { ActivatedRoute } from '@angular/router'
 import { QuizService } from '../../../Services/quiz.service'
 import { ToastrService } from 'ngx-toastr'
+import { CommonModule } from '@angular/common'
+import { FormsModule } from '@angular/forms'
 
 
 @Component({
   selector: 'app-certificate',
   standalone: true,
-  imports: [],
+  imports: [CommonModule,FormsModule],
   templateUrl: './certificate.component.html',
   styleUrl: './certificate.component.css'
 })
@@ -29,13 +31,13 @@ msg:string=''
     });
   }
   ngOnInit(): void {
-   this.getCert(1)
+   this.getCert(this.CourseId)
    this.handleExamSuccess();
   }
 
   getCert(id:number)
   {
-    this.crsService.getCertificate(1).subscribe({
+    this.crsService.getCertificate(id).subscribe({
 
       next: (data: ICertificate) => {
         this.Certificate = data;

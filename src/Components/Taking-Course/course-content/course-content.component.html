@@ -33,7 +33,7 @@
           <h5 class="course-card-title  p-3 rounded-3 text-white ">{{Course.name}}</h5>
 
           <img
-            [src]="env+Course.photoUrl"
+            [src]="env+'/'+Course.photoUrl"
             class="card-img-top course-card-img rounded-3 " alt="Course Cover Image">
 
         </div>
@@ -172,16 +172,22 @@
           </div>
         </div>
       </div> -->
-      <div>
-        <textarea name="" id="" style="width: 300px;height: 300px;" (change)="review($event)"></textarea>
-        <div class="star-rating">
-          <span *ngFor="let star of stars; let i = index" (click)="rate(i + 1)">
-            <i class="fa" [class.fa-star]="i < rating" [class.fa-star-o]="i >= rating"></i>
-          </span>
+      <div class="card mt-5 shadow-lg rounded-3 border-0 bg-white">
+        <div class="card-body">
+          <h5 class="course-description-title">Leave a Review</h5>
+          <div class="mb-3">
+            <textarea class="form-control" rows="5" (change)="review($event)" placeholder="Write your review here..."></textarea>
+          </div>
+          <div class="star-rating mb-3">
+            <span *ngFor="let star of stars; let i = index" (click)="rate(i + 1)">
+              <i class="fa" [class.fa-star]="i < rating" [class.fa-star-o]="i >= rating"></i>
+            </span>
+          </div>
+          <!-- <p>Your rating: {{rating}}</p> -->
         </div>
-        <p>Your rating: {{rating}}</p>
       </div>
     </div>
+
 
 
 
@@ -222,10 +228,10 @@
 
       </div> -->
 
-      <div class="card instructor-card shadow-lg rounded-3 text-center mt-5">
+      <div class="card instructor-card shadow-lg rounded-3 text-center mt-5" (click)="navigatetoteacher()">
         <div class="card-body instructor-card-body">
           <img
-            [src]="env+Course.teacherDataDto?.address"
+            [src]="env+'/'+Course.teacherDataDto?.pictureUrl"
             class="rounded-pill instructor-img mb-3" alt="Instructor Image">
           <h5 class="instructor-name">{{Course.teacherDataDto?.fname}} {{Course.teacherDataDto?.lname}}</h5>
           <p class="instructor-description">{{Course.teacherDataDto?.career}}</p>

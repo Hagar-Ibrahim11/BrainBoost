@@ -1,14 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { ICourseCardDetails } from '../../models/icourse-card-details';
 import { CourseService } from '../../Services/course/course.service';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule,CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
