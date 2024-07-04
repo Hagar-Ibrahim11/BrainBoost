@@ -68,6 +68,7 @@ export const routes: Routes = [
       { path: 'courses', component: CoursesComponent },
       { path: 'courseDetails/:id', component: CourseDetailsComponent },
       { path: 'StudentDetails/:id', component: StudentDetailsComponent },
+      { path: 'TeacherDetails/:id', component: TeacherDetailsComponent },
 
     ],
   },
@@ -85,7 +86,7 @@ export const routes: Routes = [
         path: 'TeacherEarningDetails/:id',
         component: TeacherEarningDetailsComponent,
       },
-      { path: 'TeacherDetails/:id', component: TeacherDetailsComponent },
+      
       { path: 'admin', component: AdminComponent },
       { path: 'category', component: CategoryComponent },
       { path: 'add-admin', component: AddAdminComponent },
