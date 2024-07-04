@@ -74,7 +74,7 @@ export class CourseContentComponent implements OnInit  {
       {
        this.msg = `you have failed in the quiz please try again`;
        }
-      this.toastr.success(this.msg);
+      this.toastr.warning(this.msg);
     }
 
     this.QuizService.stdDegree=-1
