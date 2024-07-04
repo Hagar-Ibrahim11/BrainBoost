@@ -15,14 +15,12 @@ import { CertificateComponent } from '../Components/Taking-Course/certificate/ce
 import { VideoComponent } from '../Components/video/video.component';
 import { EnrollmentSuccessComponent } from '../Components/EnrollmentSuccess/enrollment-success/enrollment-success.component';
 
-
 import { EarningComponent } from '../Components/earning/earning/earning.component';
 import { InstructorProfileComponent } from '../Components/instructor-profile/instructor-profile.component';
 import { NonApprovedCouresesComponent } from '../Components/non-approved-coureses/non-approved-coureses.component';
 import { CoursesForAdminComponent } from '../Components/courses-for-admin/courses-for-admin/courses-for-admin.component';
 import { VideotakingComponent } from '../Components/Taking-Course/video-taking/videotaking/videotaking.component';
 import { TestComponent } from '../Components/test/test.component';
-
 
 import { TeachersForAdminComponent } from '../Components/teachers-for-admin/teachers-for-admin.component';
 import { StudentForAdminComponent } from '../Components/student-for-admin/student-for-admin.component';
@@ -36,6 +34,8 @@ import { AddAdminComponent } from '../Components/add-admin/add-admin/add-admin.c
 import { UpdatecategoryComponent } from '../Components/updatecategory/updatecategory.component';
 import { LayoutAdmindashboardComponent } from '../Components/layout-admindashboard/layout-admindashboard.component';
 import { EnrollmentFailedComponent } from '../Components/EnrollmentSuccess/enrollment-failed/enrollment-failed.component';
+
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -67,10 +67,13 @@ export const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'courses', component: CoursesComponent },
       { path: 'courseDetails/:id', component: CourseDetailsComponent },
+      { path: 'StudentDetails/:id', component: StudentDetailsComponent },
 
     ],
   },
-  {path:'layout-dashboard',component: LayoutAdmindashboardComponent,
+  {
+    path: 'layout-dashboard',
+    component: LayoutAdmindashboardComponent,
     children: [
       { path: 'admindashboard', component: AdminDashboardComponent },
       { path: 'nonApprovedCourses', component: NonApprovedCouresesComponent },
@@ -82,16 +85,13 @@ export const routes: Routes = [
         path: 'TeacherEarningDetails/:id',
         component: TeacherEarningDetailsComponent,
       },
-      { path: 'StudentDetails/:id', component: StudentDetailsComponent },
       { path: 'TeacherDetails/:id', component: TeacherDetailsComponent },
-      {path: "admin",component:AdminComponent},
-      {path: "category",component:CategoryComponent},
-      {path:"add-admin",component:AddAdminComponent},
-      { path: 'update/:id', component: UpdatecategoryComponent},
-    ]
+      { path: 'admin', component: AdminComponent },
+      { path: 'category', component: CategoryComponent },
+      { path: 'add-admin', component: AddAdminComponent },
+      { path: 'update/:id', component: UpdatecategoryComponent },
+    ],
   },
-
-
 
   { path: 'pricing', component: PricingComponent },
   { path: '**', component: NotFoundComponent },

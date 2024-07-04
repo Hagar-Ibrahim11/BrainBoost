@@ -9,13 +9,14 @@ import { EnrollmentService } from '../../Services/enrollment/enrollment.service'
 import { IEnrollment } from '../../models/ienrollment';
 import { IPaymentUrl } from '../../models/ipayment-url';
 import { CommonModule } from '@angular/common';
+import { SpinnerComponent } from '../spinner/spinner/spinner.component';
 
 @Component({
   selector: 'app-course-details',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './course-details.component.html',
   styleUrl: './course-details.component.css',
+  imports: [CommonModule, SpinnerComponent],
 })
 export class CourseDetailsComponent {
   courseId!: number;
@@ -28,7 +29,12 @@ export class CourseDetailsComponent {
   IsEnrolled: boolean = false;
   NumOfStudent: number;
   stars: boolean[] = [];
+<<<<<<< HEAD
   env: string = environment.baseUrl + '/';
+=======
+  env: string = environment.baseUrl + '/Images/Courses/';
+  isLoading: boolean = false;
+>>>>>>> ebcf02dc5e7c7e3edb72b2238a86f0b5ba2f2ffc
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
@@ -42,6 +48,7 @@ export class CourseDetailsComponent {
     this.NumOfStudent = 0;
   }
   ngOnInit(): void {
+    window.addEventListener('beforeunload', this.handleUnload);
     this.authService.userData.subscribe({
       next: () => {
         if (this.authService.userData.value != null) {
@@ -96,6 +103,7 @@ export class CourseDetailsComponent {
   }
   handleEnrollCourse(courseId: number) {
     const currentUrl = this.router.url;
+    this.isLoading = true;
     if (this.UserIsLogged) {
       this.enrollmentData = {
         studentId: 1,
@@ -105,7 +113,10 @@ export class CourseDetailsComponent {
       this.enrollmentService
         .Enroll(this.enrollmentData)
         .subscribe((data: IPaymentUrl) => {
-          window.location.href = data.url;
+          setTimeout(() => {
+            this.isLoading = false;
+            window.location.href = data.url;
+          }, 3000);
         });
     } else {
       this.router.navigate(['/login'], {
@@ -115,5 +126,11 @@ export class CourseDetailsComponent {
   }
   handleGoToCourse(id: number): void {
     this.router.navigate(['/TakingCourse', id]);
+  }
+  private handleUnload = (event: Event) => {
+    this.isLoading = false;
+  };
+  ngOnDestroy(): void {
+    window.removeEventListener('beforeunload', this.handleUnload);
   }
 }
