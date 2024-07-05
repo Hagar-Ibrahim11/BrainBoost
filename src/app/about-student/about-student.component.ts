@@ -27,6 +27,7 @@ export class AboutStudentComponent implements OnInit {
     this.studentservice.GetStudentData(studentId).subscribe(
       (data: IstudentDetails) => {
         this.studentData = data;
+        console.log(this.studentData);
       },
       (error) => {
         console.error('Error fetching data of Student', error);

@@ -4,5 +4,5 @@
         <h3>numOfCrsEnrolled : {{studentData?.numOfCrsEnrolled}}</h3>
         <h3>numOfCertificates : {{studentData?.numOfCertificates}}</h3>
     </div>
-    <img src="https://img.freepik.com/free-photo/young-tender-curly-girl-holding-documents_176420-239.jpg?uid=R122299971&ga=GA1.1.1776697005.1713226272&semt=sph" alt="Teacher Image" class="teacher-img rounded-3 shadow-lg border">
+    <img [src]="studentData?.pictureUrl"  alt="Student Image" class="teacher-img rounded-3 shadow-lg border">
 </div>

@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AboutStudentComponent } from '../../app/about-student/about-student.component';
 import { StudentCoursesComponent } from '../../app/student-courses/student-courses.component';
+import { StudentProfileComponent } from '../student-profile/student-profile.component';
 import { StudentService } from '../../Services/student/student.service';
 import { IstudentDetails } from '../../models/istudent-details';
 import { ActivatedRoute } from '@angular/router';
@@ -9,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-student-details',
   standalone: true,
-  imports: [AboutStudentComponent, StudentCoursesComponent, CommonModule],
+  imports: [AboutStudentComponent, StudentCoursesComponent, CommonModule,StudentProfileComponent],
   templateUrl: './student-details.component.html',
   styleUrls: ['./student-details.component.css']
 })
