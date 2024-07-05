@@ -9,6 +9,7 @@ import { environment } from '../Enviroment/enviroment';
 })
 export class AuthService {
   userData: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  claims: any = {};
   constructor(private http: HttpClient, private router: Router) {
     this.loadUserData();
   }
@@ -23,6 +24,13 @@ export class AuthService {
     let encodedToken = JSON.stringify(this.getToken());
     let decodedToken: any = jwtDecode(encodedToken);
     this.userData.next(decodedToken);
+    this.extractClaims(decodedToken);
+  }
+  extractClaims(decodedToken: any) {
+    this.claims = {
+      userId: decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'],
+      role: decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']
+    };
   }
   login(credentials: { userName: string; password: string }): Observable<any> {
     return this.http.post<any>(
