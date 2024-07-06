@@ -11,9 +11,9 @@
                 type="text"
                 class="form-control"
                 placeholder="Search on your favorite course"
-                (input)="GetSearchCourses($event)"
+                [(ngModel)]="searchText"
               />
-              <button class="btn text-light rounded-3">Search</button>
+              <button class="btn text-light rounded-3" (click)="GetSearchCourses($event)">Search</button>
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@
                   <label for="category" class="form-label fw-bold"
                     >Course Category</label
                   >
-                  <select class="form-select" id="category" name="category">
+                  <!-- <select class="form-select" id="category" name="category">
                     <option value="all" [defaultSelected]="">All</option>
                     <option
                       *ngFor="let category of ListOfCategories"
@@ -56,8 +56,15 @@
                       {{ category.name }}
                     </option>
 
-                    <!-- Add more categories as needed -->
+
+                  </select> -->
+                  <select class="form-select" id="category" name="category" [(ngModel)]="FilterObj.categoryName" (change)="getFilteredCoursesWithCatName(selectedCategory)">
+                    <option value="all" [defaultSelected]="">All</option>
+                    <option *ngFor="let category of ListOfCategories" [value]="category.name">
+                      {{ category.name }}
+                    </option>
                   </select>
+
                 </div>
                 <!-- Rating -->
                 <div class="mb-3">
@@ -71,6 +78,7 @@
                         name="rating"
                         id="rating1"
                         value="5"
+                        [(ngModel)]="FilterObj.rate"
                         (change)="getFilteredCoursesWithRate(5)"
                       />
 
@@ -93,6 +101,7 @@
                         name="rating"
                         id="rating2"
                         value="4"
+                        [(ngModel)]="FilterObj.rate"
                         (click)="getFilteredCoursesWithRate(4)"
                       />
                       <div class="ratings">
@@ -110,6 +119,7 @@
                         name="rating"
                         id="rating3"
                         value="3"
+                        [(ngModel)]="FilterObj.rate"
                         (click)="getFilteredCoursesWithRate(3)"
                       />
                       <div class="ratings">
@@ -127,6 +137,7 @@
                         name="rating"
                         id="rating2"
                         value="2"
+                        [(ngModel)]="FilterObj.rate"
                         (click)="getFilteredCoursesWithRate(2)"
                       />
                       <div class="ratings">
@@ -143,7 +154,6 @@
 
                   <div
                     class="form-check"
-                    (click)="getFilteredCoursesWithRate(1)"
                   >
                     <input
                       class="form-check-input"
@@ -151,6 +161,8 @@
                       name="rating"
                       id="rating1"
                       value="3"
+                      [(ngModel)]="FilterObj.rate"
+                      (click)="getFilteredCoursesWithRate(1)"
                     />
                     <div class="ratings">
                       <i class="fa fa-star rating-color"></i>
@@ -173,7 +185,8 @@
                         type="radio"
                         name="duration"
                         id="duration1"
-                        value="short"
+                        value="0"
+                        [(ngModel)]="FilterObj.durtion"
                         (click)="getFilteredCoursesWithDuration(0)"
                       />
                       <label class="form-check-label" for="duration1">
@@ -186,7 +199,8 @@
                         type="radio"
                         name="duration"
                         id="duration2"
-                        value="medium"
+                        value="6"
+                        [(ngModel)]="FilterObj.durtion"
                         (click)="getFilteredCoursesWithDuration(6)"
                       />
                       <label class="form-check-label" for="duration2">
@@ -199,7 +213,8 @@
                         type="radio"
                         name="duration"
                         id="duration3"
-                        value="long"
+                        value="11"
+                        [(ngModel)]="FilterObj.durtion"
                         (click)="getFilteredCoursesWithDuration(11)"
                       />
                       <label class="form-check-label" for="duration3">
@@ -212,7 +227,8 @@
                         type="radio"
                         name="duration"
                         id="duration3"
-                        value="long"
+                        value="15"
+                        [(ngModel)]="FilterObj.durtion"
                         (click)="getFilteredCoursesWithDuration(15)"
                       />
                       <label class="form-check-label" for="duration3">
@@ -233,7 +249,8 @@
                         type="radio"
                         name="price"
                         id="price1"
-                        value="free"
+                        value="0"
+                        [(ngModel)]="FilterObj.price"
                         (click)="getFilteredCoursesWithPrice(0)"
                       />
                       <label class="form-check-label" for="price1">
@@ -246,7 +263,8 @@
                         type="radio"
                         name="price"
                         id="price2"
-                        value="paid"
+                        value="1"
+                        [(ngModel)]="FilterObj.durtion"
                         (click)="getFilteredCoursesWithPrice(1)"
                       />
                       <label class="form-check-label" for="price2">
