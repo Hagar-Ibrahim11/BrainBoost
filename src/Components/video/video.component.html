@@ -96,7 +96,7 @@
           </h5>
           <div class="video-container rounded-3">
             <video
-              [src]="contLink + vidLink"
+              [src]=" vidLink"
               oncontextmenu="return false;"
               controls
             ></video>
@@ -143,7 +143,7 @@
     <ng-container *ngIf="Allcomments">
       <ng-container *ngFor="let comment of Allcomments">
         <div class="comment">
-          <img [src]="env + comment.studentPhoto" width="50" height="50" />
+          <img [src]=" comment.studentPhoto" width="50" height="50" />
           <div class="comment-body">
             <div class="comment-header">
               <div class="name">{{ comment.studentName }}</div>
