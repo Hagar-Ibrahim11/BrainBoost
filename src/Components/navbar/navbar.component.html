@@ -63,13 +63,22 @@
         </li>
       </ul>
       <ul class="navbar-nav mb-2 mb-lg-0">
+        <li style="cursor: pointer" class="nav-item" *ngIf="isLogin">
+          <a class="nav-link" (click)="goToDashBoard()">Dashboard</a>
+        </li>
         <li class="nav-item" *ngIf="!isLogin">
-          <a class="nav-link" routerLink="login" routerLinkActive="active"
+          <a
+            style="cursor: pointer"
+            class="nav-link"
+            routerLink="login"
+            routerLinkActive="active"
             >Login/Register</a
           >
         </li>
         <li class="nav-item" *ngIf="isLogin">
-          <a class="nav-link" (click)="logout()">Logout</a>
+          <a style="cursor: pointer" class="nav-link" (click)="logout()"
+            >Logout</a
+          >
         </li>
       </ul>
     </div>

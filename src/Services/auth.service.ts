@@ -12,12 +12,37 @@ export class AuthService {
   claims: any = {};
   constructor(private http: HttpClient, private router: Router) {
     this.loadUserData();
+    console.log(this.userData);
   }
-
+  confirmMail(EmailReceiver: string) {
+    return this.http.get<any>(
+      `${environment.baseUrl}/api/Account/sendMail?EmailReceiver=${EmailReceiver}`
+    );
+  }
   loadUserData() {
     const token = this.getToken();
     if (token) {
       this.decodeUserData();
+    }
+  }
+  routeConsideringToRole() {
+    switch (
+      this.userData.value![
+        'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+      ]
+    ) {
+      case 'Admin':
+        this.router.navigateByUrl('/admindashboard');
+        break;
+        default:
+          this.router.navigateByUrl(
+            `/${
+              this.userData.value![
+                'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+              ]
+            }Details/${this.userData.value!['roleId']}`
+          );
+          break;  
     }
   }
   decodeUserData() {

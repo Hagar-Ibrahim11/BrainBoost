@@ -15,7 +15,13 @@ import { AuthService } from "../../Services/auth.service";
 @Component({
   selector: "app-register",
   standalone: true,
-  imports: [FormsModule, HttpClientModule, ReactiveFormsModule, CommonModule],
+  imports: [
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    CommonModule,
+    FormsModule,
+  ],
   templateUrl: "./register.component.html",
   styleUrls: ["./register.component.css"],
 })
@@ -66,56 +72,93 @@ export class RegisterComponent {
     }
     return null;
   }
-
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private RegisterService: AuthService
-  ) {}
-
+  activationCode!: { activationCode: string; expirationDate: Date };
+  isSubmitted: boolean = false;
+  activationCodeInserted: string = "";
+  constructor(private route: ActivatedRoute,private router: Router, private RegisterService: AuthService) {}
+  confirmUser() {
+    this.RegisterService.confirmMail(
+      this.UserRegisterForm.controls.email.value!
+    ).subscribe({
+      next: (respone) => {
+        this.isSubmitted = true;
+        this.activationCode = respone;
+      }})
+  }
   register() {
-    this.RegisterService.register(
-      {
-        UserName: this.UserRegisterForm.value["userName"]!,
-        FirstName: this.UserRegisterForm.value["firstName"]!,
-        LastName: this.UserRegisterForm.value["lastName"]!,
-        Password: this.UserRegisterForm.value["password"]!,
-        Email: this.UserRegisterForm.value["email"]!,
-      },
-      this.UserRegisterForm.value["Role"]!
-    ).subscribe(
+    // let date = new Date().getMinutes()
+    // let comparedDate = this.activationCode.expirationDate.getMinutes()
+    if (
+      this.activationCodeInserted == this.activationCode.activationCode
+    ) {
+      this.RegisterService.register(
+        {
+          UserName: this.UserRegisterForm.value["userName"]!,
+          FirstName: this.UserRegisterForm.value["firstName"]!,
+          LastName: this.UserRegisterForm.value["lastName"]!,
+          Password: this.UserRegisterForm.value["password"]!,
+          Email: this.UserRegisterForm.value["email"]!,
+        },
+        this.UserRegisterForm.value["Role"]!
+      ).subscribe(
+        (response) => {
+          alert("Registration successful");
+          this.login();
+        },
+        (error) => {
+          alert("Registration failed");
+        }
+      );
+    } else {
+      alert("Activation code is incorrect or expired");
+    }
+  }
+  login() {
+    this.RegisterService.login({
+      userName: this.UserRegisterForm.value["userName"]!,
+      password: this.UserRegisterForm.value["password"]!,
+    }).subscribe(
       (response) => {
-        console.log("Registration successful:", response);
-        this.login();
-        this.router.navigateByUrl(
-          `/${response["role"]}Form/${response["userId"]}`
-        );
+        this.RegisterService.setToken(response.token);
+        this.RegisterService.decodeUserData();
+        this.RegisterService.routeConsideringToRole()
       },
       (error) => {
-        console.error("Registration failed:", error);
-        if (error.status === 400) {  // Assuming 409 is the status code for conflict (username already exists)
-          this.registrationError = "Username already exists. Please choose another one.";
-        } else {
-          this.registrationError = "Registration failed. Please try again.";
-        }
+        console.log("Login failed:", error);
       }
     );
   }
+  //       console.log("Registration successful:", response);
+  //       this.login();
+  //       this.router.navigateByUrl(
+  //         `/${response["role"]}Form/${response["userId"]}`
+  //       );
+  //     },
+  //     (error) => {
+  //       console.error("Registration failed:", error);
+  //       if (error.status === 400) {  // Assuming 409 is the status code for conflict (username already exists)
+  //         this.registrationError = "Username already exists. Please choose another one.";
+  //       } else {
+  //         this.registrationError = "Registration failed. Please try again.";
+  //       }
+  //     }
+  //   );
+  // }
 
-  login(){
-    this.RegisterService
-      .login({
-        userName: this.UserRegisterForm.value["userName"]!,
-        password: this.UserRegisterForm.value["password"]!,
-      })
-      .subscribe(
-        (response) => {
-          this.RegisterService.setToken(response.token);
-          this.RegisterService.decodeUserData();
-        },
-        (error) => {
-          console.log('Login failed:', error);
-        }
-      );
-  }
+  // login(){
+  //   this.RegisterService
+  //     .login({
+  //       userName: this.UserRegisterForm.value["userName"]!,
+  //       password: this.UserRegisterForm.value["password"]!,
+  //     })
+  //     .subscribe(
+  //       (response) => {
+  //         this.RegisterService.setToken(response.token);
+  //         this.RegisterService.decodeUserData();
+  //       },
+  //       (error) => {
+  //         console.log('Login failed:', error);
+  //       }
+  //     );
+  // }
 }

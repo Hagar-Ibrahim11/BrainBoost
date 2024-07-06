@@ -1,35 +1,18 @@
 <div class="row row-cols-1 row-cols-md-3 g-4">
-    <div class="col">
+    <div *ngFor="let course of teacherCourses" class="col">
         <div class="course-card">
-            <img src="https://img.freepik.com/free-photo/turned-gray-laptop-computer_400718-47.jpg?uid=R122299971&ga=GA1.1.1776697005.1713226272&semt=ais_user" alt="Course Image" class="course-img">
+            <img [src]="course['photoUrl']" alt="Course Image" class="course-img">
             <div class="course-details">
-                <h3>Course Name 1</h3>
-                <p><strong>Category:</strong> Category 1</p>
-                <p>Description about Course 1 goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <a href="#" class="btn edit">Edit</a>
+                <h3>{{course['name']}}</h3>
+                <p><strong>Category:</strong> {{course['category']}}</p>
+                <p>{{course['description']}}</p>
+                <a [routerLink]="'/EditCourse/'+course['id']"  href="#" class="btn edit">Edit</a>
             </div>
         </div>
     </div>
-    <div class="col">
-        <div class="course-card">
-            <img src="https://img.freepik.com/free-photo/turned-gray-laptop-computer_400718-47.jpg?uid=R122299971&ga=GA1.1.1776697005.1713226272&semt=ais_user" alt="Course Image" class="course-img">
-            <div class="course-details">
-                <h3>Course Name 2</h3>
-                <p><strong>Category:</strong> Category 2</p>
-                <p>Description about Course 2 goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <a href="#" class="btn edit">Edit</a>
-            </div>
-        </div>
-    </div>
-    <div class="col">
-        <div class="course-card">
-            <img src="https://img.freepik.com/free-photo/turned-gray-laptop-computer_400718-47.jpg?uid=R122299971&ga=GA1.1.1776697005.1713226272&semt=ais_user" alt="Course Image" class="course-img">
-            <div class="course-details">
-                <h3>Course Name 3</h3>
-                <p><strong>Category:</strong> Category 3</p>
-                <p>Description about Course 3 goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                <a href="#" class="btn edit">Edit</a>
-            </div>
-        </div>
+    <div class="text-center mt-3">
+        <a routerLink="/addCourse" class="btn" id="add">
+            <button type="button" class="btn btn-secondary">Add new course</button>
+        </a>
     </div>
 </div>

@@ -20,6 +20,7 @@ import { AddCourseQuestionsComponent } from "./add-course-questions/add-course-q
 import { InsertedQuiz } from "./classes/inserted-quiz";
 import { AddCourseWhatToLearnComponent } from "./add-course-what-to-learn/add-course-what-to-learn.component";
 import { FaLayersCounterComponent } from "@fortawesome/angular-fontawesome";
+import { AuthService } from "../../Services/auth.service";
 @Component({
   selector: "app-add-course",
   standalone: true,
@@ -41,7 +42,7 @@ import { FaLayersCounterComponent } from "@fortawesome/angular-fontawesome";
   ],
 })
 export class AddCourseComponent {
-  constructor(private courseService: CourseServiceService) {}
+  constructor(private courseService: CourseServiceService,private authService:AuthService) {}
   Quiz: InsertedQuiz = new InsertedQuiz();
   WhatToLearn!: string[];
   courseDetailsForm = new FormGroup({
@@ -185,7 +186,7 @@ export class AddCourseComponent {
         Name: this.courseDetailsForm.value.courseName!,
         Description: this.courseDetailsForm.value.courseDescription!,
         Price: this.courseDetailsForm.value.price!,
-        TeacherId: 2,
+        TeacherId: this.authService.userData.value['roleId'],
         CategoryName: this.courseDetailsForm.value.categoryName!,
         Level: this.courseDetailsForm.value.courseLevel!,
         CertificateHeadline: "string",

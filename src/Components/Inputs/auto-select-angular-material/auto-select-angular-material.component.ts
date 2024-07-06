@@ -1,4 +1,4 @@
-import { Component, Input,EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, Input,EventEmitter, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -22,15 +22,19 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './auto-select-angular-material.component.html',
   styleUrl: './auto-select-angular-material.component.css',
 })
-export class AutoSelectAngularMaterialComponent {
-  myControl = new FormControl(null);
-  // @Input() options: {id:number,name:string}[] = [];
+export class AutoSelectAngularMaterialComponent implements OnChanges {
+  @Input() myControl = new FormControl("");
+  @Input() value:string= ""
   @Input() options: string[] = [];
   @Input() placeHolder: string = '';
   @Input() class: string = '';
   @Output() optionSelected = new EventEmitter<any>();
   filteredOptions: Observable<string[]> | undefined;
+selectedOption: any;
   constructor(private http:HttpClient){}
+  ngOnChanges(changes: SimpleChanges): void {
+    this.myControl.setValue(this.value)
+  }
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
