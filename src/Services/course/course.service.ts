@@ -94,4 +94,9 @@ export class CourseService {
       `${environment.baseUrl}/api/Course/GetTop4Crs`
     );
   }
+  GetStudentCourses(stdId:number):Observable<ICourseCardDetails[]>{
+    return this.http.get<ICourseCardDetails[]>(
+      `${environment.baseUrl}/api/Course/GetStudentCourses/${stdId}`
+    );
+  }
 }

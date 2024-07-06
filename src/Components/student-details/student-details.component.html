@@ -41,7 +41,7 @@
           <app-about-student></app-about-student>
         </ng-container>
         <ng-container *ngIf="currentComponent === 'student-courses'">
-          <app-student-courses></app-student-courses>
+          <app-student-courses [studentId]="parentData"></app-student-courses>
         </ng-container>
         <ng-container *ngIf="currentComponent === 'student-profile'">
           <app-student-profile></app-student-profile>
