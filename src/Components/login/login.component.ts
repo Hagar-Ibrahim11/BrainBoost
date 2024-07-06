@@ -14,6 +14,7 @@ import {
 } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -25,7 +26,7 @@ import { CommonModule } from '@angular/common';
     RouterLinkActive,
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   loginForm = new FormGroup({
@@ -34,11 +35,14 @@ export class LoginComponent {
   });
   credentials = { userName: '', password: '' };
   returnUrl!: string;
+  errorMessage: string | null = null; // Property for storing error message
+
   constructor(
     private router: Router,
     private authService: AuthService,
     private route: ActivatedRoute
   ) {}
+
   login(): void {
     this.authService
       .login({
@@ -53,9 +57,11 @@ export class LoginComponent {
         },
         (error) => {
           console.log('Login failed:', error);
+          this.errorMessage = 'Login failed. Please check your username and password and try again.'; // Set the error message
         }
       );
   }
+
   ngOnInit(): void {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
