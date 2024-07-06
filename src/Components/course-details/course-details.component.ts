@@ -29,12 +29,8 @@ export class CourseDetailsComponent {
   IsEnrolled: boolean = false;
   NumOfStudent: number;
   stars: boolean[] = [];
-<<<<<<< HEAD
-  env: string = environment.baseUrl + '/';
-=======
   env: string = environment.baseUrl + '/Images/Courses/';
   isLoading: boolean = false;
->>>>>>> ebcf02dc5e7c7e3edb72b2238a86f0b5ba2f2ffc
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
