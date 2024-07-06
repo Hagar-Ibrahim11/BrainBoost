@@ -56,11 +56,18 @@ export class EditCourseQuestionsComponent implements OnChanges {
   addNewQuestion() {
     this.courseQuestionsForm.push(
       new FormGroup({
+        id: new FormControl<number>(0),
         headLine: new FormControl<string>("", Validators.required),
-        answers: new FormArray<FormControl>(
+        answers: new FormArray<FormGroup>(
           [
-            new FormControl("", Validators.required),
-            new FormControl("", Validators.required),
+            new FormGroup({
+              id: new FormControl<number>(0),
+              answer: new FormControl<string>("", Validators.required),
+            }, Validators.required),
+            new FormGroup({
+              id: new FormControl<number>(0),
+              answer: new FormControl<string>("", Validators.required),
+            }, Validators.required),
           ],
           Validators.minLength(2)
         ),
@@ -69,6 +76,22 @@ export class EditCourseQuestionsComponent implements OnChanges {
       })
     );
   }
+  // addNewQuestion() {
+  //   this.courseQuestionsForm.push(
+  //     new FormGroup({
+  //       headLine: new FormControl<string>("", Validators.required),
+  //       answers: new FormArray<FormControl>(
+  //         [
+  //           new FormControl("", Validators.required),
+  //           new FormControl("", Validators.required),
+  //         ],
+  //         Validators.minLength(2)
+  //       ),
+  //       rightAnswer: new FormControl<string>("", Validators.required),
+  //       degree: new FormControl<number>(0, Validators.required),
+  //     })
+  //   );
+  // }
   getCourseQuizzDegree(): number {
     let quizDegree = 0;
     this.courseQuestionsForm.controls.forEach((formGroup) => {

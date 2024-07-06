@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { HttpClientModule } from "@angular/common/http";
 import {
   FormControl,
@@ -23,7 +23,7 @@ import { AuthService } from "../../Services/auth.service";
     FormsModule,
   ],
   templateUrl: "./register.component.html",
-  styleUrl: "./register.component.css",
+  styleUrls: ["./register.component.css"],
 })
 export class RegisterComponent {
   UserRegisterForm = new FormGroup(
@@ -55,6 +55,9 @@ export class RegisterComponent {
     },
     { validators: this.passwordMatchValidator }
   );
+
+  registrationError = '';
+
   passwordMatchValidator(
     control: AbstractControl
   ): { [key: string]: boolean } | null {
@@ -72,7 +75,7 @@ export class RegisterComponent {
   activationCode!: { activationCode: string; expirationDate: Date };
   isSubmitted: boolean = false;
   activationCodeInserted: string = "";
-  constructor(private router: Router, private RegisterService: AuthService) {}
+  constructor(private route: ActivatedRoute,private router: Router, private RegisterService: AuthService) {}
   confirmUser() {
     this.RegisterService.confirmMail(
       this.UserRegisterForm.controls.email.value!
@@ -80,11 +83,7 @@ export class RegisterComponent {
       next: (respone) => {
         this.isSubmitted = true;
         this.activationCode = respone;
-      },
-      error: (error) => {
-        alert("Error in Confirmation");
-      },
-    });
+      }})
   }
   register() {
     // let date = new Date().getMinutes()
@@ -129,4 +128,37 @@ export class RegisterComponent {
       }
     );
   }
+  //       console.log("Registration successful:", response);
+  //       this.login();
+  //       this.router.navigateByUrl(
+  //         `/${response["role"]}Form/${response["userId"]}`
+  //       );
+  //     },
+  //     (error) => {
+  //       console.error("Registration failed:", error);
+  //       if (error.status === 400) {  // Assuming 409 is the status code for conflict (username already exists)
+  //         this.registrationError = "Username already exists. Please choose another one.";
+  //       } else {
+  //         this.registrationError = "Registration failed. Please try again.";
+  //       }
+  //     }
+  //   );
+  // }
+
+  // login(){
+  //   this.RegisterService
+  //     .login({
+  //       userName: this.UserRegisterForm.value["userName"]!,
+  //       password: this.UserRegisterForm.value["password"]!,
+  //     })
+  //     .subscribe(
+  //       (response) => {
+  //         this.RegisterService.setToken(response.token);
+  //         this.RegisterService.decodeUserData();
+  //       },
+  //       (error) => {
+  //         console.log('Login failed:', error);
+  //       }
+  //     );
+  // }
 }

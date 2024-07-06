@@ -29,7 +29,7 @@ export class VideoComponent implements OnInit {
   AllCommentsWithSignalR!: IGetCommentFromSignalR[];
   commentWithSignalR!: IGetCommentFromSignalR;
   AddingComment!: IAddcomment;
-  contLink: string = 'http://localhost:43827/';
+  contLink: string = 'http://localhost:43827/Images/Videos/';
   vidLink!: string | null;
   vidIndex: number = 0;
   vidId!: number;

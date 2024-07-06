@@ -1,0 +1,8 @@
+<div class="teacher-card  p-3 border-0">
+    <div class="teacher-details">
+        <h2>{{studentData?.fname}} {{studentData?.lname}}</h2>
+        <h3>numOfCrsEnrolled : {{studentData?.numOfCrsEnrolled}}</h3>
+        <h3>numOfCertificates : {{studentData?.numOfCertificates}}</h3>
+    </div>
+    <img [src]="studentData?.pictureUrl"  alt="Student Image" class="teacher-img rounded-3 shadow-lg border">
+</div>

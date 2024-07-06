@@ -34,6 +34,9 @@ import { loginInGuard } from '../guards/is-logged-in.guard';
 import { logOutGuard } from '../guards/is-logged-out.guard';
 import { isTeacherGuard } from '../guards/is-teacher.guard';
 import { EditCourseComponent } from '../Components/edit-course/edit-course.component';
+import { EnrollmentFailedComponent } from '../Components/EnrollmentSuccess/enrollment-failed/enrollment-failed.component';
+
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -56,6 +59,11 @@ export const routes: Routes = [
     path: 'EnrollmentSuccess/:orderNumber/:courseId',
     component: EnrollmentSuccessComponent,
   },
+  {
+    path: 'EnrollmentFailed/:orderNumber/:courseId',
+    component: EnrollmentFailedComponent,
+  },
+
   { path: 'TakingCourse/:id', component: CourseContentComponent },
   { path: 'TakingQuiz/:id', component: ModifiedQuizComponent },
   { path: 'TakingCertificate/:id', component: CertificateComponent },
@@ -86,13 +94,14 @@ export const routes: Routes = [
         path: 'TeacherEarningDetails/:id',
         component: TeacherEarningDetailsComponent,
       },
+      
       { path: 'admin', component: AdminComponent },
       { path: 'category', component: CategoryComponent },
       { path: 'add-admin', component: AddAdminComponent },
       { path: 'update/:id', component: UpdatecategoryComponent },
     ],
-    canActivate: [logOutGuard],
   },
+
   { path: 'pricing', component: PricingComponent },
   { path: '**', component: NotFoundComponent },
 ];

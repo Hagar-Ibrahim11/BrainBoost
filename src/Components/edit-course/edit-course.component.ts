@@ -105,6 +105,7 @@ export class EditCourseComponent {
   ]);
   courseQuestionsForm = new FormArray<FormGroup>([], [Validators.minLength(1)]);
   updateCourseQuiz() {
+    console.log(this.courseQuestionsForm)
     this.courseQuestionsForm.controls.forEach((FormGroup, questionsIndex) => {
       this.Quiz.NumOfQuestions++;
       this.Quiz.Degree += FormGroup.controls["degree"].value;
@@ -127,6 +128,7 @@ export class EditCourseComponent {
         }
       });
     });
+    console.log(this.Quiz)
     this.courseService.UpdateCourseQuizz(this.Quiz,this.courseId).subscribe({
       next: (res) => {
         console.log(res);

@@ -10,6 +10,7 @@ import { ICheckAnswer } from '../../models/icheck-answer';
 import { ICertificate } from '../../models/icertificate';
 import { ICourseTaking } from '../../models/someCourseTakingModels/icourse-taking';
 import { IState } from '../../models/someCourseTakingModels/istate';
+import { IPaginationCourse } from '../../models/ipagination-course';
 
 @Injectable({
   providedIn: 'root',
@@ -28,14 +29,17 @@ export class CourseService {
       `${environment.baseUrl}/api/Course/GetAllCoursesAsCards`
     );
   }
-  GetFilteredCourses(filterationObj: any): Observable<ICourseCardDetails[]> {
+  GetFilteredCourses(filterationObj: any): Observable<IPaginationCourse> {
     let params = new HttpParams();
     if (filterationObj.categoryName) {
       params = params.append('CategoryName', filterationObj.categoryName);
     }
     params = params.append('Price', filterationObj.price);
     params = params.append('Rate', filterationObj.rate);
-    return this.http.get<ICourseCardDetails[]>(
+    params = params.append('Durtion', filterationObj.durtion);
+    params = params.append('PageNumber', filterationObj.pageNumber);
+    params = params.append('pageSize', filterationObj.pageSize);
+    return this.http.get<IPaginationCourse>(
       `${environment.baseUrl}/api/Course/GetFilteredCourses`,
       { params }
     );
@@ -83,6 +87,16 @@ export class CourseService {
     return this.http.get<IState>(
       `${environment.baseUrl}/api/Course/GetState/${id}`,
       { headers: header }
+    );
+  }
+  getTop4Crs(): Observable<ICourseCardDetails[]> {
+    return this.http.get<ICourseCardDetails[]>(
+      `${environment.baseUrl}/api/Course/GetTop4Crs`
+    );
+  }
+  GetStudentCourses(stdId:number):Observable<ICourseCardDetails[]>{
+    return this.http.get<ICourseCardDetails[]>(
+      `${environment.baseUrl}/api/Course/GetStudentCourses/${stdId}`
     );
   }
 }

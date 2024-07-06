@@ -111,5 +111,8 @@ rate(rating: number): void {
   this.revService.changeRate(this.StdReview).subscribe({})
 
 }
-
+navigatetoteacher()
+{
+   this.router.navigate(['/TakingVideo', this.CrsId]);
+}
 }
