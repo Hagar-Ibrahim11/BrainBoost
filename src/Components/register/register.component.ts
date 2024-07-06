@@ -87,8 +87,8 @@ export class RegisterComponent {
     });
   }
   register() {
-    let date = new Date().getMinutes()
-    let comparedDate = this.activationCode.expirationDate.getMinutes()
+    // let date = new Date().getMinutes()
+    // let comparedDate = this.activationCode.expirationDate.getMinutes()
     if (
       this.activationCodeInserted == this.activationCode.activationCode
     ) {
@@ -105,9 +105,6 @@ export class RegisterComponent {
         (response) => {
           alert("Registration successful");
           this.login();
-          this.router.navigateByUrl(
-            `/${response["role"]}Form/${response["userId"]}`
-          );
         },
         (error) => {
           alert("Registration failed");
@@ -125,6 +122,7 @@ export class RegisterComponent {
       (response) => {
         this.RegisterService.setToken(response.token);
         this.RegisterService.decodeUserData();
+        this.RegisterService.routeConsideringToRole()
       },
       (error) => {
         console.log("Login failed:", error);

@@ -11,7 +11,7 @@ export interface ICourseDetails {
   longDescription: string | null;
   lastUpdate: Date | null;
   language: string | null;
-  duration: number | null;
+  durtion: number | null;
   level: string | null;
   rate: number | null;
   numOfRates: number | null;

@@ -26,6 +26,8 @@ export class CourseDetailsComponent {
   Role!: string;
   UserIsLogged!: boolean;
   IsEnrolled: boolean = false;
+  NumOfStudent: number;
+  stars: boolean[] = [];
   env: string = environment.baseUrl + '/Images/Courses/';
   constructor(
     private route: ActivatedRoute,
@@ -37,6 +39,7 @@ export class CourseDetailsComponent {
     this.route.params.subscribe((params) => {
       this.courseId = +params['id'];
     });
+    this.NumOfStudent = 0;
   }
   ngOnInit(): void {
     this.authService.userData.subscribe({
@@ -67,11 +70,28 @@ export class CourseDetailsComponent {
       },
       complete: () => {
         console.log('courses fetched successfully'); // Log completion
+        this.stars = Array(5)
+          .fill(false)
+          .map((_, index) => index < (this.crsDetails.rate ?? 0));
       },
     });
     this.enrollmentService
       .CheckEnroll(this.courseId, this.currentUserId)
       .subscribe((data) => (this.IsEnrolled = data));
+    this.courseService.getCourseNumOfStds(this.courseId).subscribe({
+      next: (data: number) => {
+        this.NumOfStudent = data;
+      },
+      error: (error) => {
+        console.error(
+          'Error fetching Number Of Student To This Course:',
+          error
+        );
+      },
+      complete: () => {
+        console.log('Number Of Students To This Course fetched successfully');
+      },
+    });
   }
   handleEnrollCourse(courseId: number) {
     const currentUrl = this.router.url;
@@ -93,6 +113,6 @@ export class CourseDetailsComponent {
     }
   }
   handleGoToCourse(id: number): void {
-    this.router.navigate(['/TakingCourse' , id]);
+    this.router.navigate(['/TakingCourse', id]);
   }
 }

@@ -3,6 +3,9 @@ import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 import { CourseService } from '../../../Services/course/course.service'
 import { ICertificate } from '../../../models/icertificate'
+import { ActivatedRoute } from '@angular/router'
+import { QuizService } from '../../../Services/quiz.service'
+import { ToastrService } from 'ngx-toastr'
 
 
 @Component({
@@ -13,10 +16,21 @@ import { ICertificate } from '../../../models/icertificate'
   styleUrl: './certificate.component.css'
 })
 export class CertificateComponent implements OnInit{
+  CourseId!:number
 Certificate!:ICertificate
-  constructor (private crsService:CourseService){}
+msg:string=''
+  constructor (private crsService:CourseService,
+    private route:ActivatedRoute,
+    private QuizService: QuizService,
+    private toastr: ToastrService){
+    this.route.params.subscribe(params => {
+      this.CourseId = +params['id']; // Convert to number (if needed)
+      console.log(this.CourseId)
+    });
+  }
   ngOnInit(): void {
    this.getCert(1)
+   this.handleExamSuccess();
   }
 
   getCert(id:number)
@@ -44,4 +58,14 @@ Certificate!:ICertificate
    pdf.save('BrainBoost.pdf');
   })
   }
+  handleExamSuccess() {
+    if (this.QuizService.stdDegree > -1) {
+      if (this.QuizService.stdState == 'succeeded')
+        this.msg = `you have successfully finish quiz take your certificate`;
+      else this.msg = `you have failed in the quiz please try again`;
+      this.toastr.success(this.msg);
+    }
+    this.QuizService.stdDegree=-1
+
+}
 }

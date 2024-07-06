@@ -10,42 +10,57 @@ import { AddCourseComponent } from '../Components/add-course/add-course.componen
 import { PricingComponent } from '../Components/pricing/pricing.component';
 import { AdminDashboardComponent } from '../Components/admin-dashboard/admin-dashboard.component';
 import { CourseContentComponent } from '../Components/Taking-Course/course-content/course-content.component';
-import { QuizTakingComponent } from '../Components/Taking-Course/quiz-taking/quiz-taking.component';
 import { CertificateComponent } from '../Components/Taking-Course/certificate/certificate.component';
+import { VideoComponent } from '../Components/video/video.component';
 import { EnrollmentSuccessComponent } from '../Components/EnrollmentSuccess/enrollment-success/enrollment-success.component';
-
-import { VideoTakingComponent } from '../Components/Taking-Course/video-taking/video-taking.component';
-
 import { EarningComponent } from '../Components/earning/earning/earning.component';
 import { InstructorProfileComponent } from '../Components/instructor-profile/instructor-profile.component';
 import { NonApprovedCouresesComponent } from '../Components/non-approved-coureses/non-approved-coureses.component';
 import { CoursesForAdminComponent } from '../Components/courses-for-admin/courses-for-admin/courses-for-admin.component';
+import { VideotakingComponent } from '../Components/Taking-Course/video-taking/videotaking/videotaking.component';
+import { TestComponent } from '../Components/test/test.component';
 import { TeachersForAdminComponent } from '../Components/teachers-for-admin/teachers-for-admin.component';
 import { StudentForAdminComponent } from '../Components/student-for-admin/student-for-admin.component';
 import { TeacherEarningDetailsComponent } from '../Components/teacher-earning-details/teacher-earning-details.component';
 import { StudentDetailsComponent } from '../Components/student-details/student-details.component';
 import { TeacherDetailsComponent } from '../Components/teacher-details/teacher-details.component';
+import { AdminComponent } from '../Components/Admin/admin/admin.component';
+import { CategoryComponent } from '../Components/category/category.component';
+import { ModifiedQuizComponent } from '../Components/modified-quiz/modified-quiz.component';
+import { AddAdminComponent } from '../Components/add-admin/add-admin/add-admin.component';
+import { UpdatecategoryComponent } from '../Components/updatecategory/updatecategory.component';
+import { LayoutAdmindashboardComponent } from '../Components/layout-admindashboard/layout-admindashboard.component';
+import { loginInGuard } from '../guards/is-logged-in.guard';
+import { logOutGuard } from '../guards/is-logged-out.guard';
+import { isTeacherGuard } from '../guards/is-teacher.guard';
+import { EditCourseComponent } from '../Components/edit-course/edit-course.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'EditCourse/:id', component: EditCourseComponent },
+  { path: 'login', component: LoginComponent, canActivate: [loginInGuard] },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [loginInGuard],
+  },
   { path: 'TeacherForm/:id', component: InstructorProfileComponent },
   { path: 'StudentForm/:id', component: InstructorProfileComponent },
-  { path: 'addCourse', component: AddCourseComponent },
-  { path: 'TakingCourse', component: CourseContentComponent },
-  { path: 'TakingQuiz', component: QuizTakingComponent },
-  { path: 'TakingCertificate', component: CertificateComponent },
+  {
+    path: 'addCourse',
+    component: AddCourseComponent,
+    canActivate: [isTeacherGuard],
+  },
+  { path: 'Test', component: TestComponent },
   {
     path: 'EnrollmentSuccess/:orderNumber/:courseId',
     component: EnrollmentSuccessComponent,
   },
-
   { path: 'TakingCourse/:id', component: CourseContentComponent },
-  { path: 'TakingQuiz', component: QuizTakingComponent },
-  { path: 'TakingCertificate', component: CertificateComponent },
-  { path: 'TakingVideo', component: VideoTakingComponent },
-
+  { path: 'TakingQuiz/:id', component: ModifiedQuizComponent },
+  { path: 'TakingCertificate/:id', component: CertificateComponent },
+  { path: 'TakingVideo/:id', component: VideoComponent },
+  { path: 'TakingVideo', component: VideotakingComponent },
   {
     path: '',
     component: LayoutComponent,
@@ -53,6 +68,15 @@ export const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'courses', component: CoursesComponent },
       { path: 'courseDetails/:id', component: CourseDetailsComponent },
+      { path: 'StudentDetails/:id', component: StudentDetailsComponent },
+      { path: 'TeacherDetails/:id', component: TeacherDetailsComponent },
+    ],
+  },
+  {
+    path: 'layout-dashboard',
+    component: LayoutAdmindashboardComponent,
+    children: [
+      { path: 'admindashboard', component: AdminDashboardComponent },
       { path: 'nonApprovedCourses', component: NonApprovedCouresesComponent },
       { path: 'earning', component: EarningComponent },
       { path: 'courses-for-admin', component: CoursesForAdminComponent },
@@ -62,13 +86,13 @@ export const routes: Routes = [
         path: 'TeacherEarningDetails/:id',
         component: TeacherEarningDetailsComponent,
       },
-      { path: 'StudentDetails/:id', component: StudentDetailsComponent },
-      { path: 'TeacherDetails/:id', component: TeacherDetailsComponent },
+      { path: 'admin', component: AdminComponent },
+      { path: 'category', component: CategoryComponent },
+      { path: 'add-admin', component: AddAdminComponent },
+      { path: 'update/:id', component: UpdatecategoryComponent },
     ],
+    canActivate: [logOutGuard],
   },
-
-  { path: 'admindashboard', component: AdminDashboardComponent },
-
   { path: 'pricing', component: PricingComponent },
   { path: '**', component: NotFoundComponent },
 ];

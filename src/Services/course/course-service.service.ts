@@ -17,9 +17,11 @@ export class CourseServiceService {
   }
   uploadPhoto(photo: File, courseId: Number,WhereToStore:string,FolderName:string): Observable<any> {
     const insertedCoursePhotoForm = new FormData();
-    insertedCoursePhotoForm.append('InsertedPhoto', photo);
+    insertedCoursePhotoForm.append('Photo', photo);
+    insertedCoursePhotoForm.append('WhereToStore', WhereToStore);
+    insertedCoursePhotoForm.append('folderName', FolderName);
     return this.http.post(
-      `${environment.baseUrl}/api/Course/HandlePhoto/${courseId}/${WhereToStore}/${FolderName}`,
+      `${environment.baseUrl}/api/Course/HandlePhoto/${courseId}`,
       insertedCoursePhotoForm
     );
   }
@@ -37,20 +39,47 @@ export class CourseServiceService {
     WhatToLearn: string[];
     CoursePhoto:FormDataEntryValue|null
   }): Observable<any> {
-    // const insertedCourseForm = new FormData();
-    // insertedCourseForm.append('Name', insertedCourse.Name);
-    // insertedCourseForm.append('Description', insertedCourse.Description!);
-    // insertedCourseForm.append('Price', insertedCourse.Price.toString());
-    // insertedCourseForm.append('TeacherId', '1'); // assuming TeacherId is always 1
-    // insertedCourseForm.append('CategoryName', insertedCourse.CategoryName);
-    // insertedCourseForm.append('Level', insertedCourse.Level);
-    // insertedCourseForm.append('CertificateHeadline', 'string');
-    // insertedCourseForm.append('CertificateAppreciationParagraph', 'string');
-    // insertedCourseForm.append('Language', insertedCourse.Language!);
-
     return this.http.post(
       `${environment.baseUrl}/api/Course/AddCourse`,
       insertedCourse,
+    );
+  }
+  getCourseById(courseId: string): Observable<any> {
+    return this.http.get<any>(`${environment.baseUrl}/api/Course/GetCourseById/${courseId}`)
+  }
+  GetWhatToLearnByCourseId(courseId: number): Observable<any[]> {
+    return this.http.get<any>(`${environment.baseUrl}/api/Course/GetWhatToLearnByCourseId/${courseId}`)
+  }
+  updateCourseDetails(editedCourse: {
+    id:number;
+    price: number;
+    name: string;
+    description: string;
+    categoryName: string;
+    level: string;
+    language: string;
+  }): Observable<any> {
+    console.log(editedCourse)
+    return this.http.put(
+      `${environment.baseUrl}/api/Course/UpdateCourseDetails/${editedCourse.id}`,
+      editedCourse,
+    );
+  }
+  UpdateCourseWhatToLearn(editedWhatToLearn: {
+    id:number;
+    name: string;
+  }[],courseId:number): Observable<any> {
+    console.log(editedWhatToLearn)
+    return this.http.put(
+      `${environment.baseUrl}/api/Course/UpdateCourseWhatToLearn/${courseId}`,
+      editedWhatToLearn,
+    );
+  }
+  UpdateCourseQuizz(editedQuizz: any,courseId:number): Observable<any> {
+    console.log(editedQuizz)
+    return this.http.put(
+      `${environment.baseUrl}/api/Quiz/UpdateCourseQuiz/${courseId}`,
+      editedQuizz,
     );
   }
 }
