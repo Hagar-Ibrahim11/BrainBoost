@@ -11,14 +11,13 @@ import {
 } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { AuthService } from "../../Services/auth.service";
-import { error } from "console";
 
 @Component({
   selector: "app-register",
   standalone: true,
   imports: [FormsModule, HttpClientModule, ReactiveFormsModule, CommonModule],
   templateUrl: "./register.component.html",
-  styleUrl: "./register.component.css",
+  styleUrls: ["./register.component.css"],
 })
 export class RegisterComponent {
   UserRegisterForm = new FormGroup(
@@ -50,6 +49,9 @@ export class RegisterComponent {
     },
     { validators: this.passwordMatchValidator }
   );
+
+  registrationError = '';
+
   passwordMatchValidator(
     control: AbstractControl
   ): { [key: string]: boolean } | null {
@@ -64,11 +66,13 @@ export class RegisterComponent {
     }
     return null;
   }
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private RegisterService: AuthService
   ) {}
+
   register() {
     this.RegisterService.register(
       {
@@ -82,16 +86,22 @@ export class RegisterComponent {
     ).subscribe(
       (response) => {
         console.log("Registration successful:", response);
-        this.login()
+        this.login();
         this.router.navigateByUrl(
           `/${response["role"]}Form/${response["userId"]}`
         );
       },
       (error) => {
         console.error("Registration failed:", error);
+        if (error.status === 400) {  // Assuming 409 is the status code for conflict (username already exists)
+          this.registrationError = "Username already exists. Please choose another one.";
+        } else {
+          this.registrationError = "Registration failed. Please try again.";
+        }
       }
     );
   }
+
   login(){
     this.RegisterService
       .login({
