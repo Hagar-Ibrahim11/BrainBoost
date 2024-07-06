@@ -53,7 +53,7 @@ export class LoginComponent {
         (response) => {
           this.authService.setToken(response.token);
           this.authService.decodeUserData();
-          this.router.navigateByUrl(this.returnUrl);
+          this.authService.routeConsideringToRole();
         },
         (error) => {
           console.log('Login failed:', error);

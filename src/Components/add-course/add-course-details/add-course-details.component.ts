@@ -30,8 +30,11 @@ export class AddCourseDetailsComponent {
             this.categoryOptions.push(value.name)
           })
         },
-        error: (error) => {},
+        error: (error) => {
+          console.log(error)
+        },
       });
+      console.log(this.categoryOptions)
   }
   handleImageInput(img: any) {
     const file = img.target.files[0] as File;

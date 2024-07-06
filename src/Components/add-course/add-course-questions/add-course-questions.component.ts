@@ -29,16 +29,16 @@ export class AddCourseQuestionsComponent {
           Validators.minLength(2)
         ),
         rightAnswer: new FormControl<string>("", Validators.required),
-        degree: new FormControl<number>(0, Validators.required)
+        degree: new FormControl<number>(0, Validators.required),
       })
     );
   }
-  getCourseQuizzDegree():number{
-     let quizDegree = 0
-    this.courseQuestionsForm.controls.forEach((formGroup)=>{
-      quizDegree += formGroup.get('degree')?.value
-    })
-    return quizDegree
+  getCourseQuizzDegree(): number {
+    let quizDegree = 0;
+    this.courseQuestionsForm.controls.forEach((formGroup) => {
+      quizDegree += formGroup.get("degree")?.value;
+    });
+    return quizDegree;
   }
   getAnswers(questionIndex: number): FormArray {
     return this.courseQuestionsForm
@@ -60,6 +60,13 @@ export class AddCourseQuestionsComponent {
   deleteChoice(questionIndex: number, answerIndex: number) {
     this.getAnswers(questionIndex).removeAt(answerIndex);
     let answer = this.getAnswers(questionIndex).at(answerIndex).value;
+    if (
+      answer ===
+      this.courseQuestionsForm.at(questionIndex).controls["rightAnswer"].value
+    )
+      this.courseQuestionsForm
+        .at(questionIndex)
+        .controls["rightAnswer"].setValue(null);
   }
   addChoice(questionIndex: number) {
     this.getAnswers(questionIndex).push(
