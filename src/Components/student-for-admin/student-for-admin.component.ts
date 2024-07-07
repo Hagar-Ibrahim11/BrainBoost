@@ -3,43 +3,43 @@ import { Component, OnInit } from '@angular/core';
 import { IStudent } from '../../models/istudent';
 import { AdminDashboardServiceService } from '../../Services/AdminDashboard/admin-dashboard-service.service';
 import { Router } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-student-for-admin',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgxPaginationModule],
   templateUrl: './student-for-admin.component.html',
-  styleUrl: './student-for-admin.component.css'
+  styleUrls: ['./student-for-admin.component.css']
 })
 export class StudentForAdminComponent implements OnInit {
+  ListOfStudents: IStudent[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 8;
 
-  constructor(private admindashboardservice:AdminDashboardServiceService,
-    private router:Router
-  ){}
+  constructor(private admindashboardservice: AdminDashboardServiceService, private router: Router) {}
 
   ngOnInit(): void {
-    this.GetAllStudents()
+    this.GetAllStudents();
   }
-ListOfStudents:IStudent[]=[]
 
-GetAllStudents()
-{
-  this.admindashboardservice.GetAllStudents().subscribe(
-    (data: IStudent[]) => {
-      console.log(data)
-      this.ListOfStudents = data;
-    },
-    (error) => {
-      console.error('Error fetching Students', error);
-    }
-  );
-}
-GoToStudentrDetails(id: Number) {
-  this.router.navigate(['/layout-dashboard/StudentDetails', id]);
-}
+  GetAllStudents() {
+    this.admindashboardservice.GetAllStudents().subscribe(
+      (data: IStudent[]) => {
+        console.log(data);
+        this.ListOfStudents = data;
+      },
+      (error) => {
+        console.error('Error fetching Students', error);
+      }
+    );
+  }
 
-DeleteStudent(id:Number)
-  {
+  GoToStudentDetails(id: number) {
+    this.router.navigate(['/StudentDetails', id]);
+  }
+
+  DeleteStudent(id: number) {
     this.admindashboardservice.DeleteStudent(id).subscribe(
       () => {
         this.GetAllStudents();
@@ -48,6 +48,5 @@ DeleteStudent(id:Number)
         console.error(error);
       }
     );
-
   }
 }
