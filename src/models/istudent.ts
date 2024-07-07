@@ -1,5 +1,5 @@
 export interface IStudent {
-    id: Number,
+    id: number,
     numOfCertificates: Number,
     numOfCrsEnrolled: Number,
     numOfCrsSaved: Number,

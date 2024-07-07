@@ -36,7 +36,7 @@ GetAllTeachers()
   );
 }
 GoToTeacherDetails(id: Number) {
-  this.router.navigate(['/layout-dashboard/TeacherDetails', id]);
+  this.router.navigate(['/TeacherDetails', id]);
 }
 
 DeleteTeacher(TeacherId:Number)
