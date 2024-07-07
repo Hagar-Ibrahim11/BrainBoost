@@ -4,6 +4,10 @@
     
     z-index: 25000;
 }
+.navbar-brand
+{
+    color:var(--ceyan)
+}
 .navtogle
 {
     color: var(--ceyan);
