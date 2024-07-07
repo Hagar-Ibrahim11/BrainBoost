@@ -31,7 +31,6 @@ import { AddAdminComponent } from '../Components/add-admin/add-admin/add-admin.c
 import { UpdatecategoryComponent } from '../Components/updatecategory/updatecategory.component';
 import { LayoutAdmindashboardComponent } from '../Components/layout-admindashboard/layout-admindashboard.component';
 import { loginInGuard } from '../guards/is-logged-in.guard';
-import { logOutGuard } from '../guards/is-logged-out.guard';
 import { isTeacherGuard } from '../guards/is-teacher.guard';
 import { EditCourseComponent } from '../Components/edit-course/edit-course.component';
 import { EnrollmentFailedComponent } from '../Components/EnrollmentSuccess/enrollment-failed/enrollment-failed.component';
@@ -44,8 +43,7 @@ import { IsStudentGuard } from '../guards/is-student.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+
 
   {
     path: 'EditCourse/:id',
@@ -59,14 +57,8 @@ export const routes: Routes = [
     canActivate: [loginInGuard],
   },
 
-  { path: 'TeacherForm/:id', component: InstructorProfileComponent },
-  { path: 'StudentForm/:id', component: InstructorProfileComponent },
-  {
-    path: 'addCourse',
-    component: AddCourseComponent,
-    canActivate: [isTeacherGuard],
-  },
-  { path: 'Test', component: TestComponent },
+ 
+
   {
     path: 'EnrollmentSuccess/:orderNumber/:courseId',
     component: EnrollmentSuccessComponent,
@@ -95,10 +87,22 @@ export const routes: Routes = [
         component: TeacherDetailsComponent,
         canActivate: [isTeacherGuard],
       },
+      { path: 'about-us', component: AboutUsComponent },
+      { path: 'contact-us', component: ContactUsComponent },
       { path: 'TakingCourse/:id', component: CourseContentComponent },
       { path: 'TakingQuiz/:id', component: ModifiedQuizComponent },
       { path: 'TakingCertificate/:id', component: CertificateComponent },
       { path: 'TakingVideo/:id', component: VideoComponent },
+      { path: 'TakingVideo', component: VideotakingComponent },
+      { path: 'TeacherForm/:id', component: InstructorProfileComponent },
+      { path: 'StudentForm/:id', component: InstructorProfileComponent },
+      {
+        path: 'addCourse',
+        component: AddCourseComponent,
+        canActivate: [isTeacherGuard],
+      },
+      { path: 'about-us', component: AboutUsComponent },
+  { path: 'contact-us', component: ContactUsComponent },
     ],
   },
   {
