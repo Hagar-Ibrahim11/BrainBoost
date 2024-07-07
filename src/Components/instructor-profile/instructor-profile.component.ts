@@ -8,6 +8,7 @@ import {
 } from "@angular/forms";
 import { TeacherService } from "../../Services/teacher/teacher.service";
 import { ActivatedRoute } from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-instructor-profile",
@@ -64,13 +65,21 @@ export class InstructorProfileComponent implements OnChanges {
           photo: this.aboutTeacherForm.controls.photo.value!,
           yearsOfExperience:
             this.aboutTeacherForm.controls.yearsOfExperience.value!,
-            phoneNumber: this.aboutTeacherForm.controls.phone.value!,
-            address: this.aboutTeacherForm.controls.address.value!,
+          phoneNumber: this.aboutTeacherForm.controls.phone.value!,
+          address: this.aboutTeacherForm.controls.address.value!,
           userId: this.userId,
         })
         .subscribe({
           next: (response) => {
-            console.log(response);
+            Swal.fire({
+              title: "Done",
+              text: "Course details updated successfully",
+              showCancelButton: true,
+            }).then((result) => {
+              if (result.isConfirmed || result.isDismissed) {
+                window.location.reload();
+              }
+            });
           },
           error: (error) => {
             console.log(error);

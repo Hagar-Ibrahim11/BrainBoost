@@ -25,7 +25,7 @@ export class EditCourseQuestionsComponent implements OnChanges {
       next: (response) => {
         response.forEach((q) => {
           let editedQuestion = new FormGroup({
-            id:new FormControl<string>(q['id']),
+            id: new FormControl<string>(q["id"]),
             headLine: new FormControl<string>(
               q["content"],
               Validators.required
@@ -36,10 +36,16 @@ export class EditCourseQuestionsComponent implements OnChanges {
           });
           q["answers"].forEach((a: any) => {
             editedQuestion.controls.answers.push(
-              new FormGroup({
-                id: new FormControl<string>(a["id"]),
-                answer: new FormControl<string>(a["content"], Validators.required),
-              }, Validators.required)
+              new FormGroup(
+                {
+                  id: new FormControl<string>(a["id"]),
+                  answer: new FormControl<string>(
+                    a["content"],
+                    Validators.required
+                  ),
+                },
+                Validators.required
+              )
             );
             if (a["isCorrect"]) {
               editedQuestion.controls.rightAnswer.setValue(a["content"]);
@@ -60,14 +66,20 @@ export class EditCourseQuestionsComponent implements OnChanges {
         headLine: new FormControl<string>("", Validators.required),
         answers: new FormArray<FormGroup>(
           [
-            new FormGroup({
-              id: new FormControl<number>(0),
-              answer: new FormControl<string>("", Validators.required),
-            }, Validators.required),
-            new FormGroup({
-              id: new FormControl<number>(0),
-              answer: new FormControl<string>("", Validators.required),
-            }, Validators.required),
+            new FormGroup(
+              {
+                id: new FormControl<number>(0),
+                answer: new FormControl<string>("", Validators.required),
+              },
+              Validators.required
+            ),
+            new FormGroup(
+              {
+                id: new FormControl<number>(0),
+                answer: new FormControl<string>("", Validators.required),
+              },
+              Validators.required
+            ),
           ],
           Validators.minLength(2)
         ),
@@ -76,22 +88,6 @@ export class EditCourseQuestionsComponent implements OnChanges {
       })
     );
   }
-  // addNewQuestion() {
-  //   this.courseQuestionsForm.push(
-  //     new FormGroup({
-  //       headLine: new FormControl<string>("", Validators.required),
-  //       answers: new FormArray<FormControl>(
-  //         [
-  //           new FormControl("", Validators.required),
-  //           new FormControl("", Validators.required),
-  //         ],
-  //         Validators.minLength(2)
-  //       ),
-  //       rightAnswer: new FormControl<string>("", Validators.required),
-  //       degree: new FormControl<number>(0, Validators.required),
-  //     })
-  //   );
-  // }
   getCourseQuizzDegree(): number {
     let quizDegree = 0;
     this.courseQuestionsForm.controls.forEach((formGroup) => {
@@ -109,18 +105,20 @@ export class EditCourseQuestionsComponent implements OnChanges {
       .at(questionIndex)
       .get("answers")
       ?.get(`${answerIndex}`) as FormGroup;
-      return form.controls['answer'] as FormControl
+    return form.controls["answer"] as FormControl;
   }
   setTheRightAnswer(questionIndex: number, answerIndex: number) {
-    let answer = this.getAnswers(questionIndex).at(answerIndex).value;
+    let answer = this.getAnswers(questionIndex).at(answerIndex) as FormGroup;
     this.courseQuestionsForm
       .at(questionIndex)
-      .controls["rightAnswer"].setValue(answer);
+      .controls["rightAnswer"].setValue(answer.controls["answer"].value);
   }
-  checkIfAnswerIsRight(questionIndex: number, answerIndex: number):boolean{
-    let rightAnswer = this.getAnswers(questionIndex).at(answerIndex).value['answer']
-    let userAnswer = this.courseQuestionsForm.at(questionIndex).controls['rightAnswer'].value
-    return rightAnswer == userAnswer
+  checkIfAnswerIsRight(questionIndex: number, answerIndex: number): boolean {
+    let rightAnswer =
+      this.getAnswers(questionIndex).at(answerIndex).value["answer"];
+    let userAnswer =
+      this.courseQuestionsForm.at(questionIndex).controls["rightAnswer"].value;
+    return rightAnswer == userAnswer;
   }
   deleteChoice(questionIndex: number, answerIndex: number) {
     this.getAnswers(questionIndex).removeAt(answerIndex);
@@ -135,7 +133,13 @@ export class EditCourseQuestionsComponent implements OnChanges {
   }
   addChoice(questionIndex: number) {
     this.getAnswers(questionIndex).push(
-      new FormControl("", Validators.required)
+      new FormGroup(
+        {
+          id: new FormControl<number>(0),
+          answer: new FormControl<string>("", Validators.required),
+        },
+        Validators.required
+      )
     );
   }
 }

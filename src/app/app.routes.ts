@@ -36,17 +36,29 @@ import { isTeacherGuard } from '../guards/is-teacher.guard';
 import { EditCourseComponent } from '../Components/edit-course/edit-course.component';
 import { EnrollmentFailedComponent } from '../Components/EnrollmentSuccess/enrollment-failed/enrollment-failed.component';
 
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+
+import { isAuthorizedToEditCourseGuard } from '../guards/is-authorized-to-edit-course.guard';
+
 
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'EditCourse/:id', component: EditCourseComponent },
+
+  { path: 'about-us', component: AboutUsComponent },
+  { path: 'contact-us', component: ContactUsComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+
+  { path: 'EditCourse/:id', component: EditCourseComponent,canActivate:[isAuthorizedToEditCourseGuard] },
   { path: 'login', component: LoginComponent, canActivate: [loginInGuard] },
   {
     path: 'register',
     component: RegisterComponent,
     canActivate: [loginInGuard],
   },
+
   { path: 'TeacherForm/:id', component: InstructorProfileComponent },
   { path: 'StudentForm/:id', component: InstructorProfileComponent },
   {
@@ -77,7 +89,8 @@ export const routes: Routes = [
       { path: 'courses', component: CoursesComponent },
       { path: 'courseDetails/:id', component: CourseDetailsComponent },
       { path: 'StudentDetails/:id', component: StudentDetailsComponent },
-      { path: 'TeacherDetails/:id', component: TeacherDetailsComponent },
+      { path: 'TeacherDetails/:id', component: TeacherDetailsComponent,canActivate: [isTeacherGuard],
+      },
     ],
   },
   {

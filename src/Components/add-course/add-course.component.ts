@@ -21,6 +21,7 @@ import { InsertedQuiz } from "./classes/inserted-quiz";
 import { AddCourseWhatToLearnComponent } from "./add-course-what-to-learn/add-course-what-to-learn.component";
 import { FaLayersCounterComponent } from "@fortawesome/angular-fontawesome";
 import { AuthService } from "../../Services/auth.service";
+import Swal from "sweetalert2";
 @Component({
   selector: "app-add-course",
   standalone: true,
@@ -42,7 +43,10 @@ import { AuthService } from "../../Services/auth.service";
   ],
 })
 export class AddCourseComponent {
-  constructor(private courseService: CourseServiceService,private authService:AuthService) {}
+  constructor(
+    private courseService: CourseServiceService,
+    private authService: AuthService
+  ) {}
   Quiz: InsertedQuiz = new InsertedQuiz();
   WhatToLearn!: string[];
   courseDetailsForm = new FormGroup({
@@ -99,36 +103,11 @@ export class AddCourseComponent {
     [Validators.minLength(1)]
   );
   addCourseLectures(courseId: number) {
-    // this.courseMediaForm.controls.forEach((element, index) => {
-    //   const formdata = new FormData();
-    //   formdata.append(
-    //     "Title",
-    //     this.courseMediaForm.controls.at(index)?.value.title
-    //   );
-    //   formdata.append(
-    //     "VideoFile",
-    //     this.courseMediaForm.controls.at(index)?.value.videoFile
-    //   );
-    //   this.courseService.addVideo(formdata, courseId).subscribe({
-    //     next: (response) => {
-    //       console.log(response);
-    //     },
-    //     error: (error) => {
-    //       console.log(error);
-    //     },
-    //   });
-    // });
     this.courseScheduleForm.controls.forEach((chapter, chapterindex) => {
       chapter.controls.forEach((lecture, lectureindex) => {
         const formdata = new FormData();
-        formdata.append(
-          "Title",
-          lecture.get('title')?.value
-        );
-        formdata.append(
-          "VideoFile",
-          lecture.get("videoFile")?.value
-        );
+        formdata.append("Title", lecture.get("title")?.value);
+        formdata.append("VideoFile", lecture.get("videoFile")?.value);
         formdata.append("Chapter", (chapterindex + 1).toString());
         this.courseService.addVideo(formdata, courseId).subscribe({
           next: (response) => {
@@ -138,7 +117,17 @@ export class AddCourseComponent {
             console.log(error);
           },
         });
+        // Swal.fire({
+        //   title: "Done",
+        //   text: "course added successfully",
+        //   showCancelButton: true,
+        // }).then((result) => {
+        //   if (result.isConfirmed || result.isDismissed) {
+        //     window.location.reload();
+        //   }
+        // });
       });
+
     });
   }
   addCoursePhoto(courseId: number, typeStore: string, FolderName: string) {
@@ -186,7 +175,7 @@ export class AddCourseComponent {
         Name: this.courseDetailsForm.value.courseName!,
         Description: this.courseDetailsForm.value.courseDescription!,
         Price: this.courseDetailsForm.value.price!,
-        TeacherId: this.authService.userData.value['roleId'],
+        TeacherId: this.authService.userData.value["roleId"],
         CategoryName: this.courseDetailsForm.value.categoryName!,
         Level: this.courseDetailsForm.value.courseLevel!,
         CertificateHeadline: "string",

@@ -21,6 +21,7 @@ import { EditCourseWhatToLearnComponent } from "./edit-course-what-to-learn/edit
 import { CourseServiceService } from "../../Services/course/course-service.service";
 import { ActivatedRoute } from "@angular/router";
 import { CourseService } from "../../Services/course/course.service";
+import Swal from "sweetalert2";
 @Component({
   selector: "app-edit-course",
   standalone: true,
@@ -105,7 +106,6 @@ export class EditCourseComponent {
   ]);
   courseQuestionsForm = new FormArray<FormGroup>([], [Validators.minLength(1)]);
   updateCourseQuiz() {
-    console.log(this.courseQuestionsForm)
     this.courseQuestionsForm.controls.forEach((FormGroup, questionsIndex) => {
       this.Quiz.NumOfQuestions++;
       this.Quiz.Degree += FormGroup.controls["degree"].value;
@@ -117,27 +117,35 @@ export class EditCourseComponent {
       });
       let answers = FormGroup.controls["answers"] as FormArray<FormGroup>;
       answers.controls.forEach((answer, answerIndex) => {
-        this.Quiz.Questions[questionsIndex].Choices.push({
+        let insertedAnswer = {
           Id:answer.controls['id'].value,
           Choice: answer.controls['answer'].value,
           isCorrect: false,
-        });
-        if (answer.value == FormGroup.controls["rightAnswer"].value) {
-          this.Quiz.Questions[questionsIndex].Choices[answerIndex].isCorrect =
+        }
+        if (insertedAnswer.Choice == FormGroup.controls["rightAnswer"].value) {
+          insertedAnswer.isCorrect =
             true;
         }
+        this.Quiz.Questions[questionsIndex].Choices.push(insertedAnswer);
       });
     });
-    console.log(this.Quiz)
     this.courseService.UpdateCourseQuizz(this.Quiz,this.courseId).subscribe({
       next: (res) => {
-        console.log(res);
-        this.Quiz = new EditedQuiz();
+        Swal.fire({
+          title: 'Done',
+          text: 'Quizz Updated Successfuly',
+          showCancelButton: true,
+        });
       },
       error: (err) => {
-        console.log(err)
+        Swal.fire({
+          title: 'Fail',
+          text: 'Failed to upload the quiz',
+          showCancelButton: true,
+        });
       },
     })
+    this.Quiz = new EditedQuiz();
   }
   updateWhatToLearn() {
     this.WhatToLearn = [];
@@ -151,11 +159,19 @@ export class EditCourseComponent {
       .UpdateCourseWhatToLearn(this.WhatToLearn, this.courseId)
       .subscribe(
         (respone) => {
-          console.log(respone);
-        },
+          Swal.fire({
+            title: 'Done',
+            text: 'updated succesfully',
+            showCancelButton: true,
+          });
+          },
         (error) => {
-          console.log(error);
-        }
+          Swal.fire({
+            title: 'Fail',
+            text: 'Failed to upload the what to learn',
+            showCancelButton: true,
+          });
+          }
       );
   }
   updateCourseDetails() {
@@ -171,10 +187,18 @@ export class EditCourseComponent {
       })
       .subscribe({
         next: (res) => {
-          console.log(res);
+          Swal.fire({
+            title: 'Done',
+            text: 'Course details updated succesfully',
+            showCancelButton: true,
+          });
         },
         error: (err) => {
-          console.log(err);
+          Swal.fire({
+            title: 'Fail',
+            text: 'Failed to update the course details',
+            showCancelButton: true,
+          });
         },
       });
   }
