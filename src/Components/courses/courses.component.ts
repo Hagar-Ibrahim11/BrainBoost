@@ -19,13 +19,13 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-courses',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule,FormsModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule, FormsModule],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.css',
 })
 export class CoursesComponent {
   searchText: string = '';
-  selectedCategory:string=""
+  selectedCategory: string = '';
   ListOfCourses: ICourseCardDetails[] = [];
   ListOfCategories: ICategory[] = [];
   FilterObj!: ICourseFilteration;
@@ -43,7 +43,7 @@ export class CoursesComponent {
     private dataService: DataService
   ) {
     this.FilterObj = {
-      categoryName: "",
+      categoryName: 'all',
       price: -1,
       rate: -1,
       durtion: -1,
@@ -58,22 +58,15 @@ export class CoursesComponent {
   }
 
   GetSearchCourses(event: Event) {
-
-    this.SearchString =this.searchText;
-    if(this.searchText=="")
-    {
-      this.GetAllCourses();
-    }
-    else
-    {
-      this.courseservice
+    const inputElement = event.target as HTMLInputElement;
+    this.SearchString = inputElement.value;
+    this.courseservice
       .GetSearchedCourses(this.SearchString)
       .subscribe((data: ICourseCardDetails[]) => {
         this.ListOfCourses = data;
       });
-    }
-
   }
+
   GoToCourseDetails(id: number) {
     this.router.navigate(['/courseDetails', id]);
   }
@@ -109,7 +102,7 @@ export class CoursesComponent {
 
   getFilteredCoursesWithCatName(catName: string | null) {
     console.log(catName);
-    this.FilterObj.categoryName
+    this.FilterObj.categoryName;
     console.log(this.FilterObj);
     this.courseservice.GetFilteredCourses(this.FilterObj).subscribe(
       (data: IPaginationCourse) => {
@@ -171,7 +164,7 @@ export class CoursesComponent {
       rate: -1,
       durtion: -1,
       pageNumber: this.currentPage,
-      pageSize: 12,
+      pageSize: 8,
     };
     this.courseservice.GetFilteredCourses(this.FilterObj).subscribe(
       (data: IPaginationCourse) => {
