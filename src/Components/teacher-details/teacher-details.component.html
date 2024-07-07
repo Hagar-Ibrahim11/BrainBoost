@@ -5,8 +5,7 @@
       <div class="d-flex flex-column flex-shrink-0 p-3 bg-white mt-2" >
         <div class="d-flex justify-content-between align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
           <a href="#" class="d-flex align-items-center text-decoration-none">
-            <img src="https://img.freepik.com/free-photo/young-tender-curly-girl-holding-documents_176420-239.jpg?uid=R122299971&ga=GA1.1.1776697005.1713226272&semt=sph" alt="Teacher Image" class="rounded-circle me-2" width="40" height="40">
-            <span class="fs-4 ms-2 text-dark" *ngIf="!isSidebarCollapsed">Khloud Farouk</span>
+            <span class="fs-4 ms-2 text-dark" *ngIf="!isSidebarCollapsed">{{teacher['fname']}} {{teacher['lname']}}</span>
           </a>
           <button class="btn btn-primary btn-sm ms-auto d-md-none d-lg-block" (click)="toggleSidebar()">
             <i class="fas fa-bars"></i>
@@ -32,19 +31,27 @@
               <i class="fas fa-edit"></i> <span *ngIf="!isSidebarCollapsed">Teacher Earning</span>
             </a>
           </li>
+          <li>
+            <a (click)="showComponent('instructor-profile')" class="nav-link link-dark" [class.active]="currentComponent === 'instructor-profile'">
+              <i class="fas fa-edit"></i> <span *ngIf="!isSidebarCollapsed">Update info</span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
     <!-- Main Content -->
     <div class="col-md-9 col-12 main-content mt-5">
       <ng-container *ngIf="currentComponent === 'about-teacher'">
-        <app-about-teacher></app-about-teacher>
+        <app-about-teacher [teacherInfo]="teacher"></app-about-teacher>
       </ng-container>
       <ng-container *ngIf="currentComponent === 'teacher-courses'">
-        <app-teacher-courses></app-teacher-courses>
+        <app-teacher-courses [teacherCourses]="teacherCourses"></app-teacher-courses>
       </ng-container>
       <ng-container *ngIf="currentComponent === 'teacher-earning'">
-        <app-teacher-earning></app-teacher-earning>
+        <app-teacher-earning [teacherId]="teacherId"></app-teacher-earning>
+      </ng-container>
+      <ng-container *ngIf="currentComponent === 'instructor-profile'">
+        <app-instructor-profile [teacher]="teacher"></app-instructor-profile>
       </ng-container>
     </div>
   </div>

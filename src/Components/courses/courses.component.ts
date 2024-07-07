@@ -14,15 +14,18 @@ import { environment } from '../../Enviroment/enviroment';
 import { IPaginationCourse } from '../../models/ipagination-course';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-courses',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule,FormsModule],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.css',
 })
 export class CoursesComponent {
+  searchText: string = '';
+  selectedCategory:string=""
   ListOfCourses: ICourseCardDetails[] = [];
   ListOfCategories: ICategory[] = [];
   FilterObj!: ICourseFilteration;
@@ -40,12 +43,12 @@ export class CoursesComponent {
     private dataService: DataService
   ) {
     this.FilterObj = {
-      categoryName: null,
+      categoryName: "",
       price: -1,
       rate: -1,
       durtion: -1,
       pageNumber: this.currentPage,
-      pageSize: 12,
+      pageSize: 8,
     };
   }
 
@@ -55,13 +58,21 @@ export class CoursesComponent {
   }
 
   GetSearchCourses(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    this.SearchString = inputElement.value;
-    this.courseservice
+
+    this.SearchString =this.searchText;
+    if(this.searchText=="")
+    {
+      this.GetAllCourses();
+    }
+    else
+    {
+      this.courseservice
       .GetSearchedCourses(this.SearchString)
       .subscribe((data: ICourseCardDetails[]) => {
         this.ListOfCourses = data;
       });
+    }
+
   }
   GoToCourseDetails(id: number) {
     this.router.navigate(['/courseDetails', id]);
@@ -98,7 +109,7 @@ export class CoursesComponent {
 
   getFilteredCoursesWithCatName(catName: string | null) {
     console.log(catName);
-    this.FilterObj.categoryName = catName;
+    this.FilterObj.categoryName
     console.log(this.FilterObj);
     this.courseservice.GetFilteredCourses(this.FilterObj).subscribe(
       (data: IPaginationCourse) => {

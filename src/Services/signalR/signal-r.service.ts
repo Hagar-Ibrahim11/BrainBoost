@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import * as signalR from '@microsoft/signalr';
+import * as signalR from '@microsoft/signalr'
 import { environment } from '../../Enviroment/enviroment';
-import { AuthService } from '../auth.service';
 import { INewCommentFromSignalR } from '../../models/signalR/inew-comment-from-signal-r';
 
 @Injectable({
@@ -22,7 +21,7 @@ export class SignalRService {
     this.hubConnection
       .start()
       .then(() => console.log('Connection started'))
-      .catch((err) => console.log('Error while starting connection: ' + err));
+      .catch((err: string) => console.log('Error while starting connection: ' + err));
   }
   public addReceiveCommentListener(
     callback: (newCommentFromSignalR:INewCommentFromSignalR) => void
