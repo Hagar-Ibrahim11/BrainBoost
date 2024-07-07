@@ -105,8 +105,12 @@ export class RegisterComponent {
           alert("Registration successful");
           this.login();
         },
-        (error) => {
-          alert("Registration failed");
+        (error) =>  {
+          if (error.status === 400) {
+            this.registrationError = "Username already exists. Please choose another one.";
+          } else {
+            this.registrationError = "Registration failed. Please try again.";
+          }
         }
       );
     } else {

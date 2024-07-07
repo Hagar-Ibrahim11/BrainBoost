@@ -45,7 +45,9 @@ import { isAuthorizedToEditCourseGuard } from '../guards/is-authorized-to-edit-c
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
+
   { path: 'EditCourse/:id', component: EditCourseComponent, canActivate: [isAuthorizedToEditCourseGuard] },
+
   { path: 'login', component: LoginComponent, canActivate: [loginInGuard] },
   {
     path: 'register',
@@ -90,6 +92,8 @@ export const routes: Routes = [
         component: AddCourseComponent,
         canActivate: [isTeacherGuard],
       },
+      { path: 'about-us', component: AboutUsComponent },
+  { path: 'contact-us', component: ContactUsComponent },
     ],
   },
   {
