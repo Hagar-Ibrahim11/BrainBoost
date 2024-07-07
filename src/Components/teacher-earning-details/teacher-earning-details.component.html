@@ -12,11 +12,11 @@
               <div class="course-category">{{Course.description}}</div>
             </div>
             <div class="course-icon">
-              <img [src]="Course.photoUrl" alt="C++">
+              <img [src]="Course.photoUrl" alt="Course" class="card-img-top">
             </div>
           </div>
           <div class="course-footer">
-            <div class="course-score">{{Course.rate}}</div>
+            <div class="course-score">Rate: {{Course.rate}}</div>
             <p>Total Earning : {{Course.totalEarnings}}</p>
             <p>Website Earning : {{Course.totalWebsiteEarnings}}</p>
             <p>Instructor Earning : {{Course.totalInstructorEarnings}}</p>

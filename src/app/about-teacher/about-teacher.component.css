@@ -1,17 +1,23 @@
 .teacher-card {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center; /* Align items center */
     margin: 20px;
-   
     overflow: hidden;
 }
+
 .teacher-img {
-    width: 200px;
-    height: 200px;
+    width: 300px; /* Increased width */
+    height: 300px; /* Increased height */
     object-fit: cover;
 }
+
 .teacher-details {
     padding: 20px;
+    display: flex;
+    flex-direction: column; /* Ensure vertical alignment of text */
+    align-items:flex-start;
 }
 
 /* Responsive adjustments */
@@ -22,8 +28,8 @@
     }
     .teacher-img {
         width: 100%;
-        max-width: 100%;
+        max-width: 300px; /* Maintain increased width */
         height: auto;
-        margin-bottom: 20px;
-    }
+        margin-bottom:20px;
+}
 }

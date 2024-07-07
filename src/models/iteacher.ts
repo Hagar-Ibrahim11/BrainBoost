@@ -1,5 +1,5 @@
 export interface ITeacher {
-    id:Number
+    id:number,
     fname:string,
     lname: string,
     phoneNumber:string ,
