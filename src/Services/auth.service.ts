@@ -32,7 +32,7 @@ export class AuthService {
       ]
     ) {
       case 'Admin':
-        this.router.navigateByUrl('/admindashboard');
+        this.router.navigateByUrl('/layout-dashboard/admindashboard');
         break;
         default:
           this.router.navigateByUrl(

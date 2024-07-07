@@ -7,10 +7,10 @@
           <div class="card text-center pt-3 rounded-4 border-0 shadow-lg">
             <div class="card-body">
               <div class="icon-wrapper bullseye">
-                <i class="fa-solid fa-bullseye fa-2xl fs-1"></i>
+                <i class="fa-solid fa-money-bill-trend-up fa-2xl fs-1" style="color: #0de789;"></i>
               </div>
-              <h1 class="mt-2">{{TotalInstructorEarning}}</h1>
-              <p class="card-text mt-3 text-dark">TotalInstructorEarning</p>
+              <h1 class="mt-3">{{TotalInstructorEarning}} $</h1>
+              <p class="card-text mt-3 text-dark">Total Instructors Earning</p>
             </div>
           </div>
         </div>
@@ -18,10 +18,10 @@
           <div class="card text-center pt-3 rounded-4 border-0 shadow-lg">
             <div class="card-body">
               <div class="icon-wrapper book">
-                <i class="fa-solid fa-book-open fa-2xl fs-1"></i>
-              </div>
-              <h1 class="mt-2">{{TotalWebsiteEarning}}</h1>
-              <p class="card-text mt-3 text-dark">TotalWebsiteEarning</p>
+                <i class="fa-solid fa-comments-dollar fa-2xl" style="color: #0de789;"></i>
+                            </div>
+              <h1 class="mt-3">{{TotalWebsiteEarning}} $</h1>
+              <p class="card-text mt-3 text-dark">Total Website Earning</p>
             </div>
           </div>
         </div>
@@ -29,10 +29,10 @@
           <div class="card text-center pt-3 rounded-4 border-0 shadow-lg">
             <div class="card-body">
               <div class="icon-wrapper book">
-                <i class="fa-solid fa-book-open fa-2xl fs-1"></i>
-              </div>
-              <h1 class="mt-2">{{TotalEarning}}</h1>
-              <p class="card-text mt-3 text-dark">TotalEarning</p>
+                <i class="fa-solid fa-dollar-sign fa-2xl" style="color: #0de789;"></i>
+                            </div>
+              <h1 class="mt-3">{{TotalEarning}} $</h1>
+              <p class="card-text mt-3 text-dark">Total Earning</p>
             </div>
           </div>
         </div>
@@ -47,15 +47,17 @@
             <h2 class="mb-4">Top Earning Courses</h2>
           </div>
           <div class="col-md-4" *ngFor="let Course of TopEarningCourses">
-            <div class="course-card  rounded-3 shadow-lg">
+            <div class="course-card  rounded-3 shadow-lg p-3">
               <div class="course-header">
+                <div class="course-icon">
+                  <img [src]="Course.photoUrl" alt="C++" width="150" height="150">
+                </div>
+
                 <div>
                   <h4>{{Course.name}}</h4>
                   <div class="course-category">{{Course.description}}</div>
                 </div>
-                <div class="course-icon">
-                  <img [src]="Course.photoUrl" alt="C++">
-                </div>
+                
               </div>
               <div class="course-footer">
                 <div class="course-score">{{Course.rate}}</div>
