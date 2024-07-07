@@ -1,6 +1,6 @@
-import { Component } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { HttpClientModule } from "@angular/common/http";
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 import {
   FormControl,
   FormGroup,
@@ -8,12 +8,12 @@ import {
   Validators,
   ReactiveFormsModule,
   AbstractControl,
-} from "@angular/forms";
-import { CommonModule } from "@angular/common";
-import { AuthService } from "../../Services/auth.service";
+} from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
-  selector: "app-register",
+  selector: 'app-register',
   standalone: true,
   imports: [
     FormsModule,
@@ -22,8 +22,8 @@ import { AuthService } from "../../Services/auth.service";
     CommonModule,
     FormsModule,
   ],
-  templateUrl: "./register.component.html",
-  styleUrls: ["./register.component.css"],
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
   UserRegisterForm = new FormGroup(
@@ -42,15 +42,15 @@ export class RegisterComponent {
       ]),
       password: new FormControl(null, [
         Validators.required,
-        Validators.pattern("^(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z\\d]).{13,}$"),
+        Validators.pattern('^(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z\\d]).{13,}$'),
       ]),
       confirmPassword: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [
         Validators.required,
         Validators.email,
-        Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$"),
+        Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$'),
       ]),
-      Role: new FormControl(null, Validators.required),
+      Role: new FormControl('', Validators.required),
       AgreeToAllTerms: new FormControl(false, Validators.requiredTrue),
     },
     { validators: this.passwordMatchValidator }
@@ -61,8 +61,8 @@ export class RegisterComponent {
   passwordMatchValidator(
     control: AbstractControl
   ): { [key: string]: boolean } | null {
-    const password = control.get("password");
-    const confirmPassword = control.get("confirmPassword");
+    const password = control.get('password');
+    const confirmPassword = control.get('confirmPassword');
     if (
       password &&
       confirmPassword &&
@@ -74,8 +74,12 @@ export class RegisterComponent {
   }
   activationCode!: { activationCode: string; expirationDate: Date };
   isSubmitted: boolean = false;
-  activationCodeInserted: string = "";
-  constructor(private route: ActivatedRoute,private router: Router, private RegisterService: AuthService) {}
+  activationCodeInserted: string = '';
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private RegisterService: AuthService
+  ) {}
   confirmUser() {
     this.RegisterService.confirmMail(
       this.UserRegisterForm.controls.email.value!
@@ -83,26 +87,25 @@ export class RegisterComponent {
       next: (respone) => {
         this.isSubmitted = true;
         this.activationCode = respone;
-      }})
+      },
+    });
   }
   register() {
     // let date = new Date().getMinutes()
     // let comparedDate = this.activationCode.expirationDate.getMinutes()
-    if (
-      this.activationCodeInserted == this.activationCode.activationCode
-    ) {
+    if (this.activationCodeInserted == this.activationCode.activationCode) {
       this.RegisterService.register(
         {
-          UserName: this.UserRegisterForm.value["userName"]!,
-          FirstName: this.UserRegisterForm.value["firstName"]!,
-          LastName: this.UserRegisterForm.value["lastName"]!,
-          Password: this.UserRegisterForm.value["password"]!,
-          Email: this.UserRegisterForm.value["email"]!,
+          UserName: this.UserRegisterForm.value['userName']!,
+          FirstName: this.UserRegisterForm.value['firstName']!,
+          LastName: this.UserRegisterForm.value['lastName']!,
+          Password: this.UserRegisterForm.value['password']!,
+          Email: this.UserRegisterForm.value['email']!,
         },
-        this.UserRegisterForm.value["Role"]!
+        this.UserRegisterForm.value['Role']!
       ).subscribe(
         (response) => {
-          alert("Registration successful");
+          alert('Registration successful');
           this.login();
         },
         (error) =>  {
@@ -114,21 +117,21 @@ export class RegisterComponent {
         }
       );
     } else {
-      alert("Activation code is incorrect or expired");
+      alert('Activation code is incorrect or expired');
     }
   }
   login() {
     this.RegisterService.login({
-      userName: this.UserRegisterForm.value["userName"]!,
-      password: this.UserRegisterForm.value["password"]!,
+      userName: this.UserRegisterForm.value['userName']!,
+      password: this.UserRegisterForm.value['password']!,
     }).subscribe(
       (response) => {
         this.RegisterService.setToken(response.token);
         this.RegisterService.decodeUserData();
-        this.RegisterService.routeConsideringToRole()
+        this.RegisterService.routeConsideringToRole();
       },
       (error) => {
-        console.log("Login failed:", error);
+        console.log('Login failed:', error);
       }
     );
   }

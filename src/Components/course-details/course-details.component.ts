@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICourseDetails } from '../../models/icourse-details';
 import { environment } from '../../Enviroment/enviroment';
@@ -8,7 +8,7 @@ import { AuthService } from '../../Services/auth.service';
 import { EnrollmentService } from '../../Services/enrollment/enrollment.service';
 import { IEnrollment } from '../../models/ienrollment';
 import { IPaymentUrl } from '../../models/ipayment-url';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { SpinnerComponent } from '../spinner/spinner/spinner.component';
 
 @Component({
@@ -31,8 +31,10 @@ export class CourseDetailsComponent {
   stars: boolean[] = [];
   env: string = environment.baseUrl + '/Images/Courses/';
   isLoading: boolean = false;
-  review:any
+  review: any;
+  private beforeUnloadListener!: EventListenerOrEventListenerObject;
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
     private route: ActivatedRoute,
     private courseService: CourseService,
     private authService: AuthService,
@@ -45,7 +47,9 @@ export class CourseDetailsComponent {
     this.NumOfStudent = 0;
   }
   ngOnInit(): void {
-    window.addEventListener('beforeunload', this.handleUnload);
+    if (isPlatformBrowser(this.platformId)) {
+      window.addEventListener('beforeunload', this.handleUnload);
+    }
     this.authService.userData.subscribe({
       next: () => {
         if (this.authService.userData.value != null) {
@@ -69,13 +73,14 @@ export class CourseDetailsComponent {
       next: (data: ICourseDetails) => {
         this.crsDetails = data;
         if (this.crsDetails && this.crsDetails.review) {
-          this.review = this.crsDetails.review.map(review => ({
+          this.review = this.crsDetails.review.map((review) => ({
             ...review,
-            stars2: Array(5).fill(false).map((_, index) => index < (review.rate ?? 0))
+            stars2: Array(5)
+              .fill(false)
+              .map((_, index) => index < (review.rate ?? 0)),
           }));
           console.log(this.crsDetails);
           console.log(this.review);
-
         }
       },
       error: (error) => {
@@ -136,6 +141,8 @@ export class CourseDetailsComponent {
     this.isLoading = false;
   };
   ngOnDestroy(): void {
-    window.removeEventListener('beforeunload', this.handleUnload);
+    if (isPlatformBrowser(this.platformId)) {
+      window.removeEventListener('beforeunload', this.beforeUnloadListener);
+    }
   }
 }

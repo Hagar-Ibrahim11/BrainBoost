@@ -57,7 +57,8 @@ export class LoginComponent {
         },
         (error) => {
           console.log('Login failed:', error);
-          this.errorMessage = 'Login failed. Please check your username and password and try again.'; // Set the error message
+          this.errorMessage =
+            'Login failed. Please check your username and password and try again.'; // Set the error message
         }
       );
   }

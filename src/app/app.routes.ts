@@ -39,15 +39,17 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 
 import { isAuthorizedToEditCourseGuard } from '../guards/is-authorized-to-edit-course.guard';
-
-
+import { IsStudentGuard } from '../guards/is-student.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
 
-  { path: 'EditCourse/:id', component: EditCourseComponent, canActivate: [isAuthorizedToEditCourseGuard] },
-
+  {
+    path: 'EditCourse/:id',
+    component: EditCourseComponent,
+    canActivate: [isAuthorizedToEditCourseGuard],
+  },
   { path: 'login', component: LoginComponent, canActivate: [loginInGuard] },
   {
     path: 'register',
@@ -66,17 +68,24 @@ export const routes: Routes = [
     component: EnrollmentFailedComponent,
   },
 
-
+  // { path: 'TakingVideo', component: VideotakingComponent },
   {
     path: '',
     component: LayoutComponent,
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'courses', component: CoursesComponent },
-      { path: 'courseDetails/:id', component: CourseDetailsComponent },
+      { path: 'about-us', component: AboutUsComponent },
+      { path: 'contact-us', component: ContactUsComponent },
+      {
+        path: 'courseDetails/:id',
+        component: CourseDetailsComponent,
+      },
       { path: 'StudentDetails/:id', component: StudentDetailsComponent },
       {
-        path: 'TeacherDetails/:id', component: TeacherDetailsComponent, canActivate: [isTeacherGuard],
+        path: 'TeacherDetails/:id',
+        component: TeacherDetailsComponent,
+        canActivate: [isTeacherGuard],
       },
       { path: 'about-us', component: AboutUsComponent },
       { path: 'contact-us', component: ContactUsComponent },
