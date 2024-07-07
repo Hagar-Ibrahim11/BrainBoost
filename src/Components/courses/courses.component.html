@@ -5,17 +5,16 @@
         <div
           class="row height d-flex justify-content-center align-items-center"
         >
-          <div class="col-md-8 search-elements">
-            <div class="search rounded-3 shadow-lg">
-              <input
-                type="text"
-                class="form-control"
-                placeholder="Search on your favorite course"
-                [(ngModel)]="searchText"
-              />
-              <button class="btn text-light rounded-3" (click)="GetSearchCourses($event)">Search</button>
-            </div>
+        <div class="col-md-8 search-elements">
+          <div class="search rounded-3 shadow-lg">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search on your favorite course"
+              (input)="GetSearchCourses($event)"
+            />
           </div>
+        </div>
         </div>
       </div>
     </div>
@@ -46,25 +45,21 @@
                   <label for="category" class="form-label fw-bold"
                     >Course Category</label
                   >
-                  <!-- <select class="form-select" id="category" name="category">
+                  <select
+                    class="form-select"
+                    id="category"
+                    name="category"
+                    [(ngModel)]="FilterObj.categoryName"
+                    (change)="getFilteredCoursesWithCatName(selectedCategory)"
+                  >
                     <option value="all" [defaultSelected]="">All</option>
                     <option
                       *ngFor="let category of ListOfCategories"
-                      [value]="category.id"
-                      (click)="getFilteredCoursesWithCatName(category.name)"
+                      [value]="category.name"
                     >
                       {{ category.name }}
                     </option>
-
-
-                  </select> -->
-                  <select class="form-select" id="category" name="category" [(ngModel)]="FilterObj.categoryName" (change)="getFilteredCoursesWithCatName(selectedCategory)">
-                    <option value="all" [defaultSelected]="">All</option>
-                    <option *ngFor="let category of ListOfCategories" [value]="category.name">
-                      {{ category.name }}
-                    </option>
                   </select>
-
                 </div>
                 <!-- Rating -->
                 <div class="mb-3">
@@ -152,15 +147,13 @@
                     <!-- Add more ratings as needed -->
                   </div>
 
-                  <div
-                    class="form-check"
-                  >
+                  <div class="form-check">
                     <input
                       class="form-check-input"
                       type="radio"
                       name="rating"
                       id="rating1"
-                      value="3"
+                      value="1"
                       [(ngModel)]="FilterObj.rate"
                       (click)="getFilteredCoursesWithRate(1)"
                     />
@@ -264,7 +257,7 @@
                         name="price"
                         id="price2"
                         value="1"
-                        [(ngModel)]="FilterObj.durtion"
+                        [(ngModel)]="FilterObj.price"
                         (click)="getFilteredCoursesWithPrice(1)"
                       />
                       <label class="form-check-label" for="price2">
