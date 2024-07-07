@@ -31,7 +31,7 @@ export class CourseDetailsComponent {
   stars: boolean[] = [];
   env: string = environment.baseUrl + '/Images/Courses/';
   isLoading: boolean = false;
-  review:any
+  review: any;
   constructor(
     private route: ActivatedRoute,
     private courseService: CourseService,
@@ -69,13 +69,14 @@ export class CourseDetailsComponent {
       next: (data: ICourseDetails) => {
         this.crsDetails = data;
         if (this.crsDetails && this.crsDetails.review) {
-          this.review = this.crsDetails.review.map(review => ({
+          this.review = this.crsDetails.review.map((review) => ({
             ...review,
-            stars2: Array(5).fill(false).map((_, index) => index < (review.rate ?? 0))
+            stars2: Array(5)
+              .fill(false)
+              .map((_, index) => index < (review.rate ?? 0)),
           }));
           console.log(this.crsDetails);
           console.log(this.review);
-
         }
       },
       error: (error) => {
