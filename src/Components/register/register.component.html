@@ -5,7 +5,10 @@
         <div class="card text-black" style="border-radius: 25px">
           <div class="card-body p-md-5">
             <div class="row justify-content-center">
-              <div *ngIf="!isSubmitted" class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+              <div
+                *ngIf="!isSubmitted"
+                class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1"
+              >
                 <p class="text-center h1 fw-bold mb-2 mx-1 mx-md-4">Sign up</p>
 
                 <form [formGroup]="UserRegisterForm" class="mx-1 mx-md-4 mb-2">
@@ -14,7 +17,6 @@
                     {{ registrationError }}
                   </div>
 
-                  
                   <div class="d-flex flex-row align-items-center mb-2">
                     <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                     <div
@@ -39,6 +41,7 @@
                         "
                       >
                         <small
+                          class="text-danger"
                           *ngIf="
                             UserRegisterForm.controls['userName'].errors![
                               'required'
@@ -47,6 +50,7 @@
                           >Username is required.</small
                         >
                         <small
+                          class="text-danger"
                           *ngIf="
                             UserRegisterForm.controls['userName'].errors![
                               'minlength'
@@ -65,7 +69,7 @@
                       class="form-outline flex-fill mb-0"
                     >
                       <label class="form-label" for="firstName"
-                        >Your firstName</label
+                        >Your First Name</label
                       >
                       <input
                         type="text"
@@ -82,20 +86,22 @@
                         "
                       >
                         <small
+                          class="text-danger"
                           *ngIf="
                             UserRegisterForm.controls['firstName'].errors![
                               'required'
                             ]
                           "
-                          >Username is required.</small
+                          >First Name is required.</small
                         >
                         <small
+                          class="text-danger"
                           *ngIf="
                             UserRegisterForm.controls['firstName'].errors![
                               'minlength'
                             ]
                           "
-                          >Username should be more than 5 char.</small
+                          >First Name should be more than 5 char.</small
                         >
                       </div>
                     </div>
@@ -108,7 +114,7 @@
                       class="form-outline flex-fill mb-0"
                     >
                       <label class="form-label" for="lastName"
-                        >Your lastName</label
+                        >Your Last Name</label
                       >
                       <input
                         type="text"
@@ -125,20 +131,22 @@
                         "
                       >
                         <small
+                          class="text-danger"
                           *ngIf="
                             UserRegisterForm.controls['lastName'].errors![
                               'required'
                             ]
                           "
-                          >lastName is required.</small
+                          >Last Name is required.</small
                         >
                         <small
+                          class="text-danger"
                           *ngIf="
                             UserRegisterForm.controls['lastName'].errors![
                               'minlength'
                             ]
                           "
-                          >Username should be more than 5 char.</small
+                          >Last Name should be more than 5 char.</small
                         >
                       </div>
                     </div>
@@ -168,20 +176,22 @@
                         "
                       >
                         <small
+                          class="text-danger"
                           *ngIf="
                             UserRegisterForm.controls['email'].errors![
                               'required'
                             ]
                           "
-                          >email is required.</small
+                          >Email is required.</small
                         >
                         <small
+                          class="text-danger"
                           *ngIf="
                             UserRegisterForm.controls['email'].errors![
                               'pattern'
                             ]
                           "
-                          >Please text in Email Pattern</small
+                          >Please text in email pattern</small
                         >
                       </div>
                     </div>
@@ -211,6 +221,7 @@
                         "
                       >
                         <small
+                          class="text-danger"
                           *ngIf="
                             UserRegisterForm.controls['password'].errors![
                               'required'
@@ -219,6 +230,7 @@
                           >Password is required.</small
                         >
                         <small
+                          class="text-danger"
                           *ngIf="
                             UserRegisterForm.controls['password'].errors![
                               'pattern'
@@ -256,6 +268,7 @@
                         "
                       >
                         <small
+                          class="text-danger"
                           *ngIf="
                             UserRegisterForm.controls['confirmPassword']
                               .errors!['required']
@@ -264,6 +277,7 @@
                         >
                       </div>
                       <small
+                        class="text-danger"
                         *ngIf="UserRegisterForm.errors?.['passwordMismatch'] && (UserRegisterForm.controls['confirmPassword']?.dirty || UserRegisterForm.controls['confirmPassword']?.touched)"
                       >
                         Passwords do not match.
@@ -286,10 +300,9 @@
                         formControlName="Role"
                         name="role"
                       >
-                        <option selected>select your Role</option>
+                        <option value="" disabled>Select Your Role</option>
                         <option value="Student">Student</option>
                         <option value="Teacher">Teacher</option>
-                        <option value="Admin">Admin</option>
                       </select>
                       <div
                         *ngIf="
@@ -299,6 +312,7 @@
                         "
                       >
                         <small
+                          class="text-danger"
                           *ngIf="
                             UserRegisterForm.controls['Role'].errors![
                               'required'
@@ -320,7 +334,9 @@
                     />
                     <label class="form-check-label" for="form2Example3">
                       I agree all statements in
-                      <a href="#!">Terms of service</a>
+                      <a href="https://en.wikipedia.org/wiki/Terms_of_service"
+                        >Terms of service</a
+                      >
                     </label>
                   </div>
 
@@ -338,8 +354,13 @@
                   </div>
                 </form>
               </div>
-              <div *ngIf="isSubmitted" class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
-                <p class="text-center h1 fw-bold mb-2 mx-1 mx-md-4">We sent activation code to your gmail</p>
+              <div
+                *ngIf="isSubmitted"
+                class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1"
+              >
+                <p class="text-center h1 fw-bold mb-2 mx-1 mx-md-4">
+                  We sent activation code to your gmail
+                </p>
 
                 <form class="mx-1 mx-md-4 mb-2">
                   <div class="d-flex flex-row align-items-center mb-2">

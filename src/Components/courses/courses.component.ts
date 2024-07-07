@@ -7,7 +7,7 @@ import { CategoryService } from '../../Services/category/category.service';
 import { error } from 'console';
 import { listenerCount } from 'process';
 import { ICourseFilteration } from '../../models/icourse-filteration';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ICourseDetails } from '../../models/icourse-details';
 import { DataService } from '../../Services/sharedData/data.service';
 import { environment } from '../../Enviroment/enviroment';
@@ -15,11 +15,12 @@ import { IPaginationCourse } from '../../models/ipagination-course';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-courses',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule, FormsModule],
+  imports: [CommonModule, MatButtonModule, MatIconModule, FormsModule  , RouterLink],
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.css',
 })
@@ -36,11 +37,14 @@ export class CoursesComponent {
   totalItems!: number;
   totalPages!: number;
   currentPage: number = 1;
+  role: string = '';
+  isLogin: boolean = false;
   constructor(
     private courseservice: CourseService,
     private categoryService: CategoryService,
     private router: Router,
-    private dataService: DataService
+    private dataService: DataService,
+    private authService: AuthService
   ) {
     this.FilterObj = {
       categoryName: 'all',
@@ -55,6 +59,15 @@ export class CoursesComponent {
   ngOnInit() {
     this.GetAllCategories();
     this.GetAllCourses();
+    this.authService.userData.subscribe((next) => {
+      if (this.authService.userData.getValue() !== null) {
+        this.role =
+          this.authService.userData.value[
+            'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+          ];
+        this.isLogin = true;
+      }
+    });
   }
 
   GetSearchCourses(event: Event) {

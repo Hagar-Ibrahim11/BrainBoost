@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top new">
   <div class="container-fluid">
     <div class="col-2">
-      <a class="navbar-brand" href="#">BrainBoost</a>
+      <a class="navbar-brand">BrainBoost</a>
     </div>
     <button
       class="navbar-toggler"
@@ -15,19 +15,25 @@
       <i class="fa-solid fa-bars fa-xl navtogle"></i>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <div class="col-4">
+      <div class="col-lg-4 d-flex justify-content-start">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item me-3">
+          <li
+            class="nav-item me-3"
+            *ngIf="isLogin == false || role == 'Student'"
+          >
             <a class="nav-link active" aria-current="page" routerLink="/home"
               >Home</a
             >
           </li>
-          <li class="nav-item me-3">
+          <li
+            class="nav-item me-3"
+            *ngIf="isLogin == false || role == 'Student'"
+          >
             <a class="nav-link active" aria-current="page" routerLink="/courses"
               >Courses</a
             >
           </li>
-          <li class="nav-item me-3">
+          <li class="nav-item me-3" *ngIf="role != 'Admin'">
             <a
               class="nav-link active"
               aria-current="page"
@@ -35,7 +41,7 @@
               >Contact</a
             >
           </li>
-          <li class="nav-item me-3">
+          <li class="nav-item me-3" *ngIf="role != 'Admin'">
             <a
               class="nav-link active"
               aria-current="page"
@@ -43,34 +49,30 @@
               >About Us</a
             >
           </li>
+          <li class="nav-item" *ngIf="!isLogin">
+            <a class="nav-link d-lg-none" routerLink="login" routerLinkActive="active"
+              >Login/Register</a
+            >
+          </li>
         </ul>
       </div>
-      <div class="col-4">
-        <div class="bg-light rounded rounded-pill shadow-sm w-100">
-          <div class="input-group">
-            <input
-              type="search"
-              placeholder="What're you searching for?"
-              aria-describedby="button-addon1"
-              class="form-control rounded-pill bg-light search"
-            />
-            <div class="input-group-append">
-              <button id="button-addon1" type="submit" class="btn btn-link">
-                <i class="fa fa-search"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-4">
-        <ul class="navbar-nav mb-2 mb-lg-0 d-flex justify-content-end">
-          <li class="nav-item" *ngIf="!isLogin">
-            <a class="nav-link" routerLink="login" routerLinkActive="active"
-              >Login/Register</a
+      <div class="col-lg-4 d-flex justify-content-end">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item" *ngIf="isLogin && role == 'Teacher'">
+            <a
+              class="nav-link"
+              [routerLink]="['TeacherDetails', roleId]"
+              routerLinkActive="active"
+              >Instructor Dashboard</a
             >
           </li>
           <li class="nav-item" *ngIf="isLogin">
             <a class="nav-link" (click)="logout()">Logout</a>
+          </li>
+          <li class="nav-item" *ngIf="!isLogin">
+            <a class="nav-link d-none d-lg-block" routerLink="login" routerLinkActive="active"
+              >Login/Register</a
+            >
           </li>
         </ul>
       </div>
