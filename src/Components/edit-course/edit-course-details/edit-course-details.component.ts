@@ -5,6 +5,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../Enviroment/enviroment";
 import { FormGroup } from "@angular/forms";
 import { Options } from "../../../classes/options";
+import Swal from "sweetalert2";
 
 @Component({
   selector: "app-edit-course-details",
@@ -35,8 +36,12 @@ export class EditCourseDetailsComponent implements OnChanges{
           });
         },
         error: (error) => {
-          console.log(error);
-        },
+          Swal.fire({
+            title: 'Fail',
+            text: 'Failed to Get the categories',
+            showCancelButton: true,
+          });
+          },
       });
   }
   handleImageInput(img: any) {

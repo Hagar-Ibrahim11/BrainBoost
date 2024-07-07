@@ -33,6 +33,7 @@ export class TeacherDetailsComponent {
       this.teacherId = params["id"];
       this.teacherService.getTeacher(this.teacherId).subscribe({
         next: (data) => {
+          console.log(data)
           this.teacher = data;
         },
         error: (err) => console.log(err),
