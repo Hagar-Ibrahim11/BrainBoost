@@ -36,4 +36,7 @@ export class TeacherService {
   GetCoursesCardsForTeacher(teacherId:number): Observable<any> {
     return this.http.get(`${environment.baseUrl}/api/Teacher/GetCoursesCardsForTeacher?TeacherId=${teacherId}`)
   }
+  GetTeacherEarnings(teacherId:number): Observable<any> {
+    return this.http.get(`${environment.baseUrl}/api/Earning/GetCoursesAndEarningsForInstructor/${teacherId}`) 
+  }
 }
