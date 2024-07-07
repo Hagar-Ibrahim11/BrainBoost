@@ -34,11 +34,14 @@ import { AddAdminComponent } from '../Components/add-admin/add-admin/add-admin.c
 import { UpdatecategoryComponent } from '../Components/updatecategory/updatecategory.component';
 import { LayoutAdmindashboardComponent } from '../Components/layout-admindashboard/layout-admindashboard.component';
 import { EnrollmentFailedComponent } from '../Components/EnrollmentSuccess/enrollment-failed/enrollment-failed.component';
-
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'about-us', component: AboutUsComponent },
+  { path: 'contact-us', component: ContactUsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'TeacherForm/:id', component: InstructorProfileComponent },
