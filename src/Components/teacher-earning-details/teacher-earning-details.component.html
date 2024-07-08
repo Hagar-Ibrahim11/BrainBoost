@@ -5,21 +5,22 @@
         <h2 class="mb-4">Courses</h2>
       </div>
       <div class="col-md-4" *ngFor="let Course of CoursesAndEarningsForInstructor">
-        <div class="course-card  rounded-3 shadow-lg">
+        <div class="course-card  p-3 rounded-3 shadow-lg">
           <div class="course-header">
-            <div>
-              <h4>{{Course.name}}</h4>
-              <div class="course-category">{{Course.description}}</div>
-            </div>
             <div class="course-icon">
               <img [src]="Course.photoUrl" alt="Course" class="card-img-top">
             </div>
+            <div>
+              <h4 class="mt-3">{{Course.name}}</h4>
+              <div class="course-category mt-3">{{Course.description}}</div>
+            </div>
+            
           </div>
           <div class="course-footer">
-            <div class="course-score">Rate: {{Course.rate}}</div>
-            <p>Total Earning : {{Course.totalEarnings}}</p>
-            <p>Website Earning : {{Course.totalWebsiteEarnings}}</p>
-            <p>Instructor Earning : {{Course.totalInstructorEarnings}}</p>
+            <div class="course-score mt-3">Rate: {{Course.rate}}</div>
+            <p class="mt-3">Total Earning : {{Course.totalEarnings}}</p>
+            <p class="mt-3">Website Earning : {{Course.totalWebsiteEarnings}}</p>
+            <p class="mt-3">Instructor Earning : {{Course.totalInstructorEarnings}}</p>
           </div>
         </div>
       </div>
