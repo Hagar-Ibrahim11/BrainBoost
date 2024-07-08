@@ -1,5 +1,21 @@
+/* Ensure html and body take full height */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container with full height */
+.container-fluid.xx {
+    min-height: 100vh; /* Ensure it takes at least the full viewport height */
+}
+
+/* Sidebar styles */
 .sidebar {
     transition: width 0.25s ease-out, height 0.25s ease-out;
+    margin-top: 20px; /* Add top margin */
+    margin-bottom: 20px; /* Add bottom margin */
+    height: calc(100vh - 40px); /* Adjust height to account for margins */
 }
 
 .sidebar.collapsed {
@@ -16,6 +32,7 @@
 
 .main-content {
     padding-left: 20px; /* Adjust as needed */
+    flex: 1; /* Ensure it takes up remaining space */
 }
 
 /* Hidden class to toggle visibility of menu items */
@@ -78,8 +95,6 @@
     }
 }
 
-
-.nav-link:hover
-{
+.nav-link:hover {
     cursor: pointer;
 }
