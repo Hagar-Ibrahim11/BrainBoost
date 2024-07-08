@@ -33,5 +33,26 @@ export class VidService {
       { headers: header }
     );
   }
-  
+  getVideosByCourseId(CourseId: number): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${environment.baseUrl}/api/Video/getVideosByCourseId/${CourseId}`
+    );
+  }
+  updateVideo(editedVideo: {
+    id:number
+    Title:string
+    VideoFile:File
+    Chapter:number
+    crsId:number
+}): Observable<any[]> {
+    const formDate = new FormData()
+    formDate.append('title', editedVideo.Title)
+    formDate.append('videoFile', editedVideo.VideoFile)
+    formDate.append('crsId', editedVideo.crsId.toString())
+    formDate.append('id', editedVideo.id.toString())
+    return this.http.put<any[]>(
+      `${environment.baseUrl}/api/Video/editVideo`,
+      formDate
+    );
+  }
 }

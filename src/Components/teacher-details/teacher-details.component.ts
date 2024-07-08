@@ -24,7 +24,7 @@ import { ActivatedRoute } from "@angular/router";
 export class TeacherDetailsComponent {
   teacher!: any;
   teacherCourses!: any[];
-  teacherId!:number
+  teacherId!: number;
   constructor(
     private teacherService: TeacherService,
     private route: ActivatedRoute
@@ -33,7 +33,6 @@ export class TeacherDetailsComponent {
       this.teacherId = params["id"];
       this.teacherService.getTeacher(this.teacherId).subscribe({
         next: (data) => {
-          console.log(data)
           this.teacher = data;
         },
         error: (err) => console.log(err),

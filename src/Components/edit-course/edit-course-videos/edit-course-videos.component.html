@@ -1,153 +1,120 @@
-<!-- <div class="container">
-  <h1>Course Photo</h1>
-  <h2>Upload the Course Photo You want</h2>
-  <div class="form-container shadow-5">
-    <div class="form-group">
-      <input
-        (change)="handlePhotoInput($event)"
-        [type]="'file'"
-        class="form-control"
-        id="inputGroupFile02"
-      />
-      <label class="form-control" for="inputGroupFile02"
-        >Course Photo</label
-      >
-    </div>
-  </div>
-  <h1>Course Videos</h1>
-  <h2>Upload the Lecture Videos You want</h2>
-  <div
-    *ngFor="let Lecture of courseMediaForm.controls; index as i"
-    class="form-container shadow-5"
-    [formGroup]="Lecture"
-  >
-    <h3>Lecture {{ i + 1 }}</h3>
-    <div class="form-group">
-      <input
-        type="text"
-        class="form-control"
-        id="inputGroupFile02"
-        formControlName="title"
-      />
-    </div>
-    <div class="form-group">
-      <input
-        [type]="'file'"
-        class="form-control"
-        id="inputGroupFile02"
-        (change)="handleVideoInput($event, i)"
-      />
-      <label class="form-control" for="inputGroupFile02"
-        >Upload Course Video</label
-      >
-    </div>
-    <div class="class d-flex justify-content-end">
-      <button
-        type="button"
-        class="btn btn-outline-primary text-center"
-        (click)="courseMediaForm.removeAt(i)"
-      >
-        Delete
-      </button>
-    </div>
-  </div>
-  <div class="class d-flex justify-content-end text-center">
-    <button
-      type="button"
-      class="btn btn-outline-primary"
-      (click)="AddLectureForm()"
-    >
-      Add Lecture
-    </button>
-  </div>
-</div> -->
 <div class="container">
   <h1>Course Photo</h1>
   <h2>Upload the Course Photo You want</h2>
   <div class="form-container shadow-5">
     <div class="form-group">
-      <input
-        (change)="handlePhotoInput($event)"
-        [type]="'file'"
-        class="form-control"
-        id="inputGroupFile02"
-      />
-      <label class="form-control" for="inputGroupFile02">Course Photo</label>
+      <img [src]="photoUrl" alt="" />
+      <div class="class d-flex justify-content-end text-center">
+        <button type="button" class="btn btn-outline-primary">
+          Edit picture
+          <input
+            type="file"
+            class="form-control"
+            id="inputGroupFile02"
+            (change)="handlePhotoInput($event)"
+          />
+        </button>
+      </div>
     </div>
   </div>
   <h1>Course chapters</h1>
   <h2>Upload the chapters You want</h2>
   <br />
-  <div
-    *ngFor="let chapter of courseScheduleForm.controls; index as chapterIndex"
-    class="form-container shadow-5"
-    [formGroup]="getChapter(chapterIndex)"
-  >
-    <h3>chapter {{ chapterIndex + 1 }}</h3>
+  <div class="form-container shadow-5">
     <div
-      *ngFor="let Lecture of chapter.controls; index as lectureIndex"
-      [formGroup]="getLecture(chapterIndex, lectureIndex)"
+      *ngFor="let Lecture of courseScheduleForm.controls; index as lectureIndex"
     >
-      <h4>Lecture {{ lectureIndex + 1 }}</h4>
+      <h4>chapter</h4>
+      <input
+        name="title"
+        type="text"
+        class="form-control"
+        id="inputGroupFile02"
+        [formControl]="getChapter(lectureIndex)"
+      />
+      <br />
       <div class="form-group">
+        <h4>lecture</h4>
         <input
+          name="title"
           type="text"
           class="form-control"
           id="inputGroupFile02"
-          formControlName="title"
+          [formControl]="getLectureTitleControl(lectureIndex)"
         />
       </div>
       <div class="form-group">
-        <input
-          [type]="'file'"
-          class="form-control"
-          id="inputGroupFile02"
-          (change)="handleVideoInput($event, chapterIndex, lectureIndex)"
-        />
-        <label class="form-control" for="inputGroupFile02"
-          >Upload Course Video</label
-        >
+        <video [src]="Lecture.controls['videoUrl'].value" controls></video>
       </div>
       <div class="class d-flex justify-content-end text-center">
         <button
           type="button"
           class="btn btn-outline-primary"
-          (click)="DeleteLecture(chapterIndex,lectureIndex)"
+          id="replaceLectureButton"
         >
-          Delete lecture
+          Replace lecture
+          <input
+            (change)="handleVideo($event, lectureIndex)"
+            type="file"
+            class="form-control"
+            id="inputGroupFile02"
+          />
         </button>
-      </div>      
+      </div>
+    </div>
+    <div
+      *ngFor="
+        let addedVideos of addedVideosForm.controls;
+        index as addedVideosIndex
+      "
+    >
+      <h4>chapter</h4>
+      <input
+        name="title"
+        type="number"
+        class="form-control"
+        id="inputGroupFile02"
+        [formControl]="getAddedVideoChapter(addedVideosIndex)"
+      />
+      <br />
+      <div class="form-group">
+        <h4>lecture</h4>
+        <input
+          name="title"
+          type="text"
+          class="form-control"
+          id="inputGroupFile02"
+          [formControl]="getAddedVideoTitleControl(addedVideosIndex)"
+        />
+      </div>
+      <div class="form-group">
+        <video controls></video>
+      </div>
+      <div class="class d-flex justify-content-end text-center">
+        <button
+          type="button"
+          class="btn btn-outline-primary"
+          id="replaceLectureButton"
+          [disabled]="addedVideos.invalid"
+        >
+          Upload lecture
+          <input
+            (change)="uploadLecture($event, addedVideosIndex)"
+            type="file"
+            class="form-control"
+            id="inputGroupFile02"
+          />
+        </button>
+      </div>
     </div>
     <div class="class d-flex justify-content-end text-center">
       <button
+        (click)="addLecture()"
         type="button"
         class="btn btn-outline-primary"
-        (click)="AddLecture(chapterIndex)"
       >
         Add lecture
       </button>
-    </div>    
-    <div class="class d-flex justify-content-start text-center">
-      <button
-        type="button"
-        class="btn btn-outline-primary"
-        (click)="DeleteChapter(chapterIndex)"
-      >
-        delete chapter
-      </button>
-    </div>    
+    </div>
   </div>
-  <div class="class d-flex justify-content-start text-center">
-    <video width="600" controls>
-      <source src="http://localhost:43827/Course/tomas/chapter 1/video.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-    <button
-      type="button"
-      class="btn btn-outline-primary"
-      (click)="AddChapter()"
-    >
-      Add chapter
-    </button>
-  </div>  
 </div>
