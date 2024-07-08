@@ -40,10 +40,10 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 
 import { isAuthorizedToEditCourseGuard } from '../guards/is-authorized-to-edit-course.guard';
 import { IsStudentGuard } from '../guards/is-student.guard';
+import { IsAdminGuard } from '../guards/is-admin.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-
 
   {
     path: 'EditCourse/:id',
@@ -56,8 +56,6 @@ export const routes: Routes = [
     component: RegisterComponent,
     canActivate: [loginInGuard],
   },
-
- 
 
   {
     path: 'EnrollmentSuccess/:orderNumber/:courseId',
@@ -81,53 +79,108 @@ export const routes: Routes = [
         path: 'courseDetails/:id',
         component: CourseDetailsComponent,
       },
-      { path: 'StudentDetails/:id', component: StudentDetailsComponent },
+      {
+        path: 'StudentDetails/:id',
+        component: StudentDetailsComponent,
+        canActivate: [IsStudentGuard],
+      },
       {
         path: 'TeacherDetails/:id',
         component: TeacherDetailsComponent,
         canActivate: [isTeacherGuard],
       },
-      { path: 'about-us', component: AboutUsComponent },
-      { path: 'contact-us', component: ContactUsComponent },
-      { path: 'TakingCourse/:id', component: CourseContentComponent },
-      { path: 'TakingQuiz/:id', component: ModifiedQuizComponent },
-      { path: 'TakingCertificate/:id', component: CertificateComponent },
-      { path: 'TakingVideo/:id', component: VideoComponent },
-      { path: 'TakingVideo', component: VideotakingComponent },
-      { path: 'TeacherForm/:id', component: InstructorProfileComponent },
+      {
+        path: 'TakingCourse/:id',
+        component: CourseContentComponent,
+        canActivate: [isTeacherGuard],
+      },
+      {
+        path: 'TakingQuiz/:id',
+        component: ModifiedQuizComponent,
+        canActivate: [IsStudentGuard],
+      },
+      {
+        path: 'TakingCertificate/:id',
+        component: CertificateComponent,
+        canActivate: [IsStudentGuard],
+      },
+      {
+        path: 'TakingVideo/:id',
+        component: VideoComponent,
+        canActivate: [IsStudentGuard],
+      },
+      {
+        path: 'TeacherForm/:id',
+        component: InstructorProfileComponent,
+        canActivate: [isTeacherGuard],
+      },
       { path: 'StudentForm/:id', component: InstructorProfileComponent },
       {
         path: 'addCourse',
         component: AddCourseComponent,
         canActivate: [isTeacherGuard],
       },
-      { path: 'about-us', component: AboutUsComponent },
-  { path: 'contact-us', component: ContactUsComponent },
     ],
   },
   {
     path: 'layout-dashboard',
     component: LayoutAdmindashboardComponent,
+    canActivate: [IsAdminGuard],
     children: [
-      { path: 'admindashboard', component: AdminDashboardComponent },
-      { path: 'nonApprovedCourses', component: NonApprovedCouresesComponent },
-      { path: 'earning', component: EarningComponent },
-      { path: 'courses-for-admin', component: CoursesForAdminComponent },
-      { path: 'teachersforadmin', component: TeachersForAdminComponent },
-      { path: 'studentsforadmin', component: StudentForAdminComponent },
+      {
+        path: 'admindashboard',
+        component: AdminDashboardComponent,
+        canActivate: [IsAdminGuard],
+      },
+      {
+        path: 'nonApprovedCourses',
+        component: NonApprovedCouresesComponent,
+        canActivate: [IsAdminGuard],
+      },
+      {
+        path: 'earning',
+        component: EarningComponent,
+        canActivate: [IsAdminGuard],
+      },
+      {
+        path: 'courses-for-admin',
+        component: CoursesForAdminComponent,
+        canActivate: [IsAdminGuard],
+      },
+      {
+        path: 'teachersforadmin',
+        component: TeachersForAdminComponent,
+        canActivate: [IsAdminGuard],
+      },
+      {
+        path: 'studentsforadmin',
+        component: StudentForAdminComponent,
+        canActivate: [IsAdminGuard],
+      },
       {
         path: 'TeacherEarningDetails/:id',
         component: TeacherEarningDetailsComponent,
+        canActivate: [IsAdminGuard],
       },
 
-      { path: 'admin', component: AdminComponent },
-      { path: 'category', component: CategoryComponent },
-      { path: 'add-admin', component: AddAdminComponent },
-      { path: 'update/:id', component: UpdatecategoryComponent },
+      { path: 'admin', component: AdminComponent, canActivate: [IsAdminGuard] },
+      {
+        path: 'category',
+        component: CategoryComponent,
+        canActivate: [IsAdminGuard],
+      },
+      {
+        path: 'add-admin',
+        component: AddAdminComponent,
+        canActivate: [IsAdminGuard],
+      },
+      {
+        path: 'update/:id',
+        component: UpdatecategoryComponent,
+        canActivate: [IsAdminGuard],
+      },
     ],
   },
-
-  { path: 'pricing', component: PricingComponent },
   { path: '**', component: NotFoundComponent },
 ];
 function getRandom() {

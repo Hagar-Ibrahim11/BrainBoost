@@ -1,7 +1,4 @@
-
-
-.carousel
-{
+.carousel {
   width: 100% !important;
   margin: 0 !important;
   padding: 0;
@@ -9,8 +6,8 @@
 .carousel-item video {
   width: 100% !important;
   height: auto;
-  max-height: 66vh; /* Maximum height of 100% of viewport height */
-  object-fit: cover; /* Ensure the video covers the area without stretching */
+  max-height: 66vh;
+  object-fit: cover;
 }
 
 .carousel-caption {
@@ -19,7 +16,12 @@
   left: 0;
   width: 100%;
   height: 100% !important;
-  background-color: rgba(4, 20, 114, 0.322); /* Gray background with some transparency */
+  background-color: rgba(
+    4,
+    20,
+    114,
+    0.322
+  ); /* Gray background with some transparency */
   display: flex;
   align-items: center;
   justify-content: flex-start; /* Align captions to the start (left) */
@@ -34,36 +36,44 @@
 
 .carousel-caption h5,
 .carousel-caption p {
-  margin: 5px;
+  margin: 30px;
+  margin-left: 50px;
   color: #fff; /* Text color */
-  font-size: 1.5rem; /* Adjust font size for readability */
+  font-size: 2.2rem; /* Adjust font size for readability */
 }
 
 .btn-container {
-  margin-top: 20px;
+  margin-top: 30px;
+  margin-left: 50px;
 }
 
 .btn-container .btn {
   margin-right: 10px;
-  z-index: 2;
-  padding: 10px 20px; /* Enhance button size for better touch experience */
+  z-index: 99;
+  padding: 10px 20px;
 }
 
 @media (max-width: 768px) {
   .carousel-caption {
     padding: 20px;
-    font-size: 1.2rem; /* Adjust font size for smaller screens */
+    font-size: 0.8rem; /* Adjust font size for smaller screens */
   }
-
+  .carousel-caption h5,
+  .carousel-caption p {
+    margin: 15px;
+    margin-left: 25px;
+    color: #fff; /* Text color */
+    font-size: 1.2rem; /* Adjust font size for readability */
+  }
+  .btn-container {
+    margin-top: 15px;
+    margin-left: 25px;
+  }
   .btn-container .btn {
+    font-size: 0.65rem;
     padding: 8px 16px; /* Adjust button size for smaller screens */
   }
 }
-
-
-
-
-
 
 .course-card {
   border: none;
@@ -97,10 +107,10 @@
 .course-card img {
   width: 90%;
   height: 50%;
- 
 }
-.btn-read-more ,.loadMore {
-  background-color:var(--ceyan);
+.btn-read-more,
+.loadMore {
+  background-color: var(--ceyan);
   color: white;
   border: none;
   padding: 10px 20px;
@@ -108,6 +118,7 @@
   font-size: 0.9rem;
   font-weight: bold;
 }
-.btn-read-more:hover ,.loadMore:hover {
-  background-color:var(--blue-900);
+.btn-read-more:hover,
+.loadMore:hover {
+  background-color: var(--blue-900);
 }
