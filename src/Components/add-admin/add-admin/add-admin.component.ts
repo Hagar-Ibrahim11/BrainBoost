@@ -1,21 +1,24 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../../Services/auth.service';
-import {  FormControl,
+import {
+  FormControl,
   FormGroup,
   FormsModule,
   Validators,
   ReactiveFormsModule,
-  AbstractControl,} from '@angular/forms';
+  AbstractControl,
+} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-admin',
   standalone: true,
   imports: [FormsModule, HttpClientModule, ReactiveFormsModule, CommonModule],
   templateUrl: './add-admin.component.html',
-  styleUrl: './add-admin.component.css'
+  styleUrls: ['./add-admin.component.css']
 })
 export class AddAdminComponent {
   UserRegisterForm = new FormGroup(
@@ -45,6 +48,7 @@ export class AddAdminComponent {
     },
     { validators: this.passwordMatchValidator }
   );
+
   passwordMatchValidator(
     control: AbstractControl
   ): { [key: string]: boolean } | null {
@@ -59,11 +63,14 @@ export class AddAdminComponent {
     }
     return null;
   }
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private RegisterService: AuthService
+    private RegisterService: AuthService,
+    private snackBar: MatSnackBar // Inject MatSnackBar
   ) {}
+
   register() {
     this.RegisterService.register(
       {
@@ -77,12 +84,22 @@ export class AddAdminComponent {
     ).subscribe(
       (response) => {
         console.log("Registration successful:", response);
-        alert("admin added successfully");
+        this.snackBar.open('Admin added successfully', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['snack-bar-success']
+        });
       },
       (error) => {
-        console.error("failed to add admin:", error);
+        console.error("Failed to add admin:", error);
+        this.snackBar.open('Failed to add admin', 'Close', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+          panelClass: ['snack-bar-error']
+        });
       }
     );
   }
-  
 }

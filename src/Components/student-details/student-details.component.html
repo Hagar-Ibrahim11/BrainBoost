@@ -5,7 +5,7 @@
         <div class="d-flex flex-column flex-shrink-0 p-3 bg-white mt-2">
           <div class="d-flex justify-content-between align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
             <a href="#" class="d-flex align-items-center text-decoration-none">
-              <img [src]="studentData?.pictureUrl" alt="Student Image" class="rounded-circle me-2" width="40" height="40">
+              
               <span class="fs-4 ms-2 text-dark" *ngIf="!isSidebarCollapsed">{{studentData?.fname}} {{studentData?.lname}}</span>
             </a>
             <button class="btn btn-primary btn-sm ms-auto d-md-none d-lg-block" (click)="toggleSidebar()">
