@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top new">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">BrainBoost</a>
+    <div class="col-lg-2">
+      <img src="assets/Logo.png" class="logoImage" />
+    </div>
     <button
       class="navbar-toggler"
       type="button"
@@ -12,75 +14,74 @@
     >
       <i class="fa-solid fa-bars fa-xl navtogle"></i>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item me-3">
-          <a class="nav-link active" aria-current="page" routerLink="/home"
-            >Home</a
+    <div class="col-lg-10 collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="col-lg-7 d-flex justify-content-start">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-uppercase">
+          <li
+            class="nav-item me-3"
+            *ngIf="isLogin == false || role == 'Student'"
           >
-        </li>
-        <li class="nav-item me-3">
-          <a class="nav-link active" aria-current="page" routerLink="/courses"
-            >Courses</a
+            <a class="nav-link active" aria-current="page" routerLink="/home"
+              >Home</a
+            >
+          </li>
+          <li
+            class="nav-item me-3"
+            *ngIf="isLogin == false || role == 'Student'"
           >
-        </li>
-        <li class="nav-item me-3">
-          <a class="nav-link active" aria-current="page" href="#">Contact</a>
-        </li>
-        <!-- <li class="nav-item dropdown me-3">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Plans
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" routerLink="/Pricing">Pricing</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li> -->
-        <li class="nav-item me-5 col-5 ml-2">
-          <div class="bg-light rounded rounded-pill shadow-sm w-100">
-            <div class="input-group">
-              <input
-                type="search"
-                placeholder="What're you searching for?"
-                aria-describedby="button-addon1"
-                class="form-control rounded-pill bg-light search"
-              />
-              <div class="input-group-append">
-                <button id="button-addon1" type="submit" class="btn btn-link">
-                  <i class="fa fa-search"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
-      <ul class="navbar-nav mb-2 mb-lg-0">
-        <li style="cursor: pointer" class="nav-item" *ngIf="isLogin">
-          <a class="nav-link" (click)="goToDashBoard()">Dashboard</a>
-        </li>
-        <li class="nav-item" *ngIf="!isLogin">
-          <a
-            style="cursor: pointer"
-            class="nav-link"
-            routerLink="login"
-            routerLinkActive="active"
-            >Login/Register</a
-          >
-        </li>
-        <li class="nav-item" *ngIf="isLogin">
-          <a style="cursor: pointer" class="nav-link" (click)="logout()"
-            >Logout</a
-          >
-        </li>
-      </ul>
+            <a class="nav-link active" aria-current="page" routerLink="/courses"
+              >Courses</a
+            >
+          </li>
+          <li class="nav-item me-3" *ngIf="role != 'Admin'">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              routerLink="/contact-us"
+              >Contact</a
+            >
+          </li>
+          <li class="nav-item me-3" *ngIf="role != 'Admin'">
+            <a
+              class="nav-link active"
+              aria-current="page"
+              routerLink="/about-us"
+              >About Us</a
+            >
+          </li>
+          <li class="nav-item" *ngIf="!isLogin">
+            <a
+              class="nav-link d-lg-none"
+              routerLink="login"
+              routerLinkActive="active"
+              >Login/Register</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="col-lg-5 d-flex justify-content-end">
+        <ul class="navbar-nav mb-2 mb-lg-0 text-uppercase">
+          <li class="nav-item" *ngIf="isLogin && role == 'Teacher'">
+            <a
+              class="nav-link"
+              [routerLink]="['TeacherDetails', roleId]"
+              routerLinkActive="active"
+              >Instructor Dashboard</a
+            >
+          </li>
+          <li class="nav-item" *ngIf="isLogin">
+            <a class="nav-link" (click)="logout()">Logout</a>
+          </li>
+          <li class="nav-item" *ngIf="!isLogin">
+            <a
+              class="nav-link d-none d-lg-block"
+              routerLink="login"
+              routerLinkActive="active"
+              >Login / Register</a
+            >
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </nav>
