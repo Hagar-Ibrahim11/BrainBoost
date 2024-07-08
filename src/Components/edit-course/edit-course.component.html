@@ -1,5 +1,5 @@
 <mat-stepper [linear]="true" #stepper>
-  <mat-step [stepControl]="courseDetailsForm">
+  <!-- <mat-step [stepControl]="courseDetailsForm">
     <form [formGroup]="courseDetailsForm">
       <ng-template matStepLabel>Course Details</ng-template>
       <app-edit-course-details
@@ -78,19 +78,24 @@
         </button>
       </div>
     </form>
-  </mat-step>
-  <mat-step [stepControl]="courseMediaForm">
+  </mat-step> -->
+  <mat-step [stepControl]="courseScheduleForm">
     <form>
       <ng-template matStepLabel>Add course videos</ng-template>
       <app-edit-course-videos
-        [coursePhoto]="coursePhoto"
+        [photoUrl]="courseDetailsForm.controls.photoUrl.value!"
+        [courseId]="courseId"
         [courseScheduleForm]="courseScheduleForm"
+        [coursePhotoForm]="coursePhoto"
+        (onUploadPhoto)="editCoursePhoto(courseId,'Course',courseDetailsForm.controls['courseName'].value!)"
+        (onUploadVideo)="editCourseVideo($event)"
       >
       </app-edit-course-videos>
     </form>
     <div>
       <button mat-button matStepperPrevious>Back</button>
       <button
+        (click)="editCoursePhoto(courseId,'Course',courseDetailsForm.controls['courseName'].value!)"
         mat-button
         matStepperNext
         [disabled]="courseScheduleForm.invalid || coursePhoto.invalid"

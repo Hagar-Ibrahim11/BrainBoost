@@ -12,7 +12,6 @@ export class AuthService {
   claims: any = {};
   constructor(private http: HttpClient, private router: Router) {
     this.loadUserData();
-    console.log(this.userData);
   }
   confirmMail(EmailReceiver: string) {
     return this.http.get<any>(

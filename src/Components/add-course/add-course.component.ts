@@ -117,15 +117,15 @@ export class AddCourseComponent {
             console.log(error);
           },
         });
-        // Swal.fire({
-        //   title: "Done",
-        //   text: "course added successfully",
-        //   showCancelButton: true,
-        // }).then((result) => {
-        //   if (result.isConfirmed || result.isDismissed) {
-        //     window.location.reload();
-        //   }
-        // });
+        Swal.fire({
+          title: "Done",
+          text: "course added successfully",
+          showCancelButton: true,
+        }).then((result) => {
+          if (result.isConfirmed || result.isDismissed) {
+            window.location.reload();
+          }
+        });
       });
 
     });

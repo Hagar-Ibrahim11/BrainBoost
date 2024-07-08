@@ -1,4 +1,11 @@
-import { Component, Input, OnChanges, SimpleChanges } from "@angular/core";
+import {
+  Component,
+  Input,
+  OnChanges,
+  EventEmitter,
+  Output,
+  SimpleChanges,
+} from "@angular/core";
 import { InputAngularMaterialComponent } from "../../Inputs/input-angular-material/input-angular-material.component";
 import {
   FormArray,
@@ -9,6 +16,8 @@ import {
   Validators,
 } from "@angular/forms";
 import { CommonModule } from "@angular/common";
+import { VidService } from "../../../Services/vid.service";
+import { CourseServiceService } from "../../../Services/course/course-service.service";
 
 @Component({
   selector: "app-edit-course-videos",
@@ -22,41 +31,15 @@ import { CommonModule } from "@angular/common";
     ReactiveFormsModule,
   ],
 })
-export class EditCourseVideosComponent {
-  AddChapter() {
-    this.courseScheduleForm.push(
-      new FormArray<any>([
-        new FormGroup({
-          videoFile: new FormControl<File | null>(null, Validators.required),
-          title: new FormControl("", Validators.required),
-        }),
-      ])
-    );
-  }
-  AddLecture(chapterIndex: number) {
-    this.courseScheduleForm.at(chapterIndex).push(
-      new FormGroup({
-        videoFile: new FormControl<File | null>(null, Validators.required),
-        title: new FormControl("", Validators.required),
-      })
-    );
-  }
-  DeleteChapter(chapterIndex: number) {
-    this.courseScheduleForm.removeAt(chapterIndex)
-  }
-  DeleteLecture(chapterIndex: number,lectureIndex:number) {
-    this.courseScheduleForm.at(chapterIndex).removeAt(lectureIndex)
-  }
-  getChapter(index: number): FormGroup {
-    return this.courseScheduleForm.get(`${index}`) as FormGroup;
-  }
-  getLecture(chapterIndex: number, lectureIndex: number): FormGroup {
-    return this.courseScheduleForm
-      .get(`${chapterIndex}`)
-      ?.get(`${lectureIndex}`) as FormGroup;
-  }
-  @Input() coursePhoto!: FormControl;
-  @Input() courseScheduleForm!: FormArray<FormArray>;
+export class EditCourseVideosComponent implements OnChanges {
+  @Input() courseId: number = 0;
+  @Input() photoUrl!: string;
+  @Input() courseScheduleForm!: FormArray<FormGroup>;
+  @Input() coursePhotoForm!: FormControl<File | null>;
+  @Output() onUploadPhoto = new EventEmitter<any>();
+  @Output() onUploadVideo = new EventEmitter<FormGroup>();
+  addedVideosForm = new FormArray<FormGroup>([]);
+  videos: any[] = [];
   photoTypes = [
     "image/jpeg",
     "image/png",
@@ -86,18 +69,61 @@ export class EditCourseVideosComponent {
     ".mpeg",
     ".mpg",
   ];
-  constructor() {}
-  handleVideoInput($event: any, chapterIndex: number, questionIndex: number) {
+  constructor(
+    private videosService: VidService,
+    private courseService: CourseServiceService
+  ) {}
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes["courseScheduleForm"].isFirstChange()) {
+      this.videosService.getVideosByCourseId(this.courseId).subscribe({
+        next: (response) => {
+          this.videos = response;
+          this.videos.forEach((video) => {
+            this.courseScheduleForm.push(
+              new FormGroup<any>(
+                {
+                  id: new FormControl(video["id"]),
+                  title: new FormControl(video["title"]),
+                  chapter: new FormControl(video["chapter"]),
+                  videoUrl: new FormControl(video["videoUrl"]),
+                  video: new FormControl<File | null>(null),
+                  courseId: new FormControl(video["crsId"]),
+                },
+                Validators.required
+              )
+            );
+          });
+        },
+        error: (error) => {
+          console.log(error);
+        },
+      });
+      console.log(this.courseScheduleForm);
+    }
+  }
+  getLectureTitleControl(lectureIndex: any): FormControl<any> {
+    return this.courseScheduleForm.at(lectureIndex).controls[
+      "title"
+    ] as FormControl;
+  }
+  getLectureFileControl(lectureIndex: number): FormControl<any> {
+    return this.courseScheduleForm.at(lectureIndex).controls[
+      "video"
+    ] as FormControl;
+  }
+  getChapter(lectureIndex: number): FormControl<any> {
+    return this.courseScheduleForm.at(lectureIndex).controls[
+      "chapter"
+    ] as FormControl;
+  }
+  handleVideo($event: any, lectureIndex: number) {
     const file = $event.target.files[0] as File;
     if (
       this.videoTypes.includes(file.type) ||
       this.videoExtensions.some((ext) => file.name.endsWith(ext))
     ) {
-      this.courseScheduleForm
-        .get(`${chapterIndex}`)
-        ?.get(`${questionIndex}`)
-        ?.get("videoFile")
-        ?.setValue(file);
+      this.courseScheduleForm.at(lectureIndex).controls["video"].setValue(file);
+      this.onUploadVideo.emit(this.courseScheduleForm.at(lectureIndex));
     } else {
       alert("Invalid video file type");
     }
@@ -108,9 +134,55 @@ export class EditCourseVideosComponent {
       this.photoTypes.includes(file.type) ||
       this.photoExtensions.some((ext) => file.name.endsWith(ext))
     ) {
-      this.coursePhoto.setValue(file);
+      this.coursePhotoForm.setValue(file);
+      this.onUploadPhoto.emit(this.coursePhotoForm);
     } else {
       alert("Invalid photo file type");
+    }
+  }
+  addLecture() {
+    this.addedVideosForm.push(
+      new FormGroup<any>({
+        id: new FormControl(0),
+        title: new FormControl("",Validators.required),
+        chapter: new FormControl(null,Validators.required),
+        video: new FormControl<File | null>(null),
+        courseId: new FormControl(this.courseId),
+      })
+    );
+  }
+  getAddedVideoTitleControl(addedVideosIndex: number): FormControl<any> {
+    return this.addedVideosForm.at(addedVideosIndex).controls[
+      "title"
+    ] as FormControl;
+  }
+  getAddedVideoChapter(addedVideosIndex: number): FormControl<any> {
+    return this.addedVideosForm.at(addedVideosIndex).controls[
+      "chapter"
+    ] as FormControl;
+  }
+  uploadLecture($event:any,lectureIndex: number) {
+    console.log(this.addedVideosForm.at(lectureIndex))
+    const file = $event.target.files[0] as File;
+    if (
+      this.videoTypes.includes(file.type) ||
+      this.videoExtensions.some((ext) => file.name.endsWith(ext))
+    ) {
+      this.courseScheduleForm.at(lectureIndex).controls["video"].setValue(file);
+      const formData = new FormData()
+      formData.append('Title', this.addedVideosForm.at(lectureIndex).controls['title'].value)
+      formData.append('Chapter', this.addedVideosForm.at(lectureIndex).controls['chapter'].value)
+      formData.append('VideoFile', file)
+      this.courseService.addVideo(formData,this.courseId).subscribe({
+        next:(response)=>{
+          console.log(response)
+        },
+        error:(error)=>{
+          console.log(error)
+        }
+      })
+      } else {
+      alert("Invalid video file type");
     }
   }
 }

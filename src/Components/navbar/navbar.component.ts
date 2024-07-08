@@ -19,7 +19,6 @@ export class NavbarComponent {
       next: () => {
         if (authService.userData.getValue() !== null) {
           this.isLogin = true;
-          console.log(authService.userData.getValue());
         } else {
           this.isLogin = false;
         }
