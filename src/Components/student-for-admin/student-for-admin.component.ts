@@ -36,7 +36,7 @@ export class StudentForAdminComponent implements OnInit {
   }
 
   GoToStudentDetails(id: number) {
-    this.router.navigate(['/StudentDetails', id]);
+    this.router.navigate(['/StudentDetails2', id]);
   }
 
   DeleteStudent(id: number) {
