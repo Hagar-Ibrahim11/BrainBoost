@@ -41,6 +41,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { isAuthorizedToEditCourseGuard } from '../guards/is-authorized-to-edit-course.guard';
 import { IsStudentGuard } from '../guards/is-student.guard';
 import { IsAdminGuard } from '../guards/is-admin.guard';
+import { AboutTeacherComponent } from './about-teacher/about-teacher.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -79,10 +80,16 @@ export const routes: Routes = [
         path: 'courseDetails/:id',
         component: CourseDetailsComponent,
       },
+      {path:"aboutTeacher/:id",component:AboutTeacherComponent},
       {
         path: 'StudentDetails/:id',
         component: StudentDetailsComponent,
-        canActivate: [IsStudentGuard],
+        canActivate: [IsStudentGuard ],
+      },
+      {
+        path: 'StudentDetails2/:id',
+        component: StudentDetailsComponent,
+        canActivate: [IsAdminGuard],
       },
       {
         path: 'TeacherDetails/:id',
@@ -90,9 +97,14 @@ export const routes: Routes = [
         canActivate: [isTeacherGuard],
       },
       {
+        path: 'TeacherDetails2/:id',
+        component: TeacherDetailsComponent,
+        canActivate: [IsAdminGuard],
+      },
+      {
         path: 'TakingCourse/:id',
         component: CourseContentComponent,
-        canActivate: [isTeacherGuard],
+        canActivate: [IsStudentGuard],
       },
       {
         path: 'TakingQuiz/:id',

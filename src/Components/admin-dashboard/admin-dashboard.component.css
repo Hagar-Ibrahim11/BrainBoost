@@ -93,12 +93,12 @@ body {
 }
 
 .icon-wrapper i {
-    color: #B197FC;
+    color: blue;
     transition: color 0.3s ease;
 }
 
 .icon-wrapper:hover {
-    background-color: #B197FC;
+    background-color: blue;
 }
 
 .icon-wrapper:hover i {
